@@ -11,10 +11,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="bower_components/foundation/css/normalize.min.css"/>
 	<link rel="stylesheet" type="text/css" href="bower_components/foundation/css/foundation.min.css"/>
+	<style>
+		/* Off Canvas Full Height Fix*/
+	.off-canvas-wrap, .inner-wrap {
+		min-height: 100%;
+		min-height: 100vh;
+	}
+	</style>
 </head>
 <body ng-controller="ApplicationController">
-<a href="#/example">Example Route</a>
-<div ng-view>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+      </section>
+      <section class="middle tab-bar-section">
+        <h1 class="title">UTS-HELPS</h1>
+      </section>
+    </nav>
+
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><label>MAIN MENU</label></li>
+        <li><a href="#/example">Example Route</a></li>
+        <li><a href="#/">...</a></li>
+      </ul>
+    </aside>
+    <section class="main-section" ng-view>
+	    <div>
+		</div>
+    </section>
+
+  <a class="exit-off-canvas"></a>
+
+  </div>
 </div>
 </body>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -24,7 +55,4 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="app.js"></script>
 <script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
-<script src="components/version/version.js"></script>
-<script src="components/version/version-directive.js"></script>
-<script src="components/version/interpolate-filter.js"></script>
 </html>

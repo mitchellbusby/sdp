@@ -10,6 +10,9 @@ angular.module('utsHelps', [
 }])
 .run(function() {
 	console.log("Angular initialised!");
+	$(document).ready(function(){
+		$(document).foundation();
+	});
 })
 .controller('ApplicationController', ['$scope', function($scope){
 
