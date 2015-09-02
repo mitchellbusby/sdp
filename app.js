@@ -2,8 +2,12 @@
 'use strict'
 
 angular.module('utsHelps', [
-	'ngRoute'
+	'ngRoute',
+	'utsHelps.example'
 	])
+.config(['$routeProvider', function($routeProvider){
+	$routeProvider.otherwise({redirectTo:'/example'});
+}])
 .run(function() {
 	console.log("Angular initialised!");
 })
