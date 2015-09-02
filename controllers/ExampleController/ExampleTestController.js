@@ -9,7 +9,7 @@ describe('utsHelps.example module', function() {
 
   describe('example controller', function(){
 
-    it('should ....', inject(function($controller) {
+    it('should exist and when injected should load', inject(function($controller) {
       //spec body
       var exampleCtrl = $controller('exampleCtrl');
       expect(exampleCtrl).toBeDefined();

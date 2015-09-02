@@ -11,7 +11,11 @@ angular.module('utsHelps', [
 .run(function() {
 	console.log("Angular initialised!");
 	$(document).ready(function(){
-		$(document).foundation();
+		$(document).foundation({
+			offcanvas: {
+				close_on_click: true
+			}
+		});
 	});
 })
 .controller('ApplicationController', ['$scope', function($scope){
