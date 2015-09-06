@@ -2,6 +2,20 @@
 
 Repo for our project
 
+##Getting Started
+
+Pre Requisites:
+- node and npm
+- bower
+
+Bootstrap the project with
+
+```npm install```
+
+Then run the server (or host it yourself!)
+
+```npm start```
+
 ## Documentation
 [Google Drive Folder](https://drive.google.com/drive/folders/0BzxRdBrzgiQMfnNSMFZHZnFBTUlPWUNfUWxVWXJEU3RZWDkwaGVyWlRiNTcxRmxRY0s5aE0)
 
