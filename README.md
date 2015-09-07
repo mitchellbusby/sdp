@@ -2,8 +2,19 @@
 
 Repo for our project
 
-## Documentation
-[Google Drive Folder](https://drive.google.com/drive/folders/0BzxRdBrzgiQMfnNSMFZHZnFBTUlPWUNfUWxVWXJEU3RZWDkwaGVyWlRiNTcxRmxRY0s5aE0)
+##Getting Started
+
+Pre Requisites:
+- node and npm
+- bower
+
+Bootstrap the project with
+
+```npm install```
+
+Then run the server (or host it yourself!)
+
+```npm start```
 
 
 ##Testing
@@ -28,3 +39,6 @@ Then run the webserver
 Then run the end to end test launcher
 
 ```npm run protractor```
+
+## Documentation
+[Google Drive Folder](https://drive.google.com/drive/folders/0BzxRdBrzgiQMfnNSMFZHZnFBTUlPWUNfUWxVWXJEU3RZWDkwaGVyWlRiNTcxRmxRY0s5aE0)

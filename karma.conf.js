@@ -8,6 +8,7 @@ module.exports = function(config){
 		'bower_components/angular-mocks/angular-mocks.js',
 		'controllers/**/*.js',
 		'services/*.js',
+		'directives/**/*.js',
 		'directives/*.js'		
 		],
 		autoWatch: true,
