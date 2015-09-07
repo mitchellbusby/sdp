@@ -9,4 +9,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 }])
 .controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', function($scope, UpcomingActivitiesModel){
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
+	$scope.clickedOnAnActivity = function(activity) {
+		activity.isExpanded=!activity.isExpanded;
+	}
 }]);

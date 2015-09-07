@@ -4,7 +4,8 @@ angular.module('utsHelps.directives', [])
 		templateUrl: "directives/activity-details/activity-details.html",
 		restrict: 'E',
 		scope: {
-			activityDetails: '=activityDetails'
+			activityDetails: '=activityDetails',
+			expand: '=expand'
 		}
 	}
 });

@@ -70,7 +70,8 @@ angular.module('helpsRestfulServices', [])
 			      }, {
 					  "WorkshopId": 16,
 			          "topic": "U:PASSwrite for 21129 Managing People & Organisations",
-			          "description": "“I have an assignment due soon, but I don’t know where and how to begin.",
+			          "description": "This workshop will empower you to write excellent essays and "+
+			          "provide valuable support for the upcoming assignment.",
 			          "targetingGroup": "all students",
 			          "campus": "CB02.05.32",
 			          "StartDate": "2012-09-07T17:00:00",

@@ -7,6 +7,7 @@ angular.module('utsHelps', [
 	'utsHelps.example',
 	'utsHelps.UpcomingActivities',
 	'angular.filter',
+	'ngAnimate'
 	])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
