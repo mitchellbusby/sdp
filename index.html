@@ -17,6 +17,15 @@
 		min-height: 100%;
 		min-height: 100vh;
 	}
+
+  uh-activity-details > .activity {
+    border: 1px solid black;
+    border-radius: 4px;
+  }
+
+  uh-activity-details #title {
+    font-weight: bold;
+  }
 	</style>
 </head>
 <body ng-controller="ApplicationController">
@@ -35,17 +44,15 @@
       <ul class="off-canvas-list">
         <li><label>MAIN MENU</label></li>
         <li><a href="#/example">Example Route</a></li>
+        <li><a href="#/upcomingActivities">Upcoming Activities</a></li>
         <li><a href="#/blah">This should autoload to Example Route</a></li>
         <li><a href="#/">...</a></li>
       </ul>
     </aside>
     <section class="main-section" ng-view>
-	    <div>
-		</div>
     </section>
 
   <a class="exit-off-canvas"></a>
-
   </div>
 </div>
 </body>
@@ -54,6 +61,10 @@
 <script src="bower_components/modernizr/modernizr.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/angular-filter/dist/angular-filter.js"></script>
+<script src="directives/directives.js"></script>
 <script src="app.js"></script>
+<script src="services/helpsRestfulServices.js"></script>
 <script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
+<script type="text/javascript" src="controllers/UpcomingActivitiesController/UpcomingActivitiesController.js"></script>
 </html>
