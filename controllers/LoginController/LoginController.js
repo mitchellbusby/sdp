@@ -23,7 +23,7 @@ angular.module('utsHelps.login', ['ngRoute'])
 		return true; // don't return true when we have the API.
 	};
 	var timer = false;
-	$scope.$watch('loading', function() {
+	$scope.$watch('loading', function() { // $watch here is to demonstrate that page has loading gfx
 			if (timer) {
 				$timeout.cancel(timer);
 			}
@@ -35,6 +35,6 @@ angular.module('utsHelps.login', ['ngRoute'])
 				} else {
 					return false;
 				}
-			}, 200)
+			}, 800)
 	});
 }]);

@@ -2,15 +2,17 @@
 	.login-fields {
 		padding: 12px;
 	}
+	
 </style>
 <div ng-controller="loginCtrl" >
 	<div ng-hide="loading" class="login-fields"> <!-- Login fields + button -->
-		<span>User Name: </span>
-		<input type="text" ng-value="username" ></input>
-		<span>Password: </span>
-		<input type="password" ng-value="password"></input>
-		<div class="small-centered columns">
+		<input type="text" ng-value="username" placeholder="Username" ></input>
+		<input type="password" ng-value="password" placeholder="Password"></input>
+		<div class="two columns">
 			<button ng-click="onLogin()">Login</button>
+		</div>
+		<div class="two columns">
+			<button ng-click="onRegister()">Register</button>
 		</div>
 	</div>
 	<div class="loadingAnimation" ng-hide="!loading">
