@@ -1,0 +1,19 @@
+<style>
+	.login-fields {
+		padding: 12px;
+	}
+</style>
+<div ng-controller="loginCtrl" >
+	<div ng-hide="loading" class="login-fields"> <!-- Login fields + button -->
+		<span>User Name: </span>
+		<input type="text" ng-value="username" ></input>
+		<span>Password: </span>
+		<input type="password" ng-value="password"></input>
+		<div class="small-centered columns">
+			<button ng-click="onLogin()">Login</button>
+		</div>
+	</div>
+	<div class="loadingAnimation" ng-hide="!loading">
+		<img src="res/img/spinning_loader.gif"/>
+	</div>
+</div>

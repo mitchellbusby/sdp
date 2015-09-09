@@ -3,7 +3,8 @@
 
 angular.module('utsHelps', [
 	'ngRoute',
-	'utsHelps.example'
+	'utsHelps.example',
+	'utsHelps.login',
 	])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
