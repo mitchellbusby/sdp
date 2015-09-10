@@ -1,0 +1,16 @@
+<div class="activity small-12 medium-6 column small-centered">
+	<div class="row">
+		<div class="small-12 column" id="title">
+			{{activityDetails['topic']}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 column">
+			Classes available on 
+			<span ng-repeat="workshop in activityDetails.workshops | unique: 'StartDate'">
+				<span ng-if="$last && $index > 0"> and</span>
+				{{workshop.StartDate | date : 'dd/MM/yyyy' }}<span ng-if="($first || $middle) && !$last ">,</span> 
+			</span>
+		</div>
+	</div>
+</div>
