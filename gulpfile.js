@@ -7,7 +7,10 @@ var sass = require('gulp-sass');
 //Dependency to run webserver
 var webserver = require('gulp-webserver');
 
-gulp.task('default', ['sass:watch', 'webserver'], function(){
+gulp.task('default', ['sass'], function(){
+
+});
+gulp.task('build', ['sass'], function(){
 
 });
 
@@ -24,8 +27,11 @@ gulp.task('sass:watch', function() {
 gulp.task('webserver', function() {
 	gulp.src('')
 		.pipe(webserver({
-			livereload: true,
-			directoryListing: true,
+			//directoryListing: true,
 			open: true
 		}));
+});
+
+gulp.task('run', ['sass:watch', 'webserver'], function() {
+
 });
