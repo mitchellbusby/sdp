@@ -12,10 +12,21 @@ Bootstrap the project with
 
 ```npm install```
 
-Then run the server (or host it yourself!)
+Then compile the system and run the server (or host it yourself!)
 
-```npm start```
+```gulp run```
 
+#Deployment
+
+Install dependencies
+
+```npm install```
+
+Build the system
+
+```gulp build```
+
+Host the files yourself.
 
 ##Testing
 
@@ -34,7 +45,7 @@ Install protractor and its webdriver first (this is really large and will take a
 
 Then run the webserver
 
-```npm start```
+```gulp run ```
 
 Then run the end to end test launcher
 
