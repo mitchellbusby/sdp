@@ -1,20 +1,28 @@
 'use strict';
 
 angular.module('helpsRestfulServices', [])
-.constant('ENDPOINT_URI', "WhateverOurEndpointIs")
-.constant('')
-.service('UpcomingActivitiesModel', ['$http', function($http) {
+.constant("endpoint_constants", {
+	"ENDPOINT_URI":"helpshere.cloudapp.net",
+	"APP_KEY":'',
+	"ACTIVITIES_URI", "/"
+});
+.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_config', function($http, endpoint_constants) {
 	var scope = this;
 	this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}
 	this.getActivities = function() {
-		return scope.activities;
+		// Gets data from a server
+		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.ACTIVITIES_URI);
 	}
 	this.updateActivities = function(callback) {
 		// Do nothing for now
 		//$http.get(ENDPOINT_URI+)
-		var data = {
+		this.getActivities().then(function(data) {
+			var result = this.mergeActivities(data);
+			callback(result);
+		});
+		/*var data = {
 			    "Results": [
 			      {
 			          "WorkshopId": 11,
@@ -89,11 +97,9 @@ angular.module('helpsRestfulServices', [])
 			    ],
 			    "IsSuccess": true,
 			    "DisplayMessage": null
-			};
+			};*/
 		// Reshape the data
-		var result = this.mergeActivities(data);
-		//scope.activities = result;
-		callback(result);
+
 	}
 	this.paginateActivities = function(numberOfResultsPerPage, pageNumber, callback) {
 		// TODO

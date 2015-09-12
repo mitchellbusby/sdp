@@ -5,25 +5,29 @@
 		</div>
 	</div>
 	<div class="row" ng-show="!expand">
-		<div class="small-12 column">
+		<p class="small-12 column">
 			Classes available on&nbsp;
 			<span ng-repeat="workshop in activityDetails.workshops | unique: 'StartDate'">
 				<span ng-if="$last && $index > 0"> and</span>
 				{{workshop.StartDate | date : 'dd/MM/yyyy' }}<span ng-if="($first || $middle) && !$last ">,</span>
 			</span>
-		</div>
+		</p>
 	</div>
 	<div class="row expanded-content" ng-show="expand" ng-class="{expanded: expand}">
 		<div class="column small-12">
 			<div class="row">
-				<div class="column small-12">{{activityDetails['description']}}</div>
+				<p class="column small-12">{{activityDetails['description']}}</p>
 			</div>
 			<div class="row workshop-row" ng-repeat="workshop in activityDetails.workshops">
-				<div class="column small-8">
-					{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}
-				</div>
-				<div class="column small-4">
-					<button ng-click="book(workshop)">Book</button>
+				<div class="column small-12 workshop">
+					<div class="row">
+						<div class="column small-9">
+							<p>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</p>
+						</div>
+						<!--<div class="column small-3">-->
+							<a ng-click="book(workshop)" class="button column small-3">Book</a>
+						<!--</div>-->
+					</div>
 				</div>
 			</div>
 		</div>

@@ -21,12 +21,13 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:watch', function() {
-	gulp.watch('./css/_scss/*.scss', ['sass']);
+	gulp.watch(['css/_scss/*.scss', 'css/_scss/components/*.scss'], ['sass']);
 });
 
 gulp.task('webserver', function() {
 	gulp.src('')
 		.pipe(webserver({
+			liveReload: true,
 			//directoryListing: true,
 			open: true
 		}));
