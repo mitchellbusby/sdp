@@ -15,12 +15,15 @@ describe('utsHelps.UpcomingActivities module', function() {
   }));
 
   describe('upcoming activities controller', function(){
-
     it('should exist and when injected should load', inject(function($controller) {
       //spec body
       //var upcomingActivitiesCtrl = $controller('UpcomingActivitiesCtrl');
       expect(upcomingActivitiesCtrl).toBeDefined();
     }));
+    describe('clicked on an activity', function() {
+      it('should change the state of an activity to unclicked for all activities except the one selected', function() {
 
+      });
+    })
   });
 });

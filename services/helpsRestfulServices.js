@@ -1,28 +1,30 @@
 'use strict';
 
 angular.module('helpsRestfulServices', [])
-.constant("endpoint_constants", {
-	"ENDPOINT_URI":"helpshere.cloudapp.net",
-	"APP_KEY":'',
-	"ACTIVITIES_URI", "/"
-});
-.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_config', function($http, endpoint_constants) {
+.constant("helps_endpoint_constants", {
+	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
+	"port":"80",
+	"APP_KEY":'123456',
+	"ACTIVITIES_URI":"/workshop",
+	"SEARCH_URI":"/search"
+})
+.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', function($http, endpoint_constants) {
 	var scope = this;
 	this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}
 	this.getActivities = function() {
 		// Gets data from a server
-		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.ACTIVITIES_URI);
+		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, {"AppKey": endpoint_constants.APP_KEY});
 	}
 	this.updateActivities = function(callback) {
 		// Do nothing for now
 		//$http.get(ENDPOINT_URI+)
-		this.getActivities().then(function(data) {
+		/*this.getActivities().then(function(data) {
 			var result = this.mergeActivities(data);
 			callback(result);
-		});
-		/*var data = {
+		});*/
+		var data = {
 			    "Results": [
 			      {
 			          "WorkshopId": 11,
@@ -97,7 +99,10 @@ angular.module('helpsRestfulServices', [])
 			    ],
 			    "IsSuccess": true,
 			    "DisplayMessage": null
-			};*/
+			};
+			var result = this.mergeActivities(data);
+			return callback(result);
+			
 		// Reshape the data
 
 	}
