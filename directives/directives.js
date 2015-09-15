@@ -8,4 +8,13 @@ angular.module('utsHelps.directives', [])
 			expand: '=expand'
 		}
 	}
+})
+.directive('uhErrorBox', function() {
+	return {
+		templateUrl: "directives/uh-error-box/uh-error-box.html",
+		restrict: 'E',
+		scope: {
+			errorMsg: '=errorMessage'
+		}
+	}
 });

@@ -11,7 +11,6 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
 	$scope.clickedOnAnActivity = function(activity) {
 		var activityAsString = JSON.stringify(activity);
-		console.log($scope.UpcomingActivitiesModel.activities);
 		for (var workshopId in $scope.UpcomingActivitiesModel.activities) {
 			if (activityAsString === JSON.stringify($scope.UpcomingActivitiesModel.activities[workshopId])) {
 				console.log("It was equal!");

@@ -21,9 +21,9 @@ describe('utsHelps.UpcomingActivities module', function() {
       expect(upcomingActivitiesCtrl).toBeDefined();
     }));
     describe('clicked on an activity', function() {
-      it('should change the state of an activity to unclicked for all activities except the one selected', function() {
-
-      });
-    })
+      it('should change the state of an activity to unclicked for all activities except the one selected', inject(function($controller) {
+        $scope.UpcomingActivitiesModel = {"activities":{}};
+      }));
+    });
   });
 });

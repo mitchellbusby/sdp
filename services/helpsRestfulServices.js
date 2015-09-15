@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helpsRestfulServices', [])
+angular.module('helpsRestfulServices', ['utsHelps.constants'])
 .constant("helps_endpoint_constants", {
 	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
 	"port":"80",
@@ -8,23 +8,31 @@ angular.module('helpsRestfulServices', [])
 	"ACTIVITIES_URI":"/workshop",
 	"SEARCH_URI":"/search"
 })
-.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', function($http, endpoint_constants) {
+.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope) {
 	var scope = this;
 	this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}
 	this.getActivities = function() {
 		// Gets data from a server
-		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, {"AppKey": endpoint_constants.APP_KEY});
+		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
+		 {headers:{"AppKey": endpoint_constants.APP_KEY}, params: {"startingDtBegin":"2012-08-07T17:00:00"}});
 	}
 	this.updateActivities = function(callback) {
 		// Do nothing for now
 		//$http.get(ENDPOINT_URI+)
-		/*this.getActivities().then(function(data) {
-			var result = this.mergeActivities(data);
-			callback(result);
-		});*/
-		var data = {
+		this.getActivities().then(function(result) {
+			console.log(result.data);
+			if (result.data.IsSuccess) {
+				var data = this.mergeActivities(result.data);
+				callback(data);
+			}
+			else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, result.data.DisplayMessage);
+				callback(null);
+			}
+		});
+		/*var data = {
 			    "Results": [
 			      {
 			          "WorkshopId": 11,
@@ -103,7 +111,7 @@ angular.module('helpsRestfulServices', [])
 			var result = this.mergeActivities(data);
 			return callback(result);
 			
-		// Reshape the data
+		// Reshape the data*/
 
 	}
 	this.paginateActivities = function(numberOfResultsPerPage, pageNumber, callback) {
