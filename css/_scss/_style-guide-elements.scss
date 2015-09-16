@@ -1,0 +1,13 @@
+ @import "colors"; 
+  .colour-block {
+  	height: 2em;
+  	&#colour-block-main {
+  		background-color: $helps-main-color;
+  	}
+  	&#colour-block-accent {
+  		background-color: $helps-accent-color;
+  	}
+  	&#colour-block-secondary {
+  		background-color: $helps-accent-secondary;
+  	}
+  }

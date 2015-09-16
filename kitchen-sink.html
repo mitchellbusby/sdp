@@ -11,42 +11,99 @@
   <meta name="copyright" content="ZURB, inc. Copyright (c) 2014">
   <link href="css/main.css" rel="stylesheet" />
   <link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet" />
+  <style type="text/css">
+
+  </style>
 </head>
 <body class="antialiased hide-extras">
   <div class="large-9 medium-8 columns small-centered">
+
     <h1 id="kitchen-sink">Kitchen sink</h1>
     <h3 class="subheader">This page includes every single Foundation element so that we can make sure things work together smoothly.</h3>
 
-    <h4 id="joyride">Joyride</h4>
-    <div>
-      <a class="secondary button" id="start-jr" name="start-jr">Start Joyride</a>
-
-      <h5 class="so-awesome" id="numero1">Build Joyride with HTML</h5>
-
-      <p class="so-awesome" id="numero2">Stop Number 2 for You!</p><!--stops-->
-
-      <ol class="joyride-list" data-joyride="">
-        <li data-class="custom so-awesome" data-id="numero1" data-text="Next">
-          <h4>Stop #1</h4>
-
-          <p>You can control all the details for your tour stop. Any valid HTML will
-            work inside of Joyride.</p>
-          </li>
-
-          <li data-button="Next" data-id="numero2">
-            <h4>Stop #2</h4>
-
-            <p>Get the details right by styling Joyride with a custom stylesheet!</p>
-          </li>
-
-          <li data-button="Next">
-            <h4>Stop #3</h4>
-
-            <p>It works as a modal too!</p>
-          </li>
-        </ol>
+    <hr>
+    <h4 id="colour">Colour Scheme</h4>
+    <p>The <strong>main colour</strong> should be used by major elements; the <strong>accent colour</strong> should be used for small detail, and the <strong>secondary accent</strong> should be used in the instance where the other two do not fit.</p>
+    <div class="colour-demo row">
+      <div class="column small-12 medium-4">
+        <label>Main</label>
+        <div class="colour-block" id="colour-block-main">
+        </div>
       </div>
+      <div class="column small-12 medium-4">
+        <label>Accent</label>
+        <div class="colour-block" id="colour-block-accent">
+        </div>
+      </div>
+      <div class="column small-12 medium-4">
+        <label>Secondary Accent</label>
+        <div class="colour-block" id="colour-block-secondary">
+        </div>
+      </div>
+    </div>
 
+    <hr>
+    <h4 id="type">Type / Typography</h4>
+    <div class="type-demo">
+
+      <h1>h1. This is a very large header.</h1>
+      <h2>h2. This is a large header.</h2>
+      <h3>h3. This is a medium header.</h3>
+      <h4>h4. This is a moderate header.</h4>
+      <h5>h5. This is a small header.</h5>
+      <h6>h6. This is a tiny header.</h6>
+
+      <br>
+
+      <h1 class="subheader">h1. subheader</h1>
+      <h2 class="subheader">h2. subheader</h2>
+      <h3 class="subheader">h3. subheader</h3>
+      <h4 class="subheader">h4. subheader</h4>
+      <h5 class="subheader">h5. subheader</h5>
+      <h6 class="subheader">h6. subheader</h6>
+
+      <hr>
+
+      <h3>Definition List</h3>
+      <h5>Definition lists are great for small block of copy that describe the header</h5>
+      <dl>
+        <dt>Lower cost</dt>
+        <dd>The new version of this product costs significantly less than the previous one!</dd>
+        <dt>Easier to use</dt>
+        <dd>We&#39;ve changed the product so that it&#39;s much easier to use!</dd>
+        <dt>Safe for kids</dt>
+        <dd>You can leave your kids alone in a room with this product and they won&#39;t get hurt (not a guarantee).</dd>
+      </dl>
+      <hr>
+
+      <h5>Un-ordered lists are great for making quick outlines bulleted.</h5>
+      <ul class="disc">
+        <li>List item with a much longer description or more content.</li>
+        <li>List item</li>
+        <li>List item
+          <ul>
+            <li>Nested List Item</li>
+            <li>Nested List Item</li>
+            <li>Nested List Item</li>
+          </ul>
+        </li>
+        <li>List item</li>
+        <li>List item</li>
+        <li>List item</li>
+      </ul>
+
+      <h5>Ordered lists are great for lists that need order, duh.</h5>
+      <ol>
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+        <li>List Item 3</li>
+      </ol>
+
+
+
+      <br>
+      <h5>Blockquote</h5>
+      <blockquote>I do not fear computers. I fear the lack of them. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.<cite>Isaac Asimov</cite></blockquote>
 
 
       <hr>
@@ -70,7 +127,6 @@
         This is a secondary alert (div.alert-box.secondary).
         <a href="" class="close">&times;</a>
       </div>
-
 
       <hr>
       <h4 id="block-grid">Block Grid</h4>
@@ -609,260 +665,165 @@
                 <p>The tooltips can be positioned on the <span data-tooltip class="has-tip" data-width="210" title="I'm on bottom and the default position.">&quot;tip-bottom&quot;</span>, which is the default position, <span data-tooltip class="has-tip tip-top noradius" data-width="210" title="I'm on the top and I'm not rounded!">&quot;tip-top&quot; (hehe)</span>, <span data-tooltip="left" class="has-tip tip-left" data-width="90" title="I'm on the left!">&quot;tip-left&quot;</span>, or <span data-tooltip="right" class="has-tip tip-right" data-width="120" title="I'm on the right!">&quot;tip-right&quot;</span> of the target element by adding the appropriate class to them. You can even add your own custom class to style each tip differently. On a small device, the tooltips are full width and bottom aligned.</p>
 
                 <hr>
-                <h4 id="top-bar">Top Bar</h4>
-                <nav class="top-bar" data-topbar>
-                  <ul class="title-area">
-                    <!-- Title Area -->
-                    <li class="name">
-                      <h1>
-                        <a href="#">
-                          Top Bar Title
-                        </a>
-                      </h1>
-                    </li>
-                    <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-                  </ul>
-
-                  <section class="top-bar-section">
-                    <!-- Right Nav Section -->
-                    <ul class="right">
-                      <li class="divider"></li>
-                      <li class="has-dropdown">
-                        <a href="#">Main Item 1</a>
-                        <ul class="dropdown">
-                          <li><label>Section Name</label></li>
-                          <li class="has-dropdown">
-                            <a href="#" class="">Has Dropdown, Level 1</a>
-                            <ul class="dropdown">
-                              <li><a href="#">Dropdown Options</a></li>
-                              <li><a href="#">Dropdown Options</a></li>
-                              <li><a href="#">Level 2</a></li>
-                              <li><a href="#">Subdropdown Option</a></li>
-                              <li><a href="#">Subdropdown Option</a></li>
-                              <li><a href="#">Subdropdown Option</a></li>
-                            </ul>
-                          </li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li class="divider"></li>
-                          <li><label>Section Name</label></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">See all &rarr;</a></li>
-                        </ul>
-                      </li>
-                      <li class="divider"></li>
-                      <li class="has-dropdown">
-                        <a href="#">Main Item 2</a>
-                        <ul class="dropdown">
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li><a href="#">Dropdown Option</a></li>
-                          <li class="divider"></li>
-                          <li><a href="#">See all &rarr;</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </section>
-                </nav>
-
-                <!-- End Top Bar -->
-
-                <hr>
-                <h4 id="type">Type</h4>
-                <div class="type-demo">
-
-                  <h1>h1. This is a very large header.</h1>
-                  <h2>h2. This is a large header.</h2>
-                  <h3>h3. This is a medium header.</h3>
-                  <h4>h4. This is a moderate header.</h4>
-                  <h5>h5. This is a small header.</h5>
-                  <h6>h6. This is a tiny header.</h6>
-
-                  <br>
-
-                  <h1 class="subheader">h1. subheader</h1>
-                  <h2 class="subheader">h2. subheader</h2>
-                  <h3 class="subheader">h3. subheader</h3>
-                  <h4 class="subheader">h4. subheader</h4>
-                  <h5 class="subheader">h5. subheader</h5>
-                  <h6 class="subheader">h6. subheader</h6>
-
-                  <hr>
-
-                  <h3>Definition List</h3>
-                  <h5>Definition lists are great for small block of copy that describe the header</h5>
-                  <dl>
-                    <dt>Lower cost</dt>
-                    <dd>The new version of this product costs significantly less than the previous one!</dd>
-                    <dt>Easier to use</dt>
-                    <dd>We&#39;ve changed the product so that it&#39;s much easier to use!</dd>
-                    <dt>Safe for kids</dt>
-                    <dd>You can leave your kids alone in a room with this product and they won&#39;t get hurt (not a guarantee).</dd>
-                  </dl>
-                  <hr>
-
-                  <h5>Un-ordered lists are great for making quick outlines bulleted.</h5>
-                  <ul class="disc">
-                    <li>List item with a much longer description or more content.</li>
-                    <li>List item</li>
-                    <li>List item
-                      <ul>
-                        <li>Nested List Item</li>
-                        <li>Nested List Item</li>
-                        <li>Nested List Item</li>
+                <h4 id="offcanvas">Off-Canvas</h4>
+                <div class="off-canvas-wrap" data-offcanvas style="border: 1px solid black;">
+                  <div class="inner-wrap">
+                    <nav class="tab-bar">
+                      <section class="left-small">
+                        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+                      </section>
+                      <section class="middle tab-bar-section">
+                        <h1 class="title">Off-Canvas</h1>
+                      </section>
+                    </nav>
+                    <aside class="left-off-canvas-menu">
+                      <ul class="off-canvas-list">
+                        <li><label>MENU LABEL</label></li>
+                        <li><a href="#">Link 1</a></li>
+                        <li><a href="#">Link 2</a></li>
+                        <li><a href="#">Link 3</a></li>
+                        <li><a href="#">Link 4</a></li>
+                        <li><a href="#">Link 5</a></li>
                       </ul>
-                    </li>
-                    <li>List item</li>
-                    <li>List item</li>
-                    <li>List item</li>
-                  </ul>
-
-                  <h5>Ordered lists are great for lists that need order, duh.</h5>
-                  <ol>
-                    <li>List Item 1</li>
-                    <li>List Item 2</li>
-                    <li>List Item 3</li>
-                  </ol>
-
-
-
-                  <br>
-                  <h5>Blockquote</h5>
-                  <blockquote>I do not fear computers. I fear the lack of them. Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur.<cite>Isaac Asimov</cite></blockquote>
-
-                  <br>
-                  <h5>Vcard</h5>
-                  <ul class="vcard">
-                    <li class="fn">Gaius Baltar</li>
-                    <li class="street-address">123 Colonial Ave.</li>
-                    <li class="locality">Caprica City</li>
-                    <li><span class="state">Caprica</span>, <span class="zip">12345</span></li>
-                    <li class="email"><a href="#"><span class="__cf_email__" data-cfemail="d9bef7bbb8b5adb8ab99bca1b8b4a9b5bcf7bab6b4">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">
-                    /* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script></a></li>
-                  </ul>
-
+                    </aside>
+                    <section class="main-section">
+                      <p>Webtwo ipsum dolor sit amet, eskobo chumby doostang bebo. Plaxo chegg squidoo zoodles zoosk zappos zoosk foodzie sifteo joukuu zoho, blekko zinch koofers zanga lijit kaboodle jiglu elgg handango joost spotify, octopart kno voki plugg waze zanga meevee waze lala edmodo.</p> 
+                      <p>Squidoo bebo zoodles cotweet nuvvo koofers xobni dopplr gooru, yammer tumblr zillow wufoo unigo tumblr blippy, kno napster sclipo unigo hulu dropio convore. Chumby groupon plaxo woopra zooomr palantir hojoki zoosk cuil zoho, blippy lijit knewton bitly meevee oovoo foodzie bubbli jaiku, hulu zlio diigo gooru zimbra sifteo wikia shopify. Handango blyve yammer scribd, zillow.</p>
+                    </section>
+                    <a class="exit-off-canvas"></a>
+                  </div>
                 </div>
 
-                <hr>
-                <h4 id="visibility-classes">Visibility Classes</h4>
-                <h5 id="screen-size-visibility-control-show-">Screen Size Visibility Control (Show)</h5>
-                <p>The following text should describe the screen size you&#39;re using:</p>
+                <br>
+                <h5>Vcard</h5>
+                <ul class="vcard">
+                  <li class="fn">Gaius Baltar</li>
+                  <li class="street-address">123 Colonial Ave.</li>
+                  <li class="locality">Caprica City</li>
+                  <li><span class="state">Caprica</span>, <span class="zip">12345</span></li>
+                  <li class="email"><a href="#"><span class="__cf_email__" data-cfemail="d9bef7bbb8b5adb8ab99bca1b8b4a9b5bcf7bab6b4">[email&#160;protected]</span><script data-cfhash='f9e31' type="text/javascript">
+                  /* <![CDATA[ */!function(){try{var t="currentScript"in document?document.currentScript:function(){for(var t=document.getElementsByTagName("script"),e=t.length;e--;)if(t[e].getAttribute("data-cfhash"))return t[e]}();if(t&&t.previousSibling){var e,r,n,i,c=t.previousSibling,a=c.getAttribute("data-cfemail");if(a){for(e="",r=parseInt(a.substr(0,2),16),n=2;a.length-n;n+=2)i=parseInt(a.substr(n,2),16)^r,e+=String.fromCharCode(i);e=document.createTextNode(e),c.parentNode.replaceChild(e,c)}t.parentNode.removeChild(t);}}catch(u){}}()/* ]]> */</script></a></li>
+                </ul>
+
+              </div>
+
+              <hr>
+              <h4 id="visibility-classes">Visibility Classes</h4>
+              <h5 id="screen-size-visibility-control-show-">Screen Size Visibility Control (Show)</h5>
+              <p>The following text should describe the screen size you&#39;re using:</p>
+              <div class="row">
+                <div class="large-6 columns">
+                  <h4>HTML</h4>
+                  <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-small-only&quot;</span>&gt;</span>This text is shown only on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-medium-up&quot;</span>&gt;</span>This text is shown on medium screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-medium-only&quot;</span>&gt;</span>This text is shown only on a medium screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-large-up&quot;</span>&gt;</span>This text is shown on large screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-large-only&quot;</span>&gt;</span>This text is shown only on a large screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xlarge-up&quot;</span>&gt;</span>This text is shown on xlarge screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xlarge-only&quot;</span>&gt;</span>This text is shown only on an xlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xxlarge-up&quot;</span>&gt;</span>This text is shown on xxlarge screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                    <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
+
+                  </div>
+                  <div class="large-6 columns">
+                    <h4>Rendered HTML</h4>
+                    <p class="panel">
+                      <strong class="show-for-small-only">This text is shown only on a small screen.</strong>
+                      <strong class="show-for-medium-up">This text is shown on medium screens and up.</strong>
+                      <strong class="show-for-medium-only">This text is shown only on a medium screen.</strong>
+                      <strong class="show-for-large-up">This text is shown on large screens and up.</strong>
+                      <strong class="show-for-large-only">This text is shown only on a large screen.</strong>
+                      <strong class="show-for-xlarge-up">This text is shown on xlarge screens and up.</strong>
+                      <strong class="show-for-xlarge-only">This text is shown only on an xlarge screen.</strong>
+                      <strong class="show-for-xxlarge-up">This text is shown on xxlarge screens and up.</strong>
+                    </p>
+                  </div>
+                </div>
+
+
+
+                <h5 id="screen-size-visibility-control-hide-">Screen Size Visibility Control (Hide)</h5>
+                <p>The following text should describe the screen size you aren&#39;t using:</p>
                 <div class="row">
                   <div class="large-6 columns">
                     <h4>HTML</h4>
                     <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-small-only&quot;</span>&gt;</span>This text is shown only on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-medium-up&quot;</span>&gt;</span>This text is shown on medium screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-medium-only&quot;</span>&gt;</span>This text is shown only on a medium screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-large-up&quot;</span>&gt;</span>This text is shown on large screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-large-only&quot;</span>&gt;</span>This text is shown only on a large screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xlarge-up&quot;</span>&gt;</span>This text is shown on xlarge screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xlarge-only&quot;</span>&gt;</span>This text is shown only on an xlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-xxlarge-up&quot;</span>&gt;</span>This text is shown on xxlarge screens and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-small-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-medium-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a medium, large, xlarge, or xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-medium-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a medium screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-large-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a large, xlarge, or xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-large-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a large screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xlarge-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xlarge screen and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xlarge-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                      <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xxlarge-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
                       <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                     </div>
                     <div class="large-6 columns">
                       <h4>Rendered HTML</h4>
                       <p class="panel">
-                        <strong class="show-for-small-only">This text is shown only on a small screen.</strong>
-                        <strong class="show-for-medium-up">This text is shown on medium screens and up.</strong>
-                        <strong class="show-for-medium-only">This text is shown only on a medium screen.</strong>
-                        <strong class="show-for-large-up">This text is shown on large screens and up.</strong>
-                        <strong class="show-for-large-only">This text is shown only on a large screen.</strong>
-                        <strong class="show-for-xlarge-up">This text is shown on xlarge screens and up.</strong>
-                        <strong class="show-for-xlarge-only">This text is shown only on an xlarge screen.</strong>
-                        <strong class="show-for-xxlarge-up">This text is shown on xxlarge screens and up.</strong>
+                        <strong class="hide-for-small-only">You are <em>not</em> on a small screen.</strong>
+                        <strong class="hide-for-medium-up">You are <em>not</em> on a medium, large, xlarge, or xxlarge screen.</strong>
+                        <strong class="hide-for-medium-only">You are <em>not</em> on a medium screen.</strong>
+                        <strong class="hide-for-large-up">You are <em>not</em> on a large, xlarge, or xxlarge screen.</strong>
+                        <strong class="hide-for-large-only">You are <em>not</em> on a large screen.</strong>
+                        <strong class="hide-for-xlarge-up">You are <em>not</em> on an xlarge screen and up.</strong>
+                        <strong class="hide-for-xlarge-only">You are <em>not</em> on an xlarge screen.</strong>
+                        <strong class="hide-for-xxlarge-up">You are <em>not</em> on an xxlarge screen.</strong>
                       </p>
                     </div>
                   </div>
 
 
 
-                  <h5 id="screen-size-visibility-control-hide-">Screen Size Visibility Control (Hide)</h5>
-                  <p>The following text should describe the screen size you aren&#39;t using:</p>
+                  <h5 id="orientation-detection">Orientation Detection</h5>
+                  <p>The following text should describe the device orientation you&#39;re using:</p>
                   <div class="row">
                     <div class="large-6 columns">
                       <h4>HTML</h4>
                       <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-small-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-medium-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a medium, large, xlarge, or xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-medium-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a medium screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-large-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a large, xlarge, or xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-large-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a large screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xlarge-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xlarge screen and up.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xlarge-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-xxlarge-up&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on an xxlarge screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-landscape&quot;</span>&gt;</span>You are in landscape orientation.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                        <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-portrait&quot;</span>&gt;</span>You are in portrait orientation.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
                         <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                       </div>
                       <div class="large-6 columns">
                         <h4>Rendered HTML</h4>
                         <p class="panel">
-                          <strong class="hide-for-small-only">You are <em>not</em> on a small screen.</strong>
-                          <strong class="hide-for-medium-up">You are <em>not</em> on a medium, large, xlarge, or xxlarge screen.</strong>
-                          <strong class="hide-for-medium-only">You are <em>not</em> on a medium screen.</strong>
-                          <strong class="hide-for-large-up">You are <em>not</em> on a large, xlarge, or xxlarge screen.</strong>
-                          <strong class="hide-for-large-only">You are <em>not</em> on a large screen.</strong>
-                          <strong class="hide-for-xlarge-up">You are <em>not</em> on an xlarge screen and up.</strong>
-                          <strong class="hide-for-xlarge-only">You are <em>not</em> on an xlarge screen.</strong>
-                          <strong class="hide-for-xxlarge-up">You are <em>not</em> on an xxlarge screen.</strong>
+                          <strong class="show-for-landscape">You are in landscape orientation.</strong>
+                          <strong class="show-for-portrait">You are in portrait orientation.</strong>
                         </p>
                       </div>
                     </div>
 
 
 
-                    <h5 id="orientation-detection">Orientation Detection</h5>
-                    <p>The following text should describe the device orientation you&#39;re using:</p>
+                    <h5 id="touch-detection">Touch Detection</h5>
+                    <p>The following text should describe if you&#39;re using a touch device:</p>
                     <div class="row">
                       <div class="large-6 columns">
                         <h4>HTML</h4>
                         <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
-                          <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-landscape&quot;</span>&gt;</span>You are in landscape orientation.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                          <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-portrait&quot;</span>&gt;</span>You are in portrait orientation.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                          <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-touch&quot;</span>&gt;</span>You are on a touch-enabled device.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+                          <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-touch&quot;</span>&gt;</span>You are not on a touch-enabled device.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
                           <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                         </div>
                         <div class="large-6 columns">
                           <h4>Rendered HTML</h4>
                           <p class="panel">
-                            <strong class="show-for-landscape">You are in landscape orientation.</strong>
-                            <strong class="show-for-portrait">You are in portrait orientation.</strong>
+                            <strong class="show-for-touch">You are on a touch-enabled device.</strong>
+                            <strong class="hide-for-touch">You are not on a touch-enabled device.</strong>
                           </p>
                         </div>
                       </div>
 
 
 
-                      <h5 id="touch-detection">Touch Detection</h5>
-                      <p>The following text should describe if you&#39;re using a touch device:</p>
-                      <div class="row">
-                        <div class="large-6 columns">
-                          <h4>HTML</h4>
-                          <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
-                            <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-touch&quot;</span>&gt;</span>You are on a touch-enabled device.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                            <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-touch&quot;</span>&gt;</span>You are not on a touch-enabled device.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
-                            <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
-                          </div>
-                          <div class="large-6 columns">
-                            <h4>Rendered HTML</h4>
-                            <p class="panel">
-                              <strong class="show-for-touch">You are on a touch-enabled device.</strong>
-                              <strong class="hide-for-touch">You are not on a touch-enabled device.</strong>
-                            </p>
-                          </div>
-                        </div>
-
-
-
-
-                      </div>
                     </div>
+                  </div>
           <!-- <section id="courses-banner-large">
   <div class="row">
     <div class="large-5 medium-5 columns banner-image">
@@ -998,8 +959,8 @@
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/foundation/js/foundation.min.js"></script>
 <script src="bower_components/modernizr/modernizr.js"></script>
-<script>
-$(document).foundation().foundation('joyride', 'start');
+<script type="text/javascript">
+$(document).foundation();
 </script>
 </body>
 

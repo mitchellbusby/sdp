@@ -32,6 +32,10 @@ gulp.task('webserver', function() {
 		}));
 });
 
+gulp.task('styleguide', ['sass'], function() {
+
+});
+
 gulp.task('run', ['sass:watch', 'webserver'], function() {
 
 });
