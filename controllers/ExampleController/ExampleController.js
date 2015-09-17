@@ -9,6 +9,6 @@ angular.module('utsHelps.example', ['ngRoute'])
   });
 }])
 
-.controller('exampleCtrl', [function() {
-
+.controller('exampleCtrl', ['$scope', function($scope) {
+	$scope.globals.pageTitle = "Example View";
 }]);

@@ -24,6 +24,9 @@ angular.module('utsHelps', [
 	});
 })
 .controller('ApplicationController', ['$scope', 'ERR_BROADCASTS', function($scope, ERR_BROADCASTS){
+	$scope.globals = {
+		pageTitle: "UTS HELPS"
+	};
 	$scope.err_message = "";
 	$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
 		console.log("Error in API! "+err_message);

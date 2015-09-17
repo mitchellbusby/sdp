@@ -8,6 +8,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	})
 }])
 .controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', function($scope, UpcomingActivitiesModel){
+	$scope.globals.pageTitle = "Upcoming Activities";
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
 	$scope.clickedOnAnActivity = function(activity) {
 		var activityAsString = JSON.stringify(activity);
