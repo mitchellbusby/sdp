@@ -11,6 +11,7 @@ $style-guide-version: 1.02;
 
 .colour-block {
 	height: 2em;
+	margin-bottom: 1.25rem;
 	&#colour-block-main {
 		background-color: $helps-main-color;
 	}
@@ -24,6 +25,7 @@ $style-guide-version: 1.02;
 
 .zurb-footer-bottom {
 	background-color: #f2f2f2;
+	padding-top: 1.25rem;
 }
 
 pre code .code-container {
