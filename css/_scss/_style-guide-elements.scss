@@ -1,13 +1,35 @@
- @import "colors"; 
-  .colour-block {
-  	height: 2em;
-  	&#colour-block-main {
-  		background-color: $helps-main-color;
-  	}
-  	&#colour-block-accent {
-  		background-color: $helps-accent-color;
-  	}
-  	&#colour-block-secondary {
-  		background-color: $helps-accent-secondary;
-  	}
-  }
+@import "colors"; 
+
+//Style Guide Variables
+
+//The version number of your style guide. Should be freezed except for major changes.
+$style-guide-version: 1.02;
+
+#uts-style-guide-version-number:before {
+	content: "#{$style-guide-version}.";
+}
+
+.colour-block {
+	height: 2em;
+	&#colour-block-main {
+		background-color: $helps-main-color;
+	}
+	&#colour-block-accent {
+		background-color: $helps-accent-color;
+	}
+	&#colour-block-secondary {
+		background-color: $helps-accent-secondary;
+	}
+}
+
+.zurb-footer-bottom {
+	background-color: #f2f2f2;
+}
+
+pre code .code-container {
+	margin: 10px 0px;
+	padding: 5px;
+	overflow-x: auto;
+	line-height: 1.3rem;
+	font-weight: normal;
+}

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Kitchen sink | Foundation Docs</title>
+  <title>Kitchen sink | UTS HELPS</title>
   <meta name="description" content="Documentation and reference library for ZURB Foundation. JavaScript, CSS, components, grid and more.">
   <meta name="author" content="ZURB, inc. ZURB network also includes zurb.com">
   <meta name="copyright" content="ZURB, inc. Copyright (c) 2014">
@@ -14,12 +14,13 @@
   <style type="text/css">
 
   </style>
+  <link rel="stylesheet" type="text/css" href="">
 </head>
 <body class="antialiased hide-extras">
   <div class="large-9 medium-8 columns small-centered">
 
-    <h1 id="kitchen-sink">Kitchen sink</h1>
-    <h3 class="subheader">This page includes every single Foundation element so that we can make sure things work together smoothly.</h3>
+    <h1 id="kitchen-sink">"Kitchen sink" style guide</h1>
+    <h3 class="subheader">This page includes every single Foundation element, and some custom stylings for UTS HELPS so that we can make sure things work together smoothly. Version <span id="uts-style-guide-version-number"></span></h3>
 
     <hr>
     <h4 id="colour">Colour Scheme</h4>
@@ -712,7 +713,7 @@
               <h5 id="screen-size-visibility-control-show-">Screen Size Visibility Control (Show)</h5>
               <p>The following text should describe the screen size you&#39;re using:</p>
               <div class="row">
-                <div class="large-6 columns">
+                <div class="large-12 columns">
                   <h4>HTML</h4>
                   <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
                     <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-small-only&quot;</span>&gt;</span>This text is shown only on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
@@ -726,7 +727,7 @@
                     <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                   </div>
-                  <div class="large-6 columns">
+                  <div class="large-12 columns">
                     <h4>Rendered HTML</h4>
                     <p class="panel">
                       <strong class="show-for-small-only">This text is shown only on a small screen.</strong>
@@ -746,7 +747,7 @@
                 <h5 id="screen-size-visibility-control-hide-">Screen Size Visibility Control (Hide)</h5>
                 <p>The following text should describe the screen size you aren&#39;t using:</p>
                 <div class="row">
-                  <div class="large-6 columns">
+                  <div class="large-12 columns">
                     <h4>HTML</h4>
                     <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
                       <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;hide-for-small-only&quot;</span>&gt;</span>You are <span class="tag">&lt;<span class="title">em</span>&gt;</span>not<span class="tag">&lt;/<span class="title">em</span>&gt;</span> on a small screen.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
@@ -760,7 +761,7 @@
                       <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                     </div>
-                    <div class="large-6 columns">
+                    <div class="large-12 columns">
                       <h4>Rendered HTML</h4>
                       <p class="panel">
                         <strong class="hide-for-small-only">You are <em>not</em> on a small screen.</strong>
@@ -780,7 +781,7 @@
                   <h5 id="orientation-detection">Orientation Detection</h5>
                   <p>The following text should describe the device orientation you&#39;re using:</p>
                   <div class="row">
-                    <div class="large-6 columns">
+                    <div class="large-12 columns">
                       <h4>HTML</h4>
                       <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
                         <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-landscape&quot;</span>&gt;</span>You are in landscape orientation.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
@@ -788,7 +789,7 @@
                         <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                       </div>
-                      <div class="large-6 columns">
+                      <div class="large-12 columns">
                         <h4>Rendered HTML</h4>
                         <p class="panel">
                           <strong class="show-for-landscape">You are in landscape orientation.</strong>
@@ -802,7 +803,7 @@
                     <h5 id="touch-detection">Touch Detection</h5>
                     <p>The following text should describe if you&#39;re using a touch device:</p>
                     <div class="row">
-                      <div class="large-6 columns">
+                      <div class="large-12 columns">
                         <h4>HTML</h4>
                         <pre><code class="language-html"><div class="code-container"><span class="tag">&lt;<span class="title">p</span> <span class="attribute">class</span>=<span class="value">&quot;panel&quot;</span>&gt;</span>
                           <span class="tag">&lt;<span class="title">strong</span> <span class="attribute">class</span>=<span class="value">&quot;show-for-touch&quot;</span>&gt;</span>You are on a touch-enabled device.<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
@@ -810,7 +811,7 @@
                           <span class="tag">&lt;/<span class="title">p</span>&gt;</span></div></code></pre>
 
                         </div>
-                        <div class="large-6 columns">
+                        <div class="large-12 columns">
                           <h4>Rendered HTML</h4>
                           <p class="panel">
                             <strong class="show-for-touch">You are on a touch-enabled device.</strong>
@@ -837,117 +838,14 @@
     </div>
   </div>
 </section> -->
-<div id="newsletter">
-  <div class="row">
-    <div class="medium-8 columns">
-      <h5>Stay on top of what&rsquo;s happening in <a href="http://zurb.com/responsive">responsive design</a>.</h5>
-      <p>Sign up to receive monthly Responsive Reading highlights. <a href="http://zurb.com/responsive/reading">Read Last Month's Edition &raquo;</a></p>
-    </div>
-    <div class="medium-4 columns">
-      <form action="http://zurb.createsend.com/t/y/s/xlitlu/" method="post" id="subForm">
-        <div class="row collapse margintop-20px">
-          <div class="small-8 medium-8 columns">
-            <input id="fieldEmail" name="cm-xlitlu-xlitlu" type="email" placeholder="signup@example.com">
-          </div>
-          <div class="small-4 medium-4 columns">
-            <input type="submit" href="#" class="postfix button" value="Sign Up">
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="zurb-footer-top bg-fblue">
-  <div class="row property">
-    <div class="medium-4 columns">
-      <div class="property-info">
-        <h3>Foundation for Sites</h3>
-        <p>Foundation is a responsive front-end framework made by <a href="http://zurb.com">ZURB</a>, a product design company in Campbell, CA. This framework is the result of building web products &amp; services since 1998.
-        </p>
-      </div>
-    </div>
-
-    <div class="medium-8 columns">
-      <div class="row collapse">
-        <div class="medium-4 columns">
-          <div class="learn-links">
-            <h4 class="hide-for-small">Want more?</h4>
-            <ul>
-              <li><a href="http://foundation.zurb.com/apps">Foundation for Apps</a></li>
-              <li><a href="http://zurb.com/ink/">Ink Responsive Emails</a></li>
-              <li><a href="http://zurb.com/notable">Notable Design Apps</a></li>
-              <li><a href="http://zurb.com/university/courses">Training</a></li>
-              <li><a href="http://zurb.com/library">Design Resources</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="medium-4 columns">
-          <div class="support-links">
-            <h4 class="hide-for-small">Talk to us</h4>
-            <p>Tweet us at <br> <a href="https://twitter.com/zurbfoundation">@ZURBfoundation</a></p>
-            <p><a href="http://foundation.zurb.com/business/business-support.html">Business Support</a></p>
-            <p>Or check our <a href="http://foundation.zurb.com/support/support.html">support page</a></p>
-          </div>
-        </div>
-        <div class="medium-4 columns">
-          <div class="connect-links">
-            <h4 class="hide-for-small">Stay Updated</h4>
-            <p>Keep up with the latest on Foundation. Find us on <a href="https://github.com/zurb/foundation">Github</a>.</p>
-            <a href="http://zurb.com/news" class="small button">Stay Connected</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row global">
-    <div class="medium-3 small-6 columns">
-      <a href="http://zurb.com/studios" class="footer-link-block services">
-        <span class="title">Studios</span>
-        <span>Helping more than 200 startups succeed since 1998.</span>
-      </a>
-    </div>
-    <div class="medium-3 small-6 columns">
-      <a href="http://foundation.zurb.com/" class="footer-link-block foundation">
-        <span class="title">Foundation</span>
-        <span>The most advanced front-end framework in the world.</span>
-      </a>
-    </div>
-    <div class="medium-3 small-6 columns">
-      <a href="http://zurb.com/notable" class="footer-link-block apps">
-        <span class="title">Notable Design Apps</span>
-        <span>Prototype, iterate and collect feedback on your products.</span>
-      </a>
-    </div>
-    <div class="medium-3 small-6 columns">
-      <a href="http://zurb.com/university" class="footer-link-block expo">
-        <span class="title">University</span>
-        <span>Ideas, thoughts and design resources shared with you.</span>
-      </a>
-    </div>
-  </div>
-</div>
 
 <div class="zurb-footer-bottom">
   <div class="row">
     <div class="medium-4 medium-4 push-8 columns">
-      <ul class="home-social">
-        <li><a href="http://www.twitter.com/ZURB" class="twitter"></a></li>
-        <li><a href="http://www.facebook.com/ZURB" class="facebook"></a></li>
-        <li><a href="http://zurb.com/contact" class="mail"></a></li>
-      </ul>
+      <p>Kitchen Sink designed by Foundation and customised by Mitchell Busby.</p>
     </div>
     <div class="medium-8 medium-8 pull-4 columns">
-      <a href="http://www.zurb.com" class="zurb-logo regular"></a>
-      <ul class="zurb-links">
-        <li><a href="http://zurb.com/about">About</a></li>
-        <li><a href="http://zurb.com/blog">Blog</a></li>
-        <li><a href="http://zurb.com/news">News<span class="show-for-medium-up"> &amp; Events</span></a></li>
-        <li><a href="http://zurb.com/contact">Contact</a></li>
-        <li><a href="http://zurb.com/sitemap">Sitemap</a></li>
-      </ul>
-      <p class="copyright">&copy; 1998&dash;2015 ZURB, Inc. All rights reserved.</p>
+      <p>Style guide version number <span id="uts-style-guide-version-number"></span></p>
     </div>
   </div>
 </div>
