@@ -9,8 +9,9 @@ describe('utsHelps.UpcomingActivities module', function() {
   var $scope, upcomingActivitiesCtrl;
   beforeEach(inject(function($rootScope, $controller){
   	$scope = $rootScope.$new();
+    $scope.globals = {};
   	upcomingActivitiesCtrl = $controller('UpcomingActivitiesCtrl', {
-  		$scope:$scope
+  		$scope:$scope,
   	});
   }));
 

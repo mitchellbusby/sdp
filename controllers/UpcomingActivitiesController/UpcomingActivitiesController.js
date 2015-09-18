@@ -14,7 +14,6 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		var activityAsString = JSON.stringify(activity);
 		for (var workshopId in $scope.UpcomingActivitiesModel.activities) {
 			if (activityAsString === JSON.stringify($scope.UpcomingActivitiesModel.activities[workshopId])) {
-				console.log("It was equal!");
 				activity.isExpanded=!activity.isExpanded;
 			}
 			else {

@@ -28,7 +28,7 @@
         <a class="left-off-canvas-toggle menu-icon"><span></span></a>
       </section>
       <section class="middle tab-bar-section">
-        <h1 class="title">{{globals.pageTitle}}</h1>
+        <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
       </section>
     </nav>
 
@@ -39,7 +39,12 @@
         <li><a href="#/example">Example Route</a></li>
         <li><a href="#/upcomingActivities">Upcoming Activities</a></li>
         <li><a href="#/blah">This should autoload to Example Route</a></li>
-        <li><a href="#/">...</a></li>
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/upcomingActivities">New Booking</a></li>
+        <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
+        <li><a href="#/pastBookings">Past Bookings</a></li>
+        <li><a href="#/settings">Settings</a></li>
+
       </ul>
     </aside>
     <section class="main-section" ng-view>

@@ -3,6 +3,9 @@
 	margin-top: $activity-margin;
 	margin-bottom: $activity-margin;
 }
-h1.title {
+nav h1.title {
 	text-transform: uppercase;
+}
+.ng-cloak {
+	opacity: 0;	
 }
