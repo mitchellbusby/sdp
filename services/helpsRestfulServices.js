@@ -8,6 +8,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	"ACTIVITIES_URI":"/workshop",
 	"SEARCH_URI":"/search"
 })
+.config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
+	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
+	// and is not supported by the CORS official spec: http://stackoverflow.com/a/16570604
+	$sceDelegateProvider.resourceUrlWhitelist(['self', 
+		helps_endpoint_constants.ENDPOINT_URI+'/**']);
+}])
 .service('ApiMethods', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', '$q',
 	function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, $q) {
 		this.createConfigObject = function() {
@@ -23,6 +29,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 				// Given the resource URI (not including the endpoint URI), and parameters, call the endpoint
 				// and return a promise
 				var configObject = this.createConfigObject();
+				configObject["params"] = params;
 				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
 			}
 			this.getResourceFaked = function(resourceUri, params) {
@@ -132,18 +139,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 			params
 			);
 	}
-	/*this.updateActivities = function(callback) {
-		this.getActivities().then(function(result) {
-			if (result.data.IsSuccess) {
-				var data = scope.mergeActivities(result.data);
-				callback(data);
-			}
-			else {
-				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, result.data.DisplayMessage);
-				callback(null);
-			}
-		});
-	}*/
 	this.mergeActivities = function(newDataToMerge, existingData) {
 		if (newDataToMerge.IsSuccess) {
 			if (!existingData) {
