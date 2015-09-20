@@ -25,8 +25,8 @@
 							<p>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</p>
 						</div>
 						<!--<div class="column small-3">-->
-							<a ng-click="book(workshop)" ng-if="workshop.BookingCount < workshop.maximum" class="button column small-3">Book</a>
-							<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-3 alert disabled">Full</a>
+							<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-3" stop-event ng-click="book(workshop)">Book</a>
+							<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-3 alert disabled" stop-event>Full</a>
 						<!--</div>-->
 					</div>
 				</div>
