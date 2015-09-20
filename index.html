@@ -9,17 +9,17 @@
   <title>UTS HELPS</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/main.css"/>
-	<style>
-		/* Off Canvas Full Height Fix*/
-	.off-canvas-wrap, .inner-wrap {
-		min-height: 100%;
-		min-height: 100vh;
-	}
-	</style>
+  <link rel="stylesheet" type="text/css" href="css/main.css"/>
+  <style>
+  /* Off Canvas Full Height Fix*/
+  .off-canvas-wrap, .inner-wrap {
+    min-height: 100%;
+    min-height: 100vh;
+  }
+  </style>
 </head>
 <body ng-controller="ApplicationController">
-<uh-error-box error-message="err_message">
+  <uh-error-box error-message="err_message">
 </uh-error-box>
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
@@ -34,23 +34,26 @@
 
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
+        <li><label>PROFILE</label></li>
+        <li><a href="#/settings"><div id="nav-photo"></div><div id="nav-username">Username</div></a></li>
         <li><label>MAIN MENU</label></li>
-        <li><div style="width: 5em; height: 5em; border-radius: 5em; background-color: #929292; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em;"></li>
-        <li><a href="#/example">Example Route</a></li>
         <li><a href="#/upcomingActivities">Upcoming Activities</a></li>
-        <li><a href="#/blah">This should autoload to Example Route</a></li>
         <li><a href="#/">Home</a></li>
         <li><a href="#/upcomingActivities">New Booking</a></li>
         <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
         <li><a href="#/pastBookings">Past Bookings</a></li>
+        <li><a href="#/logout">Logout</a></li>
         <li><a href="#/settings">Settings</a></li>
+        <li><a href="#/help">Help</a></li>
+        <li><a href="#/example">Example Route</a></li>
+
 
       </ul>
     </aside>
     <section class="main-section" ng-view>
     </section>
 
-  <a class="exit-off-canvas"></a>
+    <a class="exit-off-canvas"></a>
   </div>
 </div>
 </body>
