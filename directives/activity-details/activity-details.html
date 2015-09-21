@@ -1,4 +1,4 @@
-<div class="activity small-12 medium-6 column small-centered">
+<div class="activity small-11 medium-8 large-6 column small-centered">
 	<div class="row">
 		<div class="small-12 column" id="title">
 			{{activityDetails['topic']}}
@@ -21,12 +21,12 @@
 			<div class="row workshop-row" ng-repeat="workshop in activityDetails.workshops">
 				<div class="column small-12 workshop">
 					<div class="row">
-						<div class="column small-9">
+						<div class="column small-12 medium-9">
 							<p>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</p>
 						</div>
 						<!--<div class="column small-3">-->
-							<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-3" stop-event ng-click="book(workshop)">Book</a>
-							<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-3 alert disabled" stop-event>Full</a>
+							<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-3" stop-event ng-click="book(workshop)">Book</a>
+							<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-12 medium-3 alert disabled" stop-event>Full</a>
 						<!--</div>-->
 					</div>
 				</div>
