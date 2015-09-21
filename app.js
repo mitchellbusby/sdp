@@ -8,6 +8,7 @@ angular.module('utsHelps', [
 	'utsHelps.UpcomingActivities',
 	'angular.filter',
 	'ngAnimate',
+	'angular-loading-bar',
 	'utsHelps.constants'
 	])
 .config(['$routeProvider', function($routeProvider){
