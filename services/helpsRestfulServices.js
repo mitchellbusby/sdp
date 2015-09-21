@@ -135,7 +135,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	}*/
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
 	}
