@@ -2,9 +2,31 @@
 
 Repo for our project
 
-## Documentation
-[Google Drive Folder](https://drive.google.com/drive/folders/0BzxRdBrzgiQMfnNSMFZHZnFBTUlPWUNfUWxVWXJEU3RZWDkwaGVyWlRiNTcxRmxRY0s5aE0)
+##Getting Started
 
+Pre Requisites:
+- node and npm
+- bower
+
+Bootstrap the project with
+
+```npm install```
+
+Then compile the system and run the server (or host it yourself!)
+
+```gulp run```
+
+#Deployment
+
+Install dependencies
+
+```npm install```
+
+Build the system
+
+```gulp build```
+
+Host the files yourself.
 
 ##Testing
 
@@ -23,8 +45,11 @@ Install protractor and its webdriver first (this is really large and will take a
 
 Then run the webserver
 
-```npm start```
+```gulp run ```
 
 Then run the end to end test launcher
 
 ```npm run protractor```
+
+## Documentation
+[Google Drive Folder](https://drive.google.com/drive/folders/0BzxRdBrzgiQMfnNSMFZHZnFBTUlPWUNfUWxVWXJEU3RZWDkwaGVyWlRiNTcxRmxRY0s5aE0)

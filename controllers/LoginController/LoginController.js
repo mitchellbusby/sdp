@@ -13,28 +13,35 @@ angular.module('utsHelps.login', ['ngRoute'])
   });
 }])
 
-.controller('loginCtrl', ["$scope", "$timeout", "$window", function($scope, $timeout, $window) {
-	$scope.loading = false;
-	$scope.loginSuccessful = true;
-	$scope.onLogin = function() {
-		$scope.loading = true;
-	};
-	$scope.loginProcess = function() { 
-		return true; // don't return true when we have the API.
-	};
-	var timer = false;
-	$scope.$watch('loading', function() { // $watch here is to demonstrate that page has loading gfx
-			if (timer) {
-				$timeout.cancel(timer);
-			}
-			timer = $timeout(function () {
-				if ( $scope.loginProcess() && $scope.loading){
-					$window.location = '#/example';
-					$scope.loading = false;
-					return true;
-				} else {
-					return false;
-				}
-			}, 800)
-	});
-}]);
+.constant('AUTH_EVENTS', {
+	loginSuccess: 'auth-login-sucess',
+	loginFailed: 'auth-login-failed',
+	logoutSuccess: 'auth-logout-success',
+	sessionTimeout: 'auth-session-timeout',
+	notAuthenticated: 'auth-not-authenticated',
+	notAuthorized: 'auth-not-authorized'
+})
+
+.constant('USER_ROLES', {
+	all: '*',
+	admin: 'admin',
+	editor: 'editor',
+	guest: 'guest'
+})
+
+.controller('loginCtrl', '$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService' , 
+	function($scope, $rootScope, AUTH_EVENTS, AuthService) {
+		$scope.credentials = {
+			username: '',
+			password: ''
+		};
+		$scope.login = function (credentials) {
+			AuthService.login(credentials).then(function (user) {
+				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+				$scope.setCurrentUser(user);
+			}, function () {
+				$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+			});
+		};
+	}
+]);

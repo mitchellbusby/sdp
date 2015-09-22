@@ -4,18 +4,14 @@
 	}
 	
 </style>
-<div ng-controller="loginCtrl" >
-	<div ng-hide="loading" class="login-fields"> <!-- Login fields + button -->
-		<input type="text" ng-value="username" placeholder="Username" ></input>
-		<input type="password" ng-value="password" placeholder="Password"></input>
-		<div class="two columns">
-			<button ng-click="onLogin()">Login</button>
-		</div>
-		<div class="two columns">
-			<button ng-click="onRegister()">Register</button>
-		</div>
-	</div>
-	<div class="loadingAnimation" ng-hide="!loading">
-		<img src="res/img/spinning_loader.gif"/>
-	</div>
+<div>
+	<form name="loginForm" ng-controller="loginCtrl" class="login-fields" ng-submit="login(credentials)" novalidate>
+		<label for="username">Username:</label>
+		<input type="text" id="username" ng-model="credentials.username">
+		
+		<label for="password">Password:</label>
+		<input type="password" id="password" ng-model="credentials.password">
+		
+		<button type="submit">Login</button>
+	</form>
 </div>

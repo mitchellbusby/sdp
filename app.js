@@ -5,6 +5,10 @@ angular.module('utsHelps', [
 	'ngRoute',
 	'utsHelps.example',
 	'utsHelps.login',
+	'helpsRestfulServices',
+	'utsHelps.example',
+	'utsHelps.UpcomingActivities',
+	'angular.filter',
 	])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
