@@ -11,8 +11,9 @@ angular.module('utsHelps', [
 	'angular-loading-bar',
 	'utsHelps.constants'
 	])
-.config(['$routeProvider', function($routeProvider){
+.config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, cfpLoadingBarProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
+	cfpLoadingBarProvider.includeSpinner = false;
 }])
 .run(function() {
 	console.log("Angular initialised!");
