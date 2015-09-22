@@ -22,6 +22,17 @@ angular.module('utsHelps', [
 				close_on_click: true
 			}
 		});
+		$(document).on('open.fndtn.offcanvas', '[data-offcanvas]', function () {
+			var off_canvas_wrap = $(this);
+			$('#loading-bar').addClass("hide");
+			$('#loading-bar-spinner').addClass("hide");
+		});
+
+		$(document).on('close.fndtn.offcanvas', '[data-offcanvas]', function () {
+			var off_canvas_wrap = $(this);
+			$("#loading-bar").removeClass("hide");
+			$('#loading-bar-spinner').addClass("hide");
+		});
 	});
 })
 .controller('ApplicationController', ['$scope', 'ERR_BROADCASTS', function($scope, ERR_BROADCASTS){
@@ -37,4 +48,7 @@ angular.module('utsHelps', [
 	$scope.triggerCloseModal = function() {
 		$("#uh-error-modal").foundation('reveal', 'close');
 	}
+
+	//General listeners 
+
 }]);
