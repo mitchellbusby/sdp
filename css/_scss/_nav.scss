@@ -13,3 +13,27 @@
 	background-size: cover; 
 	background-repeat: no-repeat;
 }
+
+
+// Sticky Header fix by http://foundation.zurb.com/forum/posts/547-off-canvas-with-fixed-top-bar?page=2
+article {
+    overflow-y: auto;
+    margin-top: $tabbar-height;
+}
+article,
+body,
+html,
+.off-canvas-wrap, 
+.off-canvas-wrap .inner-wrap,
+.row {
+    height: 100%;
+    width: 100%;
+}
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+

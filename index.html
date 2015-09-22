@@ -23,15 +23,16 @@
 </uh-error-box>
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
-    <nav class="tab-bar">
-      <section class="left-small">
-        <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-      </section>
-      <section class="middle tab-bar-section">
-        <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
-      </section>
-    </nav>
-
+    <div class="header">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+        <section class="middle tab-bar-section">
+          <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
+        </section>
+      </nav>
+    </div>
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         <li><label>PROFILE</label></li>
@@ -50,10 +51,13 @@
 
       </ul>
     </aside>
-    <section class="main-section" ng-view>
-    </section>
+    <article class="main-section" ng-view>
+    </article>
 
     <a class="exit-off-canvas"></a>
+    <footer class="small-12 columns">
+      ...
+    </footer>
   </div>
 </div>
 </body>
