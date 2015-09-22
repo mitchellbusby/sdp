@@ -106,6 +106,63 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 							"DaysOfWeek": null,
 							"BookingCount": 44,
 							"archived": null
+						},
+						{
+							"WorkshopId": 16,
+							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
+							"description": "This workshop will empower you to write excellent essays and "+
+							"provide valuable support for the upcoming assignment.",
+							"targetingGroup": "all students",
+							"campus": "CB02.05.32",
+							"StartDate": "2012-09-07T17:00:00",
+							"EndDate": "2012-09-07T18:00:00",
+							"maximum": 45,
+							"WorkShopSetID": 9,
+							"cutoff": null,
+							"type": "single",
+							"reminder_num": 9999,
+							"reminder_sent": 0,
+							"DaysOfWeek": null,
+							"BookingCount": 44,
+							"archived": null
+						},
+						{
+							"WorkshopId": 16,
+							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
+							"description": "This workshop will empower you to write excellent essays and "+
+							"provide valuable support for the upcoming assignment.",
+							"targetingGroup": "all students",
+							"campus": "CB02.05.32",
+							"StartDate": "2012-09-07T17:00:00",
+							"EndDate": "2012-09-07T18:00:00",
+							"maximum": 45,
+							"WorkShopSetID": 10,
+							"cutoff": null,
+							"type": "single",
+							"reminder_num": 9999,
+							"reminder_sent": 0,
+							"DaysOfWeek": null,
+							"BookingCount": 44,
+							"archived": null
+						},
+						{
+							"WorkshopId": 16,
+							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
+							"description": "This workshop will empower you to write excellent essays and "+
+							"provide valuable support for the upcoming assignment.",
+							"targetingGroup": "all students",
+							"campus": "CB02.05.32",
+							"StartDate": "2012-09-07T17:00:00",
+							"EndDate": "2012-09-07T18:00:00",
+							"maximum": 45,
+							"WorkShopSetID": 15,
+							"cutoff": null,
+							"type": "single",
+							"reminder_num": 9999,
+							"reminder_sent": 0,
+							"DaysOfWeek": null,
+							"BookingCount": 44,
+							"archived": null
 						}
 						],
 						"IsSuccess": true,
@@ -135,7 +192,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	}*/
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
 	}

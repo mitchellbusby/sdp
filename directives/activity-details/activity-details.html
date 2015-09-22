@@ -19,7 +19,7 @@
 				<p class="column small-12">{{activityDetails['description']}}</p>
 			</div>
 			<div class="row" ng-repeat="(campusKey, workshops) in activityDetails.workshops | groupBy: 'campus'">
-				<div class="row"><div class="column small-7 inner-card"><p>Campus {{campusKey}}</p></div></div>
+				<div class="row"><div class="column small-7 inner-card"><p><strong>Location: {{campusKey}}</strong></p></div></div>
 				<div class="row workshop-row" ng-repeat="workshop in workshops">
 					<div class="column small-12 workshop">
 						<div class="row">
