@@ -1,0 +1,11 @@
+.activity-row {
+	$activity-margin: rem-calc(10);
+	margin-top: $activity-margin;
+	margin-bottom: $activity-margin;
+}
+nav h1.title {
+	text-transform: uppercase;
+}
+.ng-cloak {
+	opacity: 0;	
+}

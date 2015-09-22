@@ -1,6 +1,7 @@
-<h1>Upcoming Activities</h1>
-<div ng-repeat="activity in UpcomingActivitiesModel.activities">
-	<uh-activity-details activity-details="activity" class="row">
+<div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
+	<a ng-click="clickedOnAnActivity(activity)">
+		<uh-activity-details activity-details="activity" expand="activity.isExpanded" class="row">
 
-	</uh-activity-details>
+		</uh-activity-details>
+	</a>
 </div>
