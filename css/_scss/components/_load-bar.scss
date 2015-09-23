@@ -5,15 +5,21 @@
  * License: MIT
  */
 
-/* Make clicks pass-through */
-#loading-bar,
-#loading-bar-spinner {
+ /* Make clicks pass-through */
+ #loading-bar,
+ #loading-bar-spinner {
   pointer-events: none;
   -webkit-pointer-events: none;
   -webkit-transition: 350ms linear all;
   -moz-transition: 350ms linear all;
   -o-transition: 350ms linear all;
   transition: 350ms linear all;
+}
+
+#loading-bar, #loading-bar-spinner {
+  &.hide {
+    display: none;    
+  }
 }
 
 #loading-bar.ng-enter,

@@ -1,8 +1,9 @@
 $tabbar-bg: $helps-main-color;
 $tabbar-color: white;
 $off-canvas-bg: $tabbar-bg;
+$off-canvas-link-color: white;
 $off-canvas-back-bg: $tabbar-bg;
-$off-canvas-label-bg: $tabbar-bg;
+$off-canvas-label-bg: scale-color($off-canvas-bg, $lightness:-30%);
 $off-canvas-label-color: $tabbar-color;
 
 // Animation
@@ -14,3 +15,6 @@ $menu-slide: 'transform 300ms ease' !default;
 
 
 //Buttons
+
+
+// Navigation
