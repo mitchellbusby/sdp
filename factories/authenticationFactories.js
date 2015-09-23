@@ -18,6 +18,8 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 		});
 	}
 	authService.login = function (credentials) {
+		// this will probably need to be rewritten when real login functionality 
+		// is implemented
 		return $http.post('/', credentials)
 		.then(function (res) { 
 			Session.create(res.data.id, res.data.user.id,
@@ -42,7 +44,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 }])
 //There used to be a service in here but it should be injected from the restful 
 //services
-.factory('AuthInterceptor', [function ($rootScope, $q, AUTH_EVENTS){
+.factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', function ($rootScope, $q, AUTH_EVENTS){
 	return {
 		responseError: function (response) {
 			$rootScope.$broadcast({
