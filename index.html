@@ -16,18 +16,11 @@
 		min-height: 100%;
 		min-height: 100vh;
 	}
-
-  uh-activity-details > .activity {
-    border: 1px solid black;
-    border-radius: 4px;
-  }
-
-  uh-activity-details #title {
-    font-weight: bold;
-  }
 	</style>
 </head>
 <body ng-controller="ApplicationController">
+<uh-error-box error-message="err_message">
+</uh-error-box>
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     <nav class="tab-bar">
@@ -35,17 +28,23 @@
         <a class="left-off-canvas-toggle menu-icon"><span></span></a>
       </section>
       <section class="middle tab-bar-section">
-        <h1 class="title">UTS-HELPS</h1>
+        <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
       </section>
     </nav>
 
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         <li><label>MAIN MENU</label></li>
+        <li><div style="width: 5em; height: 5em; border-radius: 5em; background-color: #929292; margin-left: auto; margin-right: auto; margin-top: 1em; margin-bottom: 1em;"></li>
         <li><a href="#/example">Example Route</a></li>
         <li><a href="#/upcomingActivities">Upcoming Activities</a></li>
         <li><a href="#/blah">This should autoload to Example Route</a></li>
-        <li><a href="#/">...</a></li>
+        <li><a href="#/">Home</a></li>
+        <li><a href="#/upcomingActivities">New Booking</a></li>
+        <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
+        <li><a href="#/pastBookings">Past Bookings</a></li>
+        <li><a href="#/settings">Settings</a></li>
+
       </ul>
     </aside>
     <section class="main-section" ng-view>
@@ -60,8 +59,11 @@
 <script src="bower_components/modernizr/modernizr.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
 <script type="text/javascript" src="bower_components/angular-filter/dist/angular-filter.js"></script>
 <script src="directives/directives.js"></script>
+<script type="text/javascript" src="constants.js"></script>
 <script src="app.js"></script>
 <script src="services/helpsRestfulServices.js"></script>
 <script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
