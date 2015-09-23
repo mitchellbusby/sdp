@@ -10,6 +10,9 @@ angular.module('utsHelps', [
 	'utsHelps.example',
 	'utsHelps.UpcomingActivities',
 	'angular.filter',
+	'ngAnimate',
+	'angular-loading-bar',
+	'utsHelps.constants'
 	])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
@@ -30,8 +33,7 @@ angular.module('utsHelps', [
 				close_on_click: true
 			}
 		});
-	});
-	
+	});	
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
@@ -50,7 +52,21 @@ angular.module('utsHelps', [
 		$location.path("/login");
 	});
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', function($scope, USER_ROLES, AuthService) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', function($scope, USER_ROLES, AuthService, ERR_BROADCASTS) {
+	
+	$scope.globals = {
+		pageTitle: "UTS HELPS"
+	};
+	$scope.err_message = "";
+	$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
+		console.log("Error in API! "+err_message);
+		$scope.err_message = err_message;
+		$("#uh-error-modal").foundation('reveal', 'open');
+	});
+	$scope.triggerCloseModal = function() {
+		$("#uh-error-modal").foundation('reveal', 'close');
+	}
+
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;

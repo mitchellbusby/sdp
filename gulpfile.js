@@ -21,17 +21,29 @@ gulp.task('sass', function() {
 });
 
 gulp.task('sass:watch', function() {
-	gulp.watch('./css/_scss/*.scss', ['sass']);
+	gulp.watch(['css/_scss/*.scss', 'css/_scss/components/*.scss'], ['sass']);
 });
 
 gulp.task('webserver', function() {
 	gulp.src('')
 		.pipe(webserver({
+			liveReload: true,
 			//directoryListing: true,
 			open: true
 		}));
 });
 
+gulp.task('webserver-public', function() {
+	gulp.src('')
+		.pipe(webserver({
+			host: '0.0.0.0',
+			port: '8080'
+		}))
+});
+
 gulp.task('run', ['sass:watch', 'webserver'], function() {
 
+});
+
+gulp.task('external-server', ['sass:watch', 'webserver-public'], function() {
 });

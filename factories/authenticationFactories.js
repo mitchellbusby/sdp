@@ -1,14 +1,8 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute'])
-.constant("auth_endpoint_constants", {
-	"ENDPOINT_URI": "http://helpshere.cloudapp.net/api",
-	"port": "80",
-	"APP_KEY":"123456",
-	"ACTIVITIES_URI": "/workshop",
-	"SEARCH_URI":"/search", // likely don't need this.
-})
-.factory('AuthService', function ($http, Session) {
+angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
+// These constants can be injected via HelpsRestfulServices
+.factory('AuthService',['$http', 'Session', function ($http, Session) {
 	var authService = {};
 	authService.loginFake = function (credentials){
 		Session.create("1", "TestUser", "User");
@@ -41,21 +35,9 @@ angular.module('utsHelps.auths', ['ngRoute'])
 	};
 	
 	return authService;
-})
-
-.service('Session', function () {
-	this.create = function (sessionId, userId, userRole) {
-		this.id = sessionId;
-		this.userId = userId;
-		this.userRole = userRole;
-	};
-	
-	this.destroy = function() {
-		this.id = null;
-		this.userId = null;
-		this.userRole = null;
-	};
-})
+}])
+//There used to be a service in here but it should be injected from the restful 
+//services
 .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS){
 	return {
 		responseError: function (response) {

@@ -3,14 +3,14 @@
 angular.module('utsHelps.login', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/login', {
-    templateUrl: 'views/loginView.html',
-    controller: 'loginCtrl'
-  })
-  .when('/example', {
-	  templateUrl: 'views/exampleView.html',
-	  controller: 'exampleCtrl'
-  });
+	$routeProvider.when('/login', {
+		templateUrl: 'views/loginView.html',
+		controller: 'loginCtrl'
+	})
+	.when('/example', {
+		templateUrl: 'views/exampleView.html',
+		controller: 'exampleCtrl'
+	});
 }])
 .controller('loginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 
 	function($scope, $rootScope, AUTH_EVENTS, AuthService) {
