@@ -3,6 +3,20 @@
 angular.module('helpsRestfulServices', [])
 .constant('ENDPOINT_URI', "WhateverOurEndpointIs")
 .constant('')
+.constant('AUTH_EVENTS', {
+	loginSuccess: 'auth-login-sucess',
+	loginFailed: 'auth-login-failed',
+	logoutSuccess: 'auth-logout-success',
+	sessionTimeout: 'auth-session-timeout',
+	notAuthenticated: 'auth-not-authenticated',
+	notAuthorized: 'auth-not-authorized'
+})
+.constant('USER_ROLES', {
+	all: '*',
+	admin: 'admin',
+	editor: 'editor',
+	guest: 'guest'
+})
 .service('UpcomingActivitiesModel', ['$http', function($http) {
 	var scope = this;
 	this.create = function(activitiesToSave) {
