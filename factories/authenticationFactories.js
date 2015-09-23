@@ -40,6 +40,10 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 			authorizedRoles.indexOf(Session.userRole) !== -1);
 	};
 	
+	authService.logout = function() {
+		Session.destroy();
+	}
+
 	return authService;
 }])
 //There used to be a service in here but it should be injected from the restful 
