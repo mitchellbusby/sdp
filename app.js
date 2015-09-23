@@ -11,8 +11,9 @@ angular.module('utsHelps', [
 	'angular-loading-bar',
 	'utsHelps.constants'
 	])
-.config(['$routeProvider', function($routeProvider){
+.config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, cfpLoadingBarProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
+	cfpLoadingBarProvider.includeSpinner = false;
 }])
 .run(function() {
 	console.log("Angular initialised!");
@@ -21,6 +22,17 @@ angular.module('utsHelps', [
 			offcanvas: {
 				close_on_click: true
 			}
+		});
+		$(document).on('open.fndtn.offcanvas', '[data-offcanvas]', function () {
+			var off_canvas_wrap = $(this);
+			$('#loading-bar').addClass("hide");
+			$('#loading-bar-spinner').addClass("hide");
+		});
+
+		$(document).on('close.fndtn.offcanvas', '[data-offcanvas]', function () {
+			var off_canvas_wrap = $(this);
+			$("#loading-bar").removeClass("hide");
+			$('#loading-bar-spinner').addClass("hide");
 		});
 	});
 })
@@ -37,4 +49,7 @@ angular.module('utsHelps', [
 	$scope.triggerCloseModal = function() {
 		$("#uh-error-modal").foundation('reveal', 'close');
 	}
+
+	//General listeners 
+
 }]);

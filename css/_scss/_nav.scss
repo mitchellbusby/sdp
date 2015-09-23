@@ -1,0 +1,39 @@
+#nav-username {
+	text-align: center;
+}
+#nav-photo {
+	width: 5em; 
+	height: 5em; 
+	border-radius: 5em; 
+	margin-left: auto; 
+	margin-right: auto; 
+	margin-top: 1em;
+	margin-bottom: 1em; 
+	background-image: url(../static/img/mac-glasses.jpeg); 
+	background-size: cover; 
+	background-repeat: no-repeat;
+}
+
+
+// Sticky Header fix by http://foundation.zurb.com/forum/posts/547-off-canvas-with-fixed-top-bar?page=2
+article {
+    overflow-y: auto;
+    margin-top: $tabbar-height;
+}
+article,
+body,
+html,
+.off-canvas-wrap, 
+.off-canvas-wrap .inner-wrap,
+.row {
+    height: 100%;
+    width: 100%;
+}
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+
