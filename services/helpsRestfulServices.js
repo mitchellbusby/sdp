@@ -1,6 +1,21 @@
 'use strict';
 
 angular.module('helpsRestfulServices', ['utsHelps.constants'])
+.constant('AUTH_EVENTS', {
+	loginSuccess: 'auth-login-sucess',
+	loginFailed: 'auth-login-failed',
+	logoutSuccess: 'auth-logout-success',
+	sessionTimeout: 'auth-session-timeout',
+	notAuthenticated: 'auth-not-authenticated',
+	notAuthorized: 'auth-not-authorized'
+})
+.constant('USER_ROLES', {
+	all: '*',
+	admin: 'admin',
+	editor: 'editor',
+	guest: 'guest',
+	user: 'user'
+})
 .constant("helps_endpoint_constants", {
 	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
 	"port":"80",
@@ -230,4 +245,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		});
 	};
 	this.onCreate();
-}]);
+}])
+.service('Session', function () {
+	this.create = function (sessionId, userId, userRole) {
+		this.id = sessionId;
+		this.userId = userId;
+		this.userRole = userRole;
+	};
+	
+	this.destroy = function() {
+		this.id = null;
+		this.userId = null;
+		this.userRole = null;
+	};
+});
