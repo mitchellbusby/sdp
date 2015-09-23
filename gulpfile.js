@@ -33,12 +33,14 @@ gulp.task('webserver', function() {
 		}));
 });
 
+gulp.task('styleguide', ['sass'], function() {
+});
 gulp.task('webserver-public', function() {
 	gulp.src('')
 		.pipe(webserver({
 			host: '0.0.0.0',
 			port: '8080'
-		}))
+		}));
 });
 
 gulp.task('run', ['sass:watch', 'webserver'], function() {

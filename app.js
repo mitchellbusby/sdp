@@ -14,7 +14,7 @@ angular.module('utsHelps', [
 	'angular-loading-bar',
 	'utsHelps.constants'
 	])
-.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider' function($routeProvider, cfpLoadingBarProvider, $httpProvider){
+.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
@@ -63,7 +63,8 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', function($scope, USER_ROLES, AuthService, ERR_BROADCASTS) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope',
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
@@ -83,6 +84,14 @@ angular.module('utsHelps', [
 	$scope.setCurrentUser = function (user) { 
 		$scope.currentUser = user;
 	};
-	
+	$scope.logout = function() {
+		AuthService.logoutFake().then(function success() {
+			$scope.currentUser = null;
+			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess); 
+		}, function failure(err) {
+			// deal with failure to log out here
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);
+		});
+	}
 	$scope.isLoginPage = true;
 }]);

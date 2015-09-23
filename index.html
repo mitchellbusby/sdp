@@ -35,15 +35,21 @@
     </div>
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
-        <li><a href="#/settings"><div id="nav-photo"></div><div id="nav-username">Username</div></a></li>
+        <li><a href="#/settings"><div id="nav-photo"></div><div id="nav-username">{{currentUser}}</div></a></li>
         <li><label>MAIN MENU</label></li>
-        <li><a href="#/">Home</a></li>
-        <li><a href="#/upcomingActivities">Activities</a></li>
-        <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
-        <li><a href="#/pastBookings">Past Bookings</a></li>
-        <li><a href="#/logout">Logout</a></li>
-        <li><a href="#/settings">Settings</a></li>
-        <li><a href="#/help">Help</a></li>
+        <div ng-if="currentUser">
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/upcomingActivities">Activities</a></li>
+          <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
+          <li><a href="#/pastBookings">Past Bookings</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
+          <li><a href="#/settings">Settings</a></li>
+          <li><a href="#/help">Help</a></li>
+        </div>
+        <div ng-if="!currentUser">
+          <li><a href="#/login">Login</a></li>
+          <li><a href="#/help">Help</a></li>
+        </div>
       </ul>
     </aside>
     <article class="main-section" ng-view>
