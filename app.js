@@ -85,9 +85,13 @@ angular.module('utsHelps', [
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {
-		AuthService.logout();
-		$scope.currentUser = null;
-		$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+		AuthService.logoutFake().then(function success() {
+			$scope.currentUser = null;
+			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess); 
+		}, function failure(err) {
+			// deal with failure to log out here
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);
+		});
 	}
 	$scope.isLoginPage = true;
 }]);

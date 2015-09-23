@@ -41,7 +41,18 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 	};
 	
 	authService.logout = function() {
+		//This is yet to be filled in
 		Session.destroy();
+	}
+
+	authService.logoutFake = function() {
+		Session.destroy();
+		return $q(function(resolve, reject) {
+			setTimeout(function() {
+				if (true) {return resolve();}
+				else {return reject();}
+			})
+		});
 	}
 
 	return authService;
