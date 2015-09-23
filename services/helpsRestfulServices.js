@@ -13,7 +13,8 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	all: '*',
 	admin: 'admin',
 	editor: 'editor',
-	guest: 'guest'
+	guest: 'guest',
+	user: 'user'
 })
 .constant("helps_endpoint_constants", {
 	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",

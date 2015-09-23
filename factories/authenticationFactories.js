@@ -2,24 +2,28 @@
 
 angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 // These constants can be injected via HelpsRestfulServices
-.factory('AuthService',['$http', 'Session', function ($http, Session) {
+.factory('AuthService',['$http', 'Session', '$q', function ($http, Session, $q) {
 	var authService = {};
 	authService.loginFake = function (credentials){
-		Session.create("1", "TestUser", "User");
-		return {
-			then: function (func) { func(); },
-			username: credentials.username,
-			userRole: "User",
-			userId: "1"
-		};
+		return $q(function(resolve, reject) {
+			setTimeout(function() {
+				if (credentials.username === 'mbusby') {
+					reject("User is unauthenticated");
+				}
+				else {
+					Session.create('1', credentials.username, 'User');
+					resolve(credentials.username);
+				}
+			}, 1000);
+		});
 	}
 	authService.login = function (credentials) {
 		return $http.post('/', credentials)
-			.then(function (res) { 
-				Session.create(res.data.id, res.data.user.id,
-								res.data.user.role);
-				return res.data.user;
-			})
+		.then(function (res) { 
+			Session.create(res.data.id, res.data.user.id,
+				res.data.user.role);
+			return res.data.user;
+		});
 	};
 	
 	authService.isAuthenticated = function() {
@@ -38,7 +42,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 }])
 //There used to be a service in here but it should be injected from the restful 
 //services
-.factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS){
+.factory('AuthInterceptor', [function ($rootScope, $q, AUTH_EVENTS){
 	return {
 		responseError: function (response) {
 			$rootScope.$broadcast({
@@ -50,4 +54,4 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices'])
 			return $q.reject(response);
 		}
 	}
-});
+}]);

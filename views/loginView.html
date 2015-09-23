@@ -2,16 +2,19 @@
 	.login-fields {
 		padding: 12px;
 	}
-	
 </style>
 <div>
-	<form name="loginForm" ng-controller="loginCtrl" class="login-fields" ng-submit="login(credentials)" novalidate>
+	<form name="loginForm" class="login-fields">
 		<label for="username">Username:</label>
-		<input type="text" id="username" ng-model="credentials.username">
+		<input type="text" id="username" ng-model="credentials.username" required>
 		
 		<label for="password">Password:</label>
-		<input type="password" id="password" ng-model="credentials.password">
+		<input type="password" id="password" ng-model="credentials.password" required>
 		
-		<button type="submit">Login</button>
+		<button ng-click="login(credentials)" ng-disabled="loginForm.$invalid">Login</button>
 	</form>
+	<div data-alert class="alert-box alert radius" ng-show="loginFailed" ng-click="loginFailed = ! loginFailed">
+		Your login details were incorrect. Try again.
+		<div class="close" >&times;</div>
+	</div>
 </div>

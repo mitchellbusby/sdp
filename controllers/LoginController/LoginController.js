@@ -6,10 +6,6 @@ angular.module('utsHelps.login', ['ngRoute'])
 	$routeProvider.when('/login', {
 		templateUrl: 'views/loginView.html',
 		controller: 'loginCtrl'
-	})
-	.when('/example', {
-		templateUrl: 'views/exampleView.html',
-		controller: 'exampleCtrl'
 	});
 }])
 .controller('loginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 
@@ -18,11 +14,13 @@ angular.module('utsHelps.login', ['ngRoute'])
 			username: '',
 			password: ''
 		};
+		$scope.loginFailed = false;
 		$scope.login = function (credentials) {
 			AuthService.loginFake(credentials).then(function (user) {
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 				$scope.setCurrentUser(user);
-			}, function () {
+			}, function (err) {
+				$scope.loginFailed = true;
 				$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 			});
 		};

@@ -53,7 +53,6 @@ angular.module('utsHelps', [
 	});
 }])
 .controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', function($scope, USER_ROLES, AuthService, ERR_BROADCASTS) {
-	
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
