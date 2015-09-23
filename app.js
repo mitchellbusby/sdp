@@ -14,17 +14,14 @@ angular.module('utsHelps', [
 	'angular-loading-bar',
 	'utsHelps.constants'
 	])
-.config(['$routeProvider', 'cfpLoadingBarProvider', function($routeProvider, cfpLoadingBarProvider){
+.config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider' function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
 	cfpLoadingBarProvider.includeSpinner = false;
-}])
-.config(['$httpProvider', function ($httpProvider) {
 	$httpProvider.interceptors.push([
 		'$injector',
 		function ($injector) {
 			return $injector.get('AuthInterceptor');
-		}
-		]);
+	}]);
 }])
 .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function($rootScope, AUTH_EVENTS, AuthService, $location) {
 	console.log("Angular initialised!");
@@ -45,7 +42,9 @@ angular.module('utsHelps', [
 		var off_canvas_wrap = $(this);
 		$("#loading-bar").removeClass("hide");
 		$('#loading-bar-spinner').addClass("hide");
-	});	
+	});
+
+
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
@@ -54,15 +53,15 @@ angular.module('utsHelps', [
 			}
 		}
 	});
-	
-	// Redirect if user if they have been logged in and logged out
+	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		$location.path("/example"); // dashboard
 	});
-	
 	$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
 		$location.path("/login");
 	});
+
+
 }])
 .controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', function($scope, USER_ROLES, AuthService, ERR_BROADCASTS) {
 	$scope.globals = {
