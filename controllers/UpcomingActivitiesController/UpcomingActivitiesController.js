@@ -21,4 +21,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 			}
 		}
 	}
+	$scope.bookSession = function(session) {
+		 
+	}
 }]);

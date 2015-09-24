@@ -1,28 +1,6 @@
 'use strict';
 
 angular.module('helpsRestfulServices', ['utsHelps.constants'])
-.constant('AUTH_EVENTS', {
-	loginSuccess: 'auth-login-sucess',
-	loginFailed: 'auth-login-failed',
-	logoutSuccess: 'auth-logout-success',
-	sessionTimeout: 'auth-session-timeout',
-	notAuthenticated: 'auth-not-authenticated',
-	notAuthorized: 'auth-not-authorized'
-})
-.constant('USER_ROLES', {
-	all: '*',
-	admin: 'admin',
-	editor: 'editor',
-	guest: 'guest',
-	user: 'user'
-})
-.constant("helps_endpoint_constants", {
-	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
-	"port":"80",
-	"APP_KEY":'123456',
-	"ACTIVITIES_URI":"/workshop",
-	"SEARCH_URI":"/search"
-})
 .config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
 	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
 	// and is not supported by the CORS official spec: http://stackoverflow.com/a/16570604
@@ -247,9 +225,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	this.onCreate();
 }])
 .service('Session', function () {
-	this.create = function (sessionId, userId, userRole) {
+	this.create = function (sessionId, userId, username, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
+		this.username = username;
 		this.userRole = userRole;
 	};
 	
