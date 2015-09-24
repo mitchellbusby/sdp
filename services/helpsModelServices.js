@@ -64,7 +64,7 @@ angular.module('helpsModelsServices', [])
 			"campusInfo": campusInfo,
 			"archived": archived
 		};
-	}
+	};
 	
 	return campus;
 })
@@ -107,7 +107,7 @@ angular.module('helpsModelsServices', [])
 			"campusId": campusId,
 			"name": name,
 			"archived": archived
-		}
+		};
 	};
 	return workSet;
 })
@@ -120,7 +120,7 @@ angular.module('helpsModelsServices', [])
 			"workshopId": workshopId,
 			"studentId": studentId,
 			"userId": userId
-		}
+		};
 	};
 	return wwaiting;
 })
