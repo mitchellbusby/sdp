@@ -14,7 +14,7 @@
 		</p>
 	</div>
 	<div class="row expanded-content" ng-show="expand" ng-class="{expanded: expand}">
-		<div class="column small-12">
+		<div class="column small-12" ng-if="expand">
 			<div class="row">
 				<p class="column small-12">{{activityDetails['description']}}</p>
 			</div>
