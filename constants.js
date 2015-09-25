@@ -22,5 +22,6 @@ angular.module('utsHelps.constants', [])
 	"port":"80",
 	"APP_KEY":'123456',
 	"ACTIVITIES_URI":"/workshop",
-	"SEARCH_URI":"/search"
+	"SEARCH_URI":"/search",
+	"BOOK_SESSION_URI":"/workshop/booking/create"
 });

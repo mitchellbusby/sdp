@@ -7,9 +7,10 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		controller: 'UpcomingActivitiesCtrl'
 	})
 }])
-.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', function($scope, UpcomingActivitiesModel){
+.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', function($scope, UpcomingActivitiesModel, Session){
 	$scope.globals.pageTitle = "Upcoming Activities";
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
+	$scope.selectedWorkshop = null;
 	$scope.clickedOnAnActivity = function(activity) {
 		var activityAsString = JSON.stringify(activity);
 		for (var workshopId in $scope.UpcomingActivitiesModel.activities) {
@@ -21,7 +22,30 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 			}
 		}
 	}
-	$scope.bookSession = function(session) {
+	$scope.bookWorkshop = function(workshop) {
+		// Prepare
+		$scope.selectedWorkshop = workshop;
+		 // Make modal first
+		 // Make it appear
+		 $scope.$broadcast("SHOW_CONFIRM_DENY");
+		 // wait for things to happen
 		 
-	}
-}]);
+		};
+		$scope.confirmWorkshop = function(confirmation) {
+			if (confirmation) {
+				UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
+				.then(function(success) {
+					if (success) {
+				 		// Trigger banner to say successful booking made
+		 				console.log("Successfully made a booking!");
+		 			}		
+		 			else {
+				 		// Don't trigger a banner
+				 	}
+				 	$scope.selectedWorkshop = null;
+				 });
+			}
+			else {
+			}
+		}
+	}]);

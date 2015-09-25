@@ -162,6 +162,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 						"DisplayMessage": null
 					};
 				}
+				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI && (params.WorkshopId === 1 || params.workshopId === 11) ) {
+					data = {"IsSuccess":false, "DisplayMessage":"Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS."};
+				}
+				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI) {
+					data = {"IsSuccess":true, "DisplayMessage":""};
+				}
 				else {
 					console.log("Resource not faked");
 					data = null;
@@ -185,7 +191,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	}*/
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
 	}
@@ -220,6 +226,24 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data);
+		});
+	};
+	this.bookWorkshop = function(workshopId, studentId) {
+		return ApiMethods.getResourceFaked(endpoint_constants.BOOK_SESSION_URI, {
+			studentId: studentId,
+			workshopId: workshopId,
+			userId: studentId
+		}).then(function success(response) {
+			if (response.data.IsSuccess) {
+				return true;
+			}
+			else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		}, function failure(error) {
+			// Bit of error handling
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
 	this.onCreate();
