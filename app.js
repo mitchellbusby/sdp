@@ -12,7 +12,8 @@ angular.module('utsHelps', [
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
-	'utsHelps.constants'
+	'utsHelps.constants',
+	'angular-alert-banner'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
