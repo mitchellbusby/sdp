@@ -1,0 +1,31 @@
+{
+  "name": "sdp",
+  "version": "0.0.0",
+  "private": true,
+  "homepage": "https://github.com/mitchellbusby/sdp",
+  "authors": [
+    "Mitchell Busby <mitchbusby@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.3.11",
+    "angular-animate": "~1.3.x",
+    "angular-filter": "~0.5.5",
+    "angular-loader": "1.3.11",
+    "angular-loading-bar": "~0.8.0",
+    "angular-mocks": "~1.3.11",
+    "angular-route": "1.3.11",
+    "foundation": "~5.5.2",
+    "modernizr": "~2.8.3"
+  },
+  "resolutions": {
+    "angular": "1.3.11"
+  }
+}

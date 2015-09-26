@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="utsHelps" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="utsHelps" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="utsHelps" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="utsHelps" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>UTS HELPS</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/main.css"/>
+  <style>
+  /* Off Canvas Full Height Fix*/
+  .off-canvas-wrap, .inner-wrap {
+    min-height: 100%;
+    min-height: 100vh;
+  }
+  </style>
+</head>
+<body ng-controller="ApplicationController">
+  <uh-error-box error-message="err_message">
+</uh-error-box>
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <div class="header">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+        <section class="middle tab-bar-section">
+          <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
+        </section>
+      </nav>
+    </div>
+    <aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><a href="#/settings"><div id="nav-photo"></div><div id="nav-username">{{currentUser}}</div></a></li>
+        <li><label>MAIN MENU</label></li>
+        <div ng-if="currentUser">
+          <li><a href="#/">Home</a></li>
+          <li><a href="#/upcomingActivities">Activities</a></li>
+          <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
+          <li><a href="#/pastBookings">Past Bookings</a></li>
+          <li><a ng-click="logout()">Logout</a></li>
+          <li><a href="#/settings">Settings</a></li>
+          <li><a href="#/help">Help</a></li>
+        </div>
+        <div ng-if="!currentUser">
+          <li><a href="#/login">Login</a></li>
+          <li><a href="#/help">Help</a></li>
+        </div>
+      </ul>
+    </aside>
+    <article class="main-section" ng-view>
+    </article>
+
+    <a class="exit-off-canvas"></a>
+    <footer class="small-12 columns">
+      ...
+    </footer>
+  </div>
+</div>
+</body>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/foundation/js/foundation.min.js"></script>
+<script src="bower_components/modernizr/modernizr.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script type="text/javascript" src="bower_components/angular-filter/dist/angular-filter.js"></script>
+<script src="directives/directives.js"></script>
+<script type="text/javascript" src="constants.js"></script>
+<script src="app.js"></script>
+<script src="services/helpsRestfulServices.js"></script>
+<script src="factories/authenticationFactories.js"></script>
+<script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
+<script type="text/javascript" src="controllers/LoginController/LoginController.js"></script>
+<script type="text/javascript" src="controllers/UpcomingActivitiesController/UpcomingActivitiesController.js"></script>
+</html>

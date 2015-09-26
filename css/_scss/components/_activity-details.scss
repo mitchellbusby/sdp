@@ -1,0 +1,45 @@
+// C Mitchell Busby 2015
+$wk-lr-padding: 10%;
+$interface-p-margin: rem-calc(5);
+uh-activity-details {
+	.activity, .workshop > div.row {
+		border: 1px solid black;
+		border-radius: 4px;
+	}
+	.activity {
+		@media #{$small-only} {
+			//border-left: 0px;
+			//border-right: 0px;
+		}
+	}
+	#title {
+		font-weight: bold;
+		font-size: rem-calc(20);
+	}
+	#description {
+		padding: 1.2em;
+	}
+	.workshop {
+		$wk-padding: 1.2em;
+		padding-left: $wk-lr-padding;
+		padding-right: $wk-lr-padding;
+		padding-top: 0;
+		padding-bottom: $wk-padding;
+		p {
+			line-height: 3 * $button-med;
+			margin-bottom: 0;
+		}
+	}
+	.button {
+		margin: 0;
+	}
+	.inner-card p {
+		padding-left: $wk-lr-padding;
+		padding-right: $wk-lr-padding;
+		margin-bottom: $interface-p-margin;
+	}
+}
+a uh-activity-details {
+	text-decoration: none;
+	color: initial;
+}
