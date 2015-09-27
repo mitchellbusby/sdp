@@ -124,3 +124,117 @@ angular.module('helpsModelsServices', [])
 	};
 	return wwaiting;
 })
+
+.factory('WorkShopBookings', function () {
+	var wBooking = {};
+	wBooking.create = function (workshopBookingId, workshopId, studentId, workshopSetId, userId, isActive) {
+		return {
+			"workshopBookingId":workshopBookingId, 
+			"workshopId": workshopId, 
+			"studentId": studentId, 
+			"workshopSetId": workshopSetId, 
+			"userId": userId, 
+			"isActive": isActive
+		};
+	};
+	return wBooking;
+})
+
+.factory('Session', function () {
+	var sess = {};
+	sess.create = function (sessionId, sessionTypeId, campusId, lecturerId, startDate, endDate, isActive) {
+		return {
+			"sessionId": sessionId,
+			"sessionTypeId": sessionTypeId,
+			"campusId": campusId,
+			"lecturerId": lecturerId,
+			"startDate": startDate,
+			"endDate": endDate,
+			"isActive": isActive
+			};
+	};
+	return sess;
+})
+
+.factory('SessionType', function (){
+	var type = {};
+	type.create = function(sessionTypeId, abbName, fullName, isCurrent, isActive) {
+		return {
+			"sessionTypeId": sessionTypeId,
+			"abbName": abbName,
+			"fullName": fullName,
+			"isCurrent": isCurrent,
+			"isActive": isActive
+		};
+	};
+	return type;
+})
+
+.factory('SessionBookings', function() {
+	var sessbooking = {};
+	sessbooking.create = function(sessionId, bookingId, studentId, userId, isCanceled, assistance, reason, attended, waitingId, isGroup, numPeople, lecturerComment, learningIssuesId, isLocked, assignType, assignTypeOther, subject, appointments, appointmentsOther, assistanceText, archived) {
+		return {
+			"sessionId": sessionId, 
+			"bookingId": bookingId, 
+			"studentId": studentId, 
+			"userId": userId, 
+			"isCanceled": isCanceled, 
+			"assistance": assistance, 
+			"reason": reason, 
+			"attended": attended, 
+			"waitingId": waitingId, 
+			"isGroup": isGroup, 
+			"numPeople": numPeople, 
+			"lecturerComment": lecturerComment, 
+			"learningIssuesId": learningIssuesId, 
+			"isLocked": isLocked, 
+			"assignType": assignType, 
+			"assignTypeOther": assignTypeOther, 
+			"subject": subject, 
+			"appointments": appointments, 
+			"appointmentsOther": appointmentsOther, 
+			"assistanceText": assistanceText, 
+			"archived": archived
+		};
+	};
+	return sessbooking;
+})
+
+.factory('Waiting', function() {
+	var wait = {};
+	wait.create = function(waitingId, studentId, bookingId, waitingListId) {
+		return {
+			"waitingId": waitingId,
+			"studentId": studentId,
+			"bookingId": bookingId,
+			"waitinglist": waitingListId
+		};
+	};
+	return wait;
+})
+
+.factory('WaitingList', function() { 
+	var waitList = {};
+	waitList.create = function (waitingListId, workshopId, numberInList) {
+		return {
+			"waitingListId": waitingListId,
+			"workshopId": workshopId,
+			"numberInList": numberInList
+		};
+	};
+	return waitList;
+})
+
+.factory('Notification', function() {
+	var noti = {};
+	noti.create = function(notificationId, studentId, workshopId, notifyTime, hoursAhead) {
+		return {
+			"notificationId": notificationId,
+			"studentId": studentId,
+			"workshopId", workshopId,
+			"notifyTime": notifyTime,
+			"hoursAhead": hoursAhead
+		};
+	};
+	return noti;
+})
