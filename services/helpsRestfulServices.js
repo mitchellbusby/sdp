@@ -21,7 +21,8 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	"port":"80",
 	"APP_KEY":'123456',
 	"ACTIVITIES_URI":"/workshop",
-	"SEARCH_URI":"/search"
+	"SEARCH_URI":"/search",
+	"BOOKINGS_URI": "workshop/booking"
 })
 .config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
 	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
@@ -201,51 +202,95 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 			}
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
-	var scope = this;
-	/*this.create = function(activitiesToSave) {
-		scope.activities = activitiesToSave;
-	}*/
-	this.getActivities = function(params) {
-		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
-			params
+		var scope = this;
+		/*this.create = function(activitiesToSave) {
+		 scope.activities = activitiesToSave;
+		 }*/
+		this.getActivities = function(params) {
+			// Gets data from a server
+			return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
+				params
 			);
-	}
-	this.mergeActivities = function(newDataToMerge, existingData) {
-		if (newDataToMerge.IsSuccess) {
-			if (!existingData) {
-				var existingData = {};
-			}
-			for (var i=0; i<newDataToMerge["Results"].length; i++){
-				if (existingData.hasOwnProperty(newDataToMerge["Results"][i]["WorkShopSetID"])) {
-					// Append all workshop deets and whatnot into the workshop
-					existingData[newDataToMerge["Results"][i]["WorkShopSetID"]]["workshops"].push(newDataToMerge["Results"][i]);
-				}
-				else {
-					existingData[newDataToMerge["Results"][i]["WorkShopSetID"]] = {
-						"description":newDataToMerge["Results"][i]["description"],
-						"topic":newDataToMerge["Results"][i]["topic"],
-						"workshops":[newDataToMerge["Results"][i]]
-					};
-				}
-			}
-			return existingData;
 		}
-		else {
-			// Failed to correctly load data
-			console.log("Failed to correctly load data.");
-			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
-			return {};
+		this.mergeActivities = function(newDataToMerge, existingData) {
+			if (newDataToMerge.IsSuccess) {
+				if (!existingData) {
+					var existingData = {};
+				}
+				for (var i=0; i<newDataToMerge["Results"].length; i++){
+					if (existingData.hasOwnProperty(newDataToMerge["Results"][i]["WorkShopSetID"])) {
+						// Append all workshop deets and whatnot into the workshop
+						existingData[newDataToMerge["Results"][i]["WorkShopSetID"]]["workshops"].push(newDataToMerge["Results"][i]);
+					}
+					else {
+						existingData[newDataToMerge["Results"][i]["WorkShopSetID"]] = {
+							"description":newDataToMerge["Results"][i]["description"],
+							"topic":newDataToMerge["Results"][i]["topic"],
+							"workshops":[newDataToMerge["Results"][i]]
+						};
+					}
+				}
+				return existingData;
+			}
+			else {
+				// Failed to correctly load data
+				console.log("Failed to correctly load data.");
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
+				return {};
+			}
 		}
-	}
-	this.onCreate = function() {
-		this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
-			console.log(result);
-			scope.activities = scope.mergeActivities(result.data);
-		});
-	};
-	this.onCreate();
-}])
+		this.onCreate = function() {
+			this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
+				console.log(result);
+				scope.activities = scope.mergeActivities(result.data);
+			});
+		};
+		this.onCreate();
+	}])
+.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
+		var scope = this;
+
+		this.getBookings = function(params) {
+			// Gets data from a server
+			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
+				params
+			);
+		}
+		//this.mergeActivities = function(newDataToMerge, existingData) {
+		//	if (newDataToMerge.IsSuccess) {
+		//		if (!existingData) {
+		//			var existingData = {};
+		//		}
+		//		for (var i=0; i<newDataToMerge["Results"].length; i++){
+		//			if (existingData.hasOwnProperty(newDataToMerge["Results"][i]["WorkShopSetID"])) {
+		//				// Append all workshop deets and whatnot into the workshop
+		//				existingData[newDataToMerge["Results"][i]["WorkShopSetID"]]["workshops"].push(newDataToMerge["Results"][i]);
+		//			}
+		//			else {
+		//				existingData[newDataToMerge["Results"][i]["WorkShopSetID"]] = {
+		//					"description":newDataToMerge["Results"][i]["description"],
+		//					"topic":newDataToMerge["Results"][i]["topic"],
+		//					"workshops":[newDataToMerge["Results"][i]]
+		//				};
+		//			}
+		//		}
+		//		return existingData;
+		//	}
+		//	else {
+		//		// Failed to correctly load data
+		//		console.log("Failed to correctly load data.");
+		//		$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
+		//		return {};
+		//	}
+		//}
+		this.onCreate = function() {
+			this.getBookings({"studentID":10953659}).then(function(result) {
+				console.log(result);
+				//scope.activities = scope.mergeActivities(result.data);
+			});
+		};
+		this.onCreate();
+	}])
 .service('Session', function () {
 	this.create = function (sessionId, userId, userRole) {
 		this.id = sessionId;
