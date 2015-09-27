@@ -25,27 +25,26 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	$scope.bookWorkshop = function(workshop) {
 		// Prepare
 		$scope.selectedWorkshop = workshop;
-		 // Make it appear
-		 $scope.$broadcast("SHOW_CONFIRM_DENY");		 
-		};
-		$scope.confirmWorkshop = function(confirmation) {
-			if (confirmation) {
-				UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
-				.then(function(success) {
-					if (success) {
+		// Make it appear
+		$scope.$broadcast("SHOW_CONFIRM_DENY");		 
+	};
+	$scope.confirmWorkshop = function(confirmation) {
+		if (confirmation) {
+			UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
+			.then(function(success) {
+				if (success) {
 				 		// Trigger banner to say successful booking made
 				 		AlertBanner.publish({
 				 			type: "success",
 				 			message: "Successfully made a booking.",
 				 			timeCollapse: 3000
 				 		});
-				 		console.log("Successfully made a booking!");
 				 	}		
 				 	else {
 				 		// Don't trigger a banner
 				 	}
 				 });
-			}
-			$scope.selectedWorkshop = null;
 		}
-	}]);
+		$scope.selectedWorkshop = null;
+	}
+}]);

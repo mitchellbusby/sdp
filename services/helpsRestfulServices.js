@@ -183,6 +183,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 					}, 1000);
 				});
 			}
+			this.postResource = function(resourceUri, params) {
+				var configObject = this.createConfigObject();
+				configObject["params"] = params;
+				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
+			}
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
 	var scope = this;

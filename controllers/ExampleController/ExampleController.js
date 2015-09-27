@@ -11,9 +11,4 @@ angular.module('utsHelps.example', ['ngRoute'])
 
 .controller('exampleCtrl', ['$scope', 'AlertBanner', function($scope, AlertBanner) {
 	$scope.globals.pageTitle = "Example View";
-	AlertBanner.publish({
-		type: "success",
-		message: "Successfully made a booking.",
-		autoClose: false
-	});
 }]);

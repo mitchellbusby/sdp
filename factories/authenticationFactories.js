@@ -11,7 +11,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.c
 					reject("User is unauthenticated");
 				}
 				else {
-					Session.create('1', 123456, credentials.username, 'User');
+					Session.create('1', 11899859, credentials.username, 'User');
 					resolve(credentials.username);
 				}
 			}, 1000);
