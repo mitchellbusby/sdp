@@ -126,7 +126,7 @@ angular.module('helpsModelsServices', [])
 	return workshopWaiting;
 })
 
-.factory('WorkShopBooking', function () {
+.factory('WorkshopBooking', function () {
 	var workshopBooking = {};
 	workshopBooking.create = function (workshopBookingId, workshopId, studentId, workshopSetId, userId, isActive) {
 		return {
