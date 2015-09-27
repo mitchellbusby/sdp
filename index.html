@@ -27,19 +27,21 @@
   <div class="inner-wrap">
     <div class="header">
       <nav class="tab-bar">
-        <section class="left-small">
-          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
-        </section>
         <section class="middle tab-bar-section">
           <h1 class="title" ng-cloak>{{globals.pageTitle}}</h1>
         </section>
+        <div ng-if="currentUser">
+          <section class="left-small">
+              <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+          </section>
+        </div>
       </nav>
     </div>
     <aside class="left-off-canvas-menu">
       <ul class="off-canvas-list">
         <li><a href="#/settings"><div id="nav-photo"></div><div id="nav-username">{{currentUser}}</div></a></li>
         <li><label>MAIN MENU</label></li>
-        <div ng-if="currentUser">
+
           <li><a href="#/">Home</a></li>
           <li><a href="#/upcomingActivities">Activities</a></li>
           <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
@@ -47,11 +49,10 @@
           <li><a ng-click="logout()">Logout</a></li>
           <li><a href="#/settings">Settings</a></li>
           <li><a href="#/help">Help</a></li>
-        </div>
-        <div ng-if="!currentUser">
+        <!--<div ng-if="!currentUser">
           <li><a href="#/login">Login</a></li>
           <li><a href="#/help">Help</a></li>
-        </div>
+        </div>-->
       </ul>
     </aside>
     <article class="main-section" ng-view>
