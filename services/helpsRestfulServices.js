@@ -196,7 +196,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	}*/
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
 	}
@@ -228,7 +228,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		}
 	}
 	this.onCreate = function() {
-		this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
+		this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data);
 		});
