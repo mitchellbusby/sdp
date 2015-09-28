@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('helpsRestfulServices', ['utsHelps.constants'])
+angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServices'])
 .config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
 	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
 	// and is not supported by the CORS official spec: http://stackoverflow.com/a/16570604
@@ -209,7 +209,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
 			}
 		}])
-.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
+.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking) {
 	var scope = this;
 	this.getActivities = function(params) {
 		// Gets data from a server
@@ -251,11 +251,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		});
 	};
 	this.bookWorkshop = function(workshopId, studentId) {
-		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, {
-			studentId: studentId,
-			workshopId: workshopId,
-			userId: studentId
-		}).then(function success(response) {
+		//Create a nice model to send to the DB
+		// This method could be ported to Tomm's code
+		var workshopBooking = WorkshopBooking.create(null, workshopId, studentId, null, studentId, null);
+		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, workshopBooking).then(function success(response) {
 			if (response.data.IsSuccess) {
 				return true;
 			}
@@ -270,7 +269,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	};
 	this.onCreate();
 }])
-.service('Session', function () {
+.service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
@@ -281,6 +280,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 	this.destroy = function() {
 		this.id = null;
 		this.userId = null;
+		this.username = null;
 		this.userRole = null;
 	};
-});
+}]);
