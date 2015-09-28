@@ -252,7 +252,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
-		// This method could be ported to Tomm's code
+		// This method could be ported to Tomm's model tbh
 		var workshopBooking = WorkshopBooking.create(null, workshopId, studentId, null, studentId, null);
 		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, workshopBooking).then(function success(response) {
 			if (response.data.IsSuccess) {
