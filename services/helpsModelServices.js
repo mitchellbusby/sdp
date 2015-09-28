@@ -2,8 +2,8 @@
 
 angular.module('helpsModelsServices', [])
 .factory('User', function (){
-	var fac = {};
-	fac.create = function(userId, studentId, name, password) {
+	var user = {};
+	user.create = function(userId, studentId, name, password) {
 		return {
 			"userId":userId,
 			"studentId":studentId,
@@ -11,7 +11,7 @@ angular.module('helpsModelsServices', [])
 			"password":password
 		};
 	}
-	return fac;
+	return user;
 })
 
 .factory('Student', function () {
@@ -100,8 +100,8 @@ angular.module('helpsModelsServices', [])
 })
 
 .factory('WorkshopSet', function () {
-	var workSet = {};
-	workSet.create = function (workshopSetId, campusId, name, archived){
+	var workshopSet = {};
+	workshopSet.create = function (workshopSetId, campusId, name, archived){
 		return {
 			"workshopSetId": workshopSetId,
 			"campusId": campusId,
@@ -109,12 +109,13 @@ angular.module('helpsModelsServices', [])
 			"archived": archived
 		};
 	};
-	return workSet;
+	return workshopSet;
 })
 
 .factory('WorkshopWaiting', function () {
-	var wwaiting = {};
-	wwaiting.create = function (workshopWaitingId, workshopId, studentId, userId) {
+	var workshopWaiting = {};
+
+	workshopWaiting.create = function (workshopWaitingId, workshopId, studentId, userId) {
 		return {
 			"workshopWaitingId": workshopWaitingId,
 			"workshopId": workshopId,
@@ -122,12 +123,12 @@ angular.module('helpsModelsServices', [])
 			"userId": userId
 		};
 	};
-	return wwaiting;
+	return workshopWaiting;
 })
 
-.factory('WorkShopBookings', function () {
-	var wBooking = {};
-	wBooking.create = function (workshopBookingId, workshopId, studentId, workshopSetId, userId, isActive) {
+.factory('WorkshopBooking', function () {
+	var workshopBooking = {};
+	workshopBooking.create = function (workshopBookingId, workshopId, studentId, workshopSetId, userId, isActive) {
 		return {
 			"workshopBookingId":workshopBookingId, 
 			"workshopId": workshopId, 
@@ -137,12 +138,12 @@ angular.module('helpsModelsServices', [])
 			"isActive": isActive
 		};
 	};
-	return wBooking;
+	return workshopBooking;
 })
 
 .factory('Session', function () {
-	var sess = {};
-	sess.create = function (sessionId, sessionTypeId, campusId, lecturerId, startDate, endDate, isActive) {
+	var session = {};
+	session.create = function (sessionId, sessionTypeId, campusId, lecturerId, startDate, endDate, isActive) {
 		return {
 			"sessionId": sessionId,
 			"sessionTypeId": sessionTypeId,
@@ -153,7 +154,7 @@ angular.module('helpsModelsServices', [])
 			"isActive": isActive
 			};
 	};
-	return sess;
+	return session;
 })
 
 .factory('SessionType', function (){
@@ -170,9 +171,9 @@ angular.module('helpsModelsServices', [])
 	return type;
 })
 
-.factory('SessionBookings', function() {
-	var sessbooking = {};
-	sessbooking.create = function(sessionId, bookingId, studentId, userId, isCanceled, assistance, reason, attended, waitingId, isGroup, numPeople, lecturerComment, learningIssuesId, isLocked, assignType, assignTypeOther, subject, appointments, appointmentsOther, assistanceText, archived) {
+.factory('SessionBooking', function() {
+	var sessionBooking = {};
+	sessionBooking.create = function(sessionId, bookingId, studentId, userId, isCanceled, assistance, reason, attended, waitingId, isGroup, numPeople, lecturerComment, learningIssuesId, isLocked, assignType, assignTypeOther, subject, appointments, appointmentsOther, assistanceText, archived) {
 		return {
 			"sessionId": sessionId, 
 			"bookingId": bookingId, 
@@ -197,7 +198,7 @@ angular.module('helpsModelsServices', [])
 			"archived": archived
 		};
 	};
-	return sessbooking;
+	return sessionBooking;
 })
 
 .factory('Waiting', function() {
@@ -207,34 +208,34 @@ angular.module('helpsModelsServices', [])
 			"waitingId": waitingId,
 			"studentId": studentId,
 			"bookingId": bookingId,
-			"waitinglist": waitingListId
+			"waitingList": waitingListId
 		};
 	};
 	return wait;
 })
 
 .factory('WaitingList', function() { 
-	var waitList = {};
-	waitList.create = function (waitingListId, workshopId, numberInList) {
+	var waitingList = {};
+	waitingList.create = function (waitingListId, workshopId, numberInList) {
 		return {
 			"waitingListId": waitingListId,
 			"workshopId": workshopId,
 			"numberInList": numberInList
 		};
 	};
-	return waitList;
+	return waitingList;
 })
 
 .factory('Notification', function() {
-	var noti = {};
-	noti.create = function(notificationId, studentId, workshopId, notifyTime, hoursAhead) {
+	var notification = {};
+	notification.create = function(notificationId, studentId, workshopId, notifyTime, hoursAhead) {
 		return {
 			"notificationId": notificationId,
 			"studentId": studentId,
-			"workshopId", workshopId,
+			"workshopId": workshopId,
 			"notifyTime": notifyTime,
 			"hoursAhead": hoursAhead
 		};
 	};
-	return noti;
+	return notification;
 })
