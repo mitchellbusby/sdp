@@ -1,4 +1,4 @@
-<div ng-repeat="booking in BookingsModel.bookings">
+<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isUpcomingBooking">
 	<a>
 		<uh-booking-details booking-details="booking" class="row">
 

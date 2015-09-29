@@ -251,11 +251,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		var scope = this;
 
 		this.getBookings = function(params) {
-			// Gets data from a server
+			// Gets data from the server
 			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
-		}
+		};
 
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
@@ -274,11 +274,31 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
 				return {};
 			}
-		}
+		};
+
+		this.bookingsArray = function () {
+			if (typeof scope.bookings !== 'undefined') {
+				return $.map(scope.bookings, function(value) {
+					return [value];
+				});
+			}
+			else {
+				return [];
+			}
+		};
+
+		this.isUpcomingBooking = function (booking) {
+			var startDate = new Date(booking.starting);
+			var now = new Date();
+			return now < startDate;
+		};
+
+		this.isPastBooking = function (booking) {
+			return !scope.isUpcomingBooking(booking);
+		};
 
 		this.onCreate = function() {
 			this.getBookings({"studentID":10953659}).then(function(result) {
-				console.log(JSON.stringify(result));
 				scope.bookings = scope.mergeBookings(result.data);
 			});
 		};
