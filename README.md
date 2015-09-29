@@ -6,13 +6,18 @@ Repo for our project
 
 Pre Requisites:
 - node and npm
+- gulp
 - bower
 
 Bootstrap the project with
 
 ```npm install```
 
-Then compile the system and run the server (or host it yourself!)
+Then compile the system 
+
+```gulp build```
+
+Run the server (or host it yourself!)
 
 ```gulp run```
 
@@ -27,6 +32,12 @@ Build the system
 ```gulp build```
 
 Host the files yourself.
+
+#Updating
+
+```npm install```
+
+```bower update```
 
 ##Testing
 
