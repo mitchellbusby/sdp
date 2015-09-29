@@ -16,7 +16,11 @@ angular.module('helpsModelsServices', [])
 
 .factory('Student', function () {
 	var student = {};
-
+	
+	student.empty = function() {
+		return student.create("", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "","", "", "", "", "","", "", "","");
+	};
+	
 	student.create = function (studentId, creatorId, dob, gender, degree, status, 
 		firstLanguage, countryOfOrigin, background, degreeDetails, altContact,
 		HSC, HSCMarks, IELTS, IELTSMarks, TOELF, TOELFMarks, TAFE,
