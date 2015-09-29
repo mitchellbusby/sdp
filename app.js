@@ -9,7 +9,7 @@ angular.module('utsHelps', [
 	'helpsRestfulServices',
 	'utsHelps.example',
 	'utsHelps.UpcomingActivities',
-	'utsHelps.Bookings',
+	'utsHelps.UpcomingBookings',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
