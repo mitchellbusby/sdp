@@ -10,6 +10,8 @@ var webserver = require('gulp-webserver');
 var concat = require('gulp-concat');
 //Dependency to create a nice source map (allows the user to easily debug a minified file)
 var sourcemaps = require('gulp-sourcemaps');
+// Dependency for minify
+var uglify = require('gulp-uglify');
 
 gulp.task('default', ['sass'], function(){
 
@@ -58,8 +60,9 @@ gulp.task('concat-js', function() {
 	return gulp.src(jsFiles, {base: './'})
 		.pipe(sourcemaps.init())
 			.pipe((concat('main.js')))
-				.pipe(sourcemaps.write())
-					.pipe(gulp.dest('.'));
+				.pipe(uglify())
+					.pipe(sourcemaps.write())
+						.pipe(gulp.dest('.'));
 });
 
 gulp.task('concat:watch', function() {
