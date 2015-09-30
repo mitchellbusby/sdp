@@ -53,7 +53,7 @@ gulp.task('run', ['sass', 'concat-js', 'sass:watch', 'concat:watch', 'webserver'
 
 });
 
-gulp.task('external-server', ['sass:watch', 'webserver-public'], function() {
+gulp.task('external-server', ['sass:watch', 'concat:watch', 'webserver-public'], function() {
 });
 
 gulp.task('concat-js', function() {
