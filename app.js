@@ -8,6 +8,7 @@ angular.module('utsHelps', [
 	'utsHelps.login',
 	'helpsRestfulServices',
 	'utsHelps.example',
+	'utsHelps.register',
 	'utsHelps.UpcomingActivities',
 	'angular.filter',
 	'ngAnimate',
@@ -48,7 +49,7 @@ angular.module('utsHelps', [
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.templateUrl!="views/loginView.html"){
+			if (next.templateUrl!="views/loginView.html" && next.templateUrl!="views/registerView.html"){
 				$location.path("/login");
 			}
 		}
