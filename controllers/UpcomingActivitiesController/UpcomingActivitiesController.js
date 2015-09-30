@@ -20,5 +20,10 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				$scope.UpcomingActivitiesModel.activities[workshopId].isExpanded = false;
 			}
 		}
-	}
+	};
+
+	$scope.onViewMore = function(){
+        $scope.UpcomingActivitiesModel.getMoreActivities();
+	};
+
 }]);

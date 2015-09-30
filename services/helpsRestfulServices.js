@@ -202,6 +202,8 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
 	var scope = this;
+		var pageNumber = 1;
+		var pageSize = 15;
 	/*this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}*/
@@ -210,7 +212,8 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
-	}
+	};
+
 	this.mergeActivities = function(newDataToMerge, existingData) {
 		if (newDataToMerge.IsSuccess) {
 			if (!existingData) {
@@ -237,15 +240,26 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
 			return {};
 		}
-	}
-	this.onCreate = function() {
-		this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
+	};
+
+	this.getMoreActivities = function(){
+		pageNumber++;
+		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
 			console.log(result);
-			scope.activities = scope.mergeActivities(result.data);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
+		});
+	}
+
+	this.onCreate = function() {
+		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
+			console.log(result);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
 	};
 	this.onCreate();
 }])
+
+
 .service('Session', function () {
 	this.create = function (sessionId, userId, userRole) {
 		this.id = sessionId;
