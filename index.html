@@ -21,6 +21,8 @@
 <body ng-controller="ApplicationController">
   <uh-error-box error-message="err_message">
 </uh-error-box>
+<alert-banner>
+</alert-banner>
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     <div class="header">
@@ -70,12 +72,15 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="bower_components/angular-alert-banner/dist/angular-alert-banner.js"></script>
 <script type="text/javascript" src="bower_components/angular-filter/dist/angular-filter.js"></script>
 <script src="directives/directives.js"></script>
 <script type="text/javascript" src="constants.js"></script>
 <script src="app.js"></script>
 <script src="services/helpsRestfulServices.js"></script>
 <script src="factories/authenticationFactories.js"></script>
+<script src="services/messagingService.js"></script>
+<script type="text/javascript" src="services/helpsModelServices.js"></script>
 <script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
 <script type="text/javascript" src="controllers/LoginController/LoginController.js"></script>
 <script type="text/javascript" src="controllers/UpcomingActivitiesController/UpcomingActivitiesController.js"></script>
