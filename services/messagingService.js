@@ -18,7 +18,8 @@ angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-
 .service('ErrorRegistry', [function() {
 	this.errorDictionary = {
 		"Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.":"Couldn't create booking.",
-		"Error creating workshop booking: Booking already exists.":"Booking already exists."
+		"Error creating workshop booking: Booking already exists.":"Booking already exists.",
+		"Error creating workshop booking: Workshop has reached cut-off for bookings.":"Workshop has reached cut-off for bookings"
 	}
 	this.retrieveFriendlyError = function(message) {
 		if (message in this.errorDictionary) {
