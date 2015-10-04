@@ -9,7 +9,7 @@ angular.module('utsHelps.register', ['ngRoute'])
 	});
 }])
 
-.controller('registerCtrl', ['$scope', '$rootScope', 'User', 'Student', 'RegisterService', function ($scope, $rootScope, User, Student, RegisterService) {
+.controller('registerCtrl', ['$scope', '$rootScope', 'User', 'Student', 'RegisterService', '$location', function ($scope, $rootScope, User, Student, RegisterService, $location) {
 	$scope.details = {
 		user: RegisterService.getUser(),
 		student: RegisterService.getStudent()

@@ -49,7 +49,7 @@ angular.module('utsHelps', [
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.templateUrl!="views/loginView.html" && next.templateUrl!="views/registerView.html"){
+			if (next.templateUrl!="views/loginView.html" || next.templateUrl.match('views/register/[0-9]*\.html') {
 				$location.path("/login");
 			}
 		}
