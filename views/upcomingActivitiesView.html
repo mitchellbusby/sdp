@@ -1,4 +1,4 @@
-<div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
+<div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row" infinite-scroll="onViewMore()">
 	<a ng-click="clickedOnAnActivity(activity)">
 		<uh-activity-details activity-details="activity" expand="activity.isExpanded" class="row">
 
