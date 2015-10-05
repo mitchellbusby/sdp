@@ -1,6 +1,6 @@
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row" infinite-scroll="onViewMore()">
 	<a ng-click="clickedOnAnActivity(activity)">
-		<uh-activity-details activity-details="activity" expand="activity.isExpanded" class="row">
+		<uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" class="row">
 
 		</uh-activity-details>
 	</a>
@@ -8,3 +8,10 @@
 <div class="small-11 medium-8 large-6 column small-centered">
 	<button ng-click = "onViewMore()" >View More</button>
 </div>
+
+<uh-confirm-deny-modal callback="confirmWorkshop(isConfirmed)">
+	<h2>Confirm Booking?</h2>
+	<p class="small-11 small-centered column">Are you sure you want to book in for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+	<p class="small-11 small-centered column">If you book this workshop, your attendance will be marked unless you cancel.</p>
+</uh-confirm-deny-modal>
+

@@ -12,7 +12,9 @@ angular.module('utsHelps', [
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
-	'utsHelps.constants'
+	'utsHelps.constants',
+	'angular-alert-banner',
+	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
@@ -22,6 +24,14 @@ angular.module('utsHelps', [
 		function ($injector) {
 			return $injector.get('AuthInterceptor');
 	}]);
+}])
+.config(['$provide', function($provide) {
+  //Provides redirection for
+  $provide.decorator('$exceptionHandler', ['$delegate', function($delegate) {
+    return function(exception, cause) {
+      $delegate(exception, cause);
+      throw exception;
+  }}]);
 }])
 .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function($rootScope, AUTH_EVENTS, AuthService, $location) {
 	console.log("Angular initialised!");
@@ -63,17 +73,17 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope',
- function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService',
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
 	$scope.err_message = "";
-	$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
+	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
 		console.log("Error in API! "+err_message);
 		$scope.err_message = err_message;
 		$("#uh-error-modal").foundation('reveal', 'open');
-	});
+	});*/
 	$scope.triggerCloseModal = function() {
 		$("#uh-error-modal").foundation('reveal', 'close');
 	}
