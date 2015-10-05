@@ -6,11 +6,17 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 //Dependency to run webserver
 var webserver = require('gulp-webserver');
+//Dependency to concat js files
+var concat = require('gulp-concat');
+//Dependency to create a nice source map (allows the user to easily debug a minified file)
+var sourcemaps = require('gulp-sourcemaps');
+// Dependency for minify
+var uglify = require('gulp-uglify');
 
 gulp.task('default', ['sass'], function(){
 
 });
-gulp.task('build', ['sass'], function(){
+gulp.task('build', ['sass', 'concat-js'], function(){
 
 });
 
@@ -43,9 +49,36 @@ gulp.task('webserver-public', function() {
 		}));
 });
 
-gulp.task('run', ['sass:watch', 'webserver'], function() {
+gulp.task('run', ['sass', 'concat-js', 'sass:watch', 'concat:watch', 'webserver'], function() {
 
 });
 
-gulp.task('external-server', ['sass:watch', 'webserver-public'], function() {
+gulp.task('external-server', ['sass:watch', 'concat:watch', 'webserver-public'], function() {
 });
+
+gulp.task('concat-js', function() {
+	return gulp.src(jsFiles, {base: './'})
+		.pipe(sourcemaps.init())
+			.pipe((concat('main.js')))
+				.pipe(uglify())
+					.pipe(sourcemaps.write())
+						.pipe(gulp.dest('.'));
+});
+
+gulp.task('concat:watch', function() {
+	gulp.watch(jsFiles, ['concat-js']);
+});
+var jsFiles = [
+	 './directives/directives.js',
+	 './app.js', 
+	 './services/helpsRestfulServices.js', 
+	 './services/helpsModelServices.js',
+	 './factories/authenticationFactories.js',
+	 './factories/helpsRestfulFactories.js',
+	 './controllers/ExampleController/ExampleController.js',
+	 './controllers/LoginController/LoginController.js',
+	 './controllers/UpcomingActivitiesController/UpcomingActivitiesController.js',
+	 './services/messagingService.js',
+	 './constants.js',
+	 './directives/directives.js'
+	 ];

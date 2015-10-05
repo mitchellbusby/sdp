@@ -25,6 +25,14 @@ angular.module('utsHelps', [
 			return $injector.get('AuthInterceptor');
 	}]);
 }])
+.config(['$provide', function($provide) {
+  //Provides redirection for
+  $provide.decorator('$exceptionHandler', ['$delegate', function($delegate) {
+    return function(exception, cause) {
+      $delegate(exception, cause);
+      throw exception;
+  }}]);
+}])
 .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function($rootScope, AUTH_EVENTS, AuthService, $location) {
 	console.log("Angular initialised!");
 	$(document).ready(function(){
