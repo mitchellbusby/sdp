@@ -64,7 +64,7 @@ angular.module('utsHelps.directives', [])
 		}
 	}
 })
-.directive('uhConfirmDenyModal', function($parse) {
+.directive('uhConfirmDenyModal', ['$parse', function($parse) {
 	return {
 		restrict: 'E',
 		transclude: true,
@@ -101,4 +101,4 @@ angular.module('utsHelps.directives', [])
 			})
 		}
 	}
-});
+}]);

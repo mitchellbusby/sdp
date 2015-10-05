@@ -68,7 +68,9 @@ gulp.task('concat-js', function() {
 gulp.task('concat:watch', function() {
 	gulp.watch(jsFiles, ['concat-js']);
 });
-var jsFiles = ['./app.js', 
+var jsFiles = [
+	 './directives/directives.js',
+	 './app.js', 
 	 './services/helpsRestfulServices.js', 
 	 './services/helpsModelServices.js',
 	 './factories/authenticationFactories.js',
@@ -76,6 +78,7 @@ var jsFiles = ['./app.js',
 	 './controllers/ExampleController/ExampleController.js',
 	 './controllers/LoginController/LoginController.js',
 	 './controllers/UpcomingActivitiesController/UpcomingActivitiesController.js',
+	 './services/messagingService.js',
 	 './constants.js',
 	 './directives/directives.js'
 	 ];
