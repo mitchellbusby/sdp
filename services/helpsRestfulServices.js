@@ -283,4 +283,21 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.username = null;
 		this.userRole = null;
 	};
+}])
+.service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', function(WorkshopBooking, Session, ApiMethods) {
+	var vm = this;
+	vm.Bookings = [];
+	this.onCreate = function() {
+		ApiMethods.getResource("/workshop/booking/search", {"studentId":Session.userId, "pageSize":2000}).then(function(result){
+			console.log(result.data);
+		});
+	}
+	this.bookingExists = function(bookingId) {
+		for (var i=0; i<vm.Bookings; i++) {
+			if (vm.Bookings[i].workshopBookingId === bookingId) {
+				return true;
+			}
+		}
+	}
+	vm.onCreate();
 }]);
