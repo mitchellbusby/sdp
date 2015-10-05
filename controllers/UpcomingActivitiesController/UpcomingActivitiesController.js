@@ -25,5 +25,4 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	$scope.onViewMore = function(){
         $scope.UpcomingActivitiesModel.getMoreActivities();
 	};
-
 }]);
