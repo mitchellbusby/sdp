@@ -57,14 +57,14 @@ angular.module('utsHelps.directives', [])
 			var showDialog = function () {
 				scope.visible = true;
 			}
-			
+
 			scope.visible = false;
 			scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
 			scope.$on(AUTH_EVENTS.sessionTimeout, showDialog);
 		}
 	}
 })
-.directive('uhConfirmDenyModal', function($parse) {
+.directive('uhConfirmDenyModal', ['$parse', function($parse) {
 	return {
 		restrict: 'E',
 		transclude: true,
@@ -80,7 +80,11 @@ angular.module('utsHelps.directives', [])
 			var hideModal = function() {
 				elem.find('div').foundation('reveal', 'close');
 			}
+<<<<<<< HEAD
 			scope.$on('SHOW_CONFIRM_DENY', showModal);
+=======
+			scope.$on('SHOW_CONFIRM_DENY_'+attrs.cdmId, showModal);
+>>>>>>> origin
 			var denyModal = function() {
 				hideModal();
 				console.log("Modal hidden!");
@@ -101,4 +105,4 @@ angular.module('utsHelps.directives', [])
 			})
 		}
 	}
-});
+}]);
