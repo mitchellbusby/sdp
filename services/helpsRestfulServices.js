@@ -269,7 +269,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.onCreate();
 }])
-.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
+.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session) {
 		var scope = this;
 
 		this.getBookings = function(params) {
@@ -320,8 +320,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		};
 
 		this.onCreate = function() {
-			this.getBookings({"studentID":10953659}).then(function(result) {
+            console.log("UserID: " + Session.userId);
+			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
+				console.log(JSON.stringify(result.data));
 			});
 		};
 		this.onCreate();
