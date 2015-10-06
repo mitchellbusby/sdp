@@ -250,6 +250,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			scope.activities = scope.mergeActivities(result.data);
 		});
 	};
+	this.refresh = function() {
+		scope.activities = null;
+		scope.onCreate();		
+	}
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
 		// This method could be ported to Tomm's model tbh
@@ -267,6 +271,22 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
+	this.cancelWorkshop = function(workshopId, studentId) {
+		var cancelModel = {"workshopId":workshopId, "studentId":studentId, "userId": studentId};
+		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.CANCEL_BOOKING_URI, cancelModel).then(function success(response){
+			// What to do if it worked
+			if (response.data.IsSuccess) {
+				return true;
+			}
+			else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		}, 
+		function fail(response) {
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
+		});
+	}
 	this.onCreate();
 }])
 .service('Session', [function () {
@@ -303,12 +323,26 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		var workshopId = workshop.WorkshopId;
 		for (var i=0; i<vm.Bookings.length; i++) {
 			//console.log("Run bookingExists against workshop " + workshopId + " and booking "+vm.Bookings[i].workshopId);
-			if (vm.Bookings[i].workshopID === workshopId) {
+			if (vm.Bookings[i].workshopID === workshopId && vm.Bookings[i].BookingArchived===null) {
 				return true;
 			}
 		}
 		return false;
 		//console.log("Run bookingExists against workshop " + workshopId);
+	}
+	this.getBooking = function(workshop) {
+		var workshopId = workshop.WorkshopId;
+		for (var i=0; i<vm.Bookings.length; i++) {
+			//console.log("Run bookingExists against workshop " + workshopId + " and booking "+vm.Bookings[i].workshopId);
+			if (vm.Bookings[i].workshopID === workshopId) {
+				return vm.Bookings[i];
+			}
+		}
+		return -1;
+	}
+	this.refresh = function() {
+		vm.Bookings = [];
+		vm.onCreate();
 	}
 	vm.onCreate();
 }]);

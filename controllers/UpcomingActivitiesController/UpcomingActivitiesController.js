@@ -44,6 +44,8 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				 	else {
 				 		// Don't trigger a banner
 				 	}
+				 	UpcomingActivitiesModel.refresh();
+				 	WorkshopBookingsModel.refresh();
 				 });
 		}
 		$scope.selectedWorkshop = null;
@@ -55,6 +57,22 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	$scope.confirmCancel = function(confirmation) {
 		// Do nothing
 		if (confirmation) {
+			//Do the booking thing
+			UpcomingActivitiesModel.cancelWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId).then(function(success){
+				if (success) {
+					AlertBanner.publish({
+						type: "success",
+						message: "Successfully cancelled your booking.",
+						timeCollapse: 3000
+					});
+
+				}
+				else {
+					// Don't trigger a banner
+				}
+				UpcomingActivitiesModel.refresh();
+				WorkshopBookingsModel.refresh();
+			});
 		}
 		else {
 		}
