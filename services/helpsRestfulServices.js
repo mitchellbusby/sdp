@@ -290,14 +290,25 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.onCreate = function() {
 		ApiMethods.getResource("/workshop/booking/search", {"studentId":Session.userId, "pageSize":2000}).then(function(result){
 			console.log(result.data);
+			if (result.data.IsSuccess) {
+				vm.Bookings = result.data.Results;
+			}
+			else {
+				// Error messaging
+			}
 		});
 	}
-	this.bookingExists = function(bookingId) {
-		for (var i=0; i<vm.Bookings; i++) {
-			if (vm.Bookings[i].workshopBookingId === bookingId) {
+	this.bookingExists = function(workshop) {
+		//Checks if booking exists for a workshop
+		var workshopId = workshop.WorkshopId;
+		for (var i=0; i<vm.Bookings.length; i++) {
+			//console.log("Run bookingExists against workshop " + workshopId + " and booking "+vm.Bookings[i].workshopId);
+			if (vm.Bookings[i].workshopID === workshopId) {
 				return true;
 			}
 		}
+		return false;
+		//console.log("Run bookingExists against workshop " + workshopId);
 	}
 	vm.onCreate();
 }]);
