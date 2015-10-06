@@ -18,20 +18,24 @@ angular.module('utsHelps.register', ['ngRoute'])
 }])
 
 .controller('registerCtrl', ['$scope', '$rootScope', 'User', 'Student', 'RegisterService', function ($scope, $rootScope, User, Student, RegisterService) {
-	$scope.details = {	
+	$scope.details = {
 		user: RegisterService.getUser(),
 		student: RegisterService.getStudent()
 	};
-	
+
 	$scope.goRegisterOne = function() {
 		RegisterService.goRegisterPageOne();
 	};
-	
+
 	$scope.goRegisterTwo = function() {
 		RegisterService.goRegisterPageTwo();
 	};
-	
-	$scope.goRegisterThree = function() { 
+
+	$scope.goRegisterThree = function() {
 		RegisterService.goRegisterPageThree();
 	};
+
+	$scope.registerStudent = function() {
+		RegisterService.registerUserDetails();
+	}
 }]);

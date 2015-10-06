@@ -32,6 +32,9 @@ function($location, User, Student) {
 
 	var registerUserDetails = function () {
 		// no idea, send the info to the API.
+		$location.path('/login');
+		registerDetails.student = null;
+		registerDetails.user = null;
 	};
 
 	return {

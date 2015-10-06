@@ -7,7 +7,6 @@ angular.module('utsHelps', [
 	'utsHelps.example',
 	'utsHelps.login',
 	'helpsRestfulServices',
-	'utsHelps.example',
 	'utsHelps.register',
 	'utsHelps.UpcomingActivities',
 	'utsHelps.registerService',
@@ -19,7 +18,7 @@ angular.module('utsHelps', [
 	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/example'});
+	$routeProvider.otherwise({redirectTo:'/login'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
@@ -60,7 +59,6 @@ angular.module('utsHelps', [
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			var pa = $location.path();
 			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
 				$location.path("/login");
 			}
