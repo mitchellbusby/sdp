@@ -14,7 +14,7 @@
 		</p>
 	</div>
 	<div class="row expanded-content" ng-show="expand" ng-class="{expanded: expand}">
-		<div class="column small-12">
+		<div class="column small-12" ng-if="expand">
 			<div class="row">
 				<p class="column small-12">{{activityDetails['description']}}</p>
 			</div>
@@ -27,7 +27,7 @@
 								<p>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</p>
 							</div>
 							<!--<div class="column small-3">-->
-								<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-3" stop-event ng-click="book(workshop)">Book</a>
+								<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-3" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
 								<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-12 medium-3 alert disabled" stop-event>Full</a>
 							<!--</div>-->
 						</div>

@@ -7,9 +7,10 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		controller: 'UpcomingActivitiesCtrl'
 	})
 }])
-.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', function($scope, UpcomingActivitiesModel){
+.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', function($scope, UpcomingActivitiesModel, Session, AlertBanner){
 	$scope.globals.pageTitle = "Upcoming Activities";
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
+	$scope.selectedWorkshop = null;
 	$scope.clickedOnAnActivity = function(activity) {
 		var activityAsString = JSON.stringify(activity);
 		for (var workshopId in $scope.UpcomingActivitiesModel.activities) {
@@ -20,5 +21,30 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				$scope.UpcomingActivitiesModel.activities[workshopId].isExpanded = false;
 			}
 		}
+	}
+	$scope.bookWorkshop = function(workshop) {
+		// Prepare
+		$scope.selectedWorkshop = workshop;
+		// Make it appear
+		$scope.$broadcast("SHOW_CONFIRM_DENY");		 
+	};
+	$scope.confirmWorkshop = function(confirmation) {
+		if (confirmation) {
+			UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
+			.then(function(success) {
+				if (success) {
+				 		// Trigger banner to say successful booking made
+				 		AlertBanner.publish({
+				 			type: "success",
+				 			message: "Successfully made a booking.",
+				 			timeCollapse: 3000
+				 		});
+				 	}		
+				 	else {
+				 		// Don't trigger a banner
+				 	}
+				 });
+		}
+		$scope.selectedWorkshop = null;
 	}
 }]);

@@ -1,29 +1,6 @@
 'use strict';
 
-angular.module('helpsRestfulServices', ['utsHelps.constants'])
-.constant('AUTH_EVENTS', {
-	loginSuccess: 'auth-login-sucess',
-	loginFailed: 'auth-login-failed',
-	logoutSuccess: 'auth-logout-success',
-	sessionTimeout: 'auth-session-timeout',
-	notAuthenticated: 'auth-not-authenticated',
-	notAuthorized: 'auth-not-authorized'
-})
-.constant('USER_ROLES', {
-	all: '*',
-	admin: 'admin',
-	editor: 'editor',
-	guest: 'guest',
-	user: 'user'
-})
-.constant("helps_endpoint_constants", {
-	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
-	"port":"80",
-	"APP_KEY":'123456',
-	"ACTIVITIES_URI":"/workshop",
-	"SEARCH_URI":"/search",
-	"BOOKINGS_URI": "/workshop/booking"
-})
+angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServices'])
 .config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
 	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
 	// and is not supported by the CORS official spec: http://stackoverflow.com/a/16570604
@@ -185,6 +162,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 						"DisplayMessage": null
 					};
 				}
+				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI && (params.WorkshopId === 1 || params.workshopId === 11) ) {
+					data = {"IsSuccess":false, "DisplayMessage":"Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS."};
+				}
+				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI) {
+					data = {"IsSuccess":true, "DisplayMessage":""};
+				}
 				else {
 					console.log("Resource not faked");
 					data = null;
@@ -200,16 +183,38 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 					}, 1000);
 				});
 			}
-		}])
-.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
-		var scope = this;
-		/*this.create = function(activitiesToSave) {
-		 scope.activities = activitiesToSave;
-		 }*/
-		this.getActivities = function(params) {
-			// Gets data from a server
-			return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
-				params
+			this.transformParams = function(params) {
+				// This bit of code circumvents the issue whereby Angular doesn't support
+				// URI params for POST calls - for obvious security reasons. However, 
+				// ITD have decided that security is not important so eschewed this important
+				// safety measure. 
+				// Enclosed in a try catch because if there is no return, things get ugly.
+				try {
+					if (params === undefined) {return params;}
+					else {return $.param(params);}
+				}
+				catch(err) {
+					return params;
+				}
+				
+			}
+			this.postResource = function(resourceUri, params) {
+				var configObject = this.createConfigObject();
+				configObject.params = params;
+				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
+			}
+			this.postResourceWithParamsInUri = function(resourceUri, params) {
+				var configObject = this.createConfigObject();
+				var uriTransform = this.transformParams(params);
+				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
+			}
+}])
+.service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
+	var scope = this;
+	this.getActivities = function(params) {
+		// Gets data from a server
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+			params
 			);
 		}
 		this.mergeActivities = function(newDataToMerge, existingData) {
@@ -240,13 +245,30 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 			}
 		}
 		this.onCreate = function() {
-			this.getActivities({"startingDtBegin":"2012-08-07T17:00:00"}).then(function(result) {
+			this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
 				console.log(result);
 				scope.activities = scope.mergeActivities(result.data);
 			});
 		};
+		this.bookWorkshop = function(workshopId, studentId) {
+			//Create a nice model to send to the DB
+			// This method could be ported to Tomm's model tbh
+			var workshopBooking = WorkshopBooking.create(null, workshopId, studentId, null, studentId, null);
+			return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, workshopBooking).then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+					return false;
+				}
+			}, function failure(error) {
+				// Bit of error handling
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
+			});
+		};
 		this.onCreate();
-	}])
+}])
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
 		var scope = this;
 
@@ -303,17 +325,19 @@ angular.module('helpsRestfulServices', ['utsHelps.constants'])
 			});
 		};
 		this.onCreate();
-	}])
-.service('Session', function () {
-	this.create = function (sessionId, userId, userRole) {
+}])
+.service('Session', [function () {
+	this.create = function (sessionId, userId, username, userRole) {
 		this.id = sessionId;
 		this.userId = userId;
+		this.username = username;
 		this.userRole = userRole;
 	};
 	
 	this.destroy = function() {
 		this.id = null;
 		this.userId = null;
+		this.username = null;
 		this.userRole = null;
 	};
-});
+}]);
