@@ -26,7 +26,7 @@ angular.module('utsHelps.login', ['ngRoute'])
 		};
 
 		$scope.goRegister = function(credentials) {
-			RegisterService.setUserFromLogin($scope.credentials.username, $scope.credentials.password);
+			RegisterService.setUserFromLogin(credentials.username, credentials.password);
 			RegisterService.goRegisterPageOne();
 		};
 	}]);

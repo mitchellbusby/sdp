@@ -61,9 +61,7 @@ angular.module('utsHelps', [
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
 			var pa = $location.path();
-			console.log(pa);
-			console.log(pa.match('/register[0-9]'));
-			if (next.templateUrl!="views/loginView.html" && !$location.path().match('#/register[0-9]*\'')) {
+			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
 				$location.path("/login");
 			}
 		}

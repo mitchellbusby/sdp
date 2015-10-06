@@ -26,8 +26,12 @@ function($location, User, Student) {
 	var goRegisterPageThree = function() { $location.path('/register3') };
 
 	var setUserFromLogin = function (username, password) {
-		registerDetails.user.userName = username;
+		registerDetails.user.name = username;
 		registerDetails.user.password = password;
+	};
+
+	var registerUserDetails = function () {
+		// no idea, send the info to the API.
 	};
 
 	return {
@@ -39,5 +43,6 @@ function($location, User, Student) {
 		goRegisterPageTwo: goRegisterPageTwo,
 		goRegisterPageThree: goRegisterPageThree,
 		setUserFromLogin: setUserFromLogin,
+		registerUserDetails: registerUserDetails,
 	};
 }]);

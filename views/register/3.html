@@ -1,5 +1,5 @@
 <style>
-	.register-fields 
+	.register-fields
 	{
 		padding: 1rem;
 		padding-left: 2rem;
@@ -17,35 +17,42 @@
 	<form name="studentDetails" class="register-fields">
 		<br>
 		<br>
-		
-		<label for="studentId">Student ID:</label>
-		<input type="text" id="studentId" ng-model="details.user.studentId" required>
-	
-		<label for="password">Password:</label>
-		<input type="password" id="password" ng-model="details.user.password" required>
-		
-		<label for="passwordConfirm">Confirm password:</label>
-		<input type="password" id="passwordConfirm" required>
-	
-		<label for="name">Name:</label>
-		<input type="text" id="name" ng-model="details.user.name" required>
-		
-		<!--
-			Gender
-		-->
-		
-		<!-- Email is not in the model -->
-		<label for="email">Email:</label>
-		<input type="text" id="email" ng-model="details.student.email" required>
-		
-		<!-- No mobile phone number stored in model -->
-		<label for="mobile">Mobile:</label>
-		<input type="text" id="mobile" ng-model="details.student.altContact" required>
-		
-		<label for="dob">Date Of Birth:</label>
-		<input type="text" id="dob" ng-model="details.student.dob" required>
-		
-		<button class="button column medium-12 success" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Next</button>
-		
+
+
+		<input type="checkbox" id="hscMarkCheck" ng-model="details.student.HSC">
+		<label for="hscMark">HSC</label>
+		<input type="text" id="hscMark" ng-model="details.student.HSCMarks">
+
+		<input type="checkbox" id="ieltsMarkCheck" ng-model="details.student.IELTS">
+		<label for="ieltsMark">IELTS</label>
+		<input type="text" id="ieltsMark" ng-model="details.student.IELTSMarks">
+
+		<input type="checkbox" id="toeflMarkCheck" ng-model="details.student.TOEFL">
+		<label for="toeflMark">TOEFL</label>
+		<input type="text" id="toeflMark" ng-model="details.student.TOEFLMarks">
+
+		<input type="checkbox" id="tafeMarkCheck" ng-model="details.student.TAFE">
+		<label for="tafeMark">TAFE</label>
+		<input type="text" id="tafeMark" ng-model="details.student.TAFEMarks">
+
+		<input type="checkbox" id="cultMarkCheck" ng-model="details.student.CULT">
+		<label for="cultMark">CULT</label>
+		<input type="text" id="cultMark" ng-model="details.student.CULTMarks">
+
+		<input type="checkbox" id="insearchDeepMarkCheck" ng-model="details.student.insearchDEEP">
+		<label for="insearchDeepMark">insearchDEEP</label>
+		<input type="text" id="insearchDeepMark" ng-model="details.student.insearchDEEPMarks">
+
+		<input type="checkbox" id="insearchDiplomaMarkCheck" ng-model="details.student.insearchDiploma">
+		<label for="insearchDiplomaMark">insearchDiploma</label>
+		<input type="text" id="insearchDiplomaMark" ng-model="details.student.insearchDiplomaMarks">
+
+		<input type="checkbox" id="foundationCourseMarkCheck" ng-model="details.student.foundationCourse">
+		<label for="foundationCourseMark">foundationCourse</label>
+		<input type="text" id="foundationCourseMark" ng-model="details.student.foundationCourseMarks">
+		<button class="button column medium-12" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Previous</button>
+
+		<button class="button column medium-12 success" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Register</button>
+
 		</form>
 </div>

@@ -1,5 +1,5 @@
 <style>
-	.register-fields 
+	.register-fields
 	{
 		padding: 1rem;
 		padding-left: 2rem;
@@ -17,35 +17,35 @@
 	<form name="studentDetails" class="register-fields">
 		<br>
 		<br>
-		
+
 		<label for="studentId">Student ID:</label>
 		<input type="text" id="studentId" ng-model="details.user.studentId" required>
-	
+
 		<label for="password">Password:</label>
 		<input type="password" id="password" ng-model="details.user.password" required>
-		
+
 		<label for="passwordConfirm">Confirm password:</label>
 		<input type="password" id="passwordConfirm" required>
-	
+
 		<label for="name">Name:</label>
 		<input type="text" id="name" ng-model="details.user.name" required>
-		
+
 		<!--
 			Gender
 		-->
-		
+
 		<!-- Email is not in the model -->
 		<label for="email">Email:</label>
 		<input type="text" id="email" ng-model="details.student.email" required>
-		
+
 		<!-- No mobile phone number stored in model -->
 		<label for="mobile">Mobile:</label>
 		<input type="text" id="mobile" ng-model="details.student.altContact" required>
-		
+
 		<label for="dob">Date Of Birth:</label>
 		<input type="text" id="dob" ng-model="details.student.dob" required>
-		
+
 		<button class="button column medium-12 success" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Next</button>
-		
+
 		</form>
 </div>
