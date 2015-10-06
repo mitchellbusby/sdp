@@ -269,7 +269,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.onCreate();
 }])
-.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session) {
+.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
 		var scope = this;
 
 		this.getBookings = function(params) {
@@ -279,13 +279,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			);
 		};
 
+		CampusesModel.onCreate();
+
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
 
 				existingData = typeof existingData !== 'undefined' ? existingData : {};
 
 				for (var i=0; i<newDataToMerge["Results"].length; i++) {
-					existingData[newDataToMerge["Results"][i]["BookingId"]] = (newDataToMerge["Results"][i]);
+                    var bookingID = newDataToMerge["Results"][i]["BookingId"];
+					existingData[bookingID] = (newDataToMerge["Results"][i]);
+					existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
 				}
 
 				return existingData;
@@ -352,9 +356,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
     };
 
     this.onCreate = function() {
-      this.getCampuses().then(function (result) {
-         scope.campuses = scope.mergeCampuses(result.data);
-      });
+        this.getCampuses().then(function (result) {
+            scope.campuses = scope.mergeCampuses(result.data);
+        });
     };
 }])
 .service('Session', [function () {
