@@ -213,7 +213,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	var scope = this;
 	this.getActivities = function(params) {
 		// Gets data from a server
-		params.pageSize = 100;
 		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
