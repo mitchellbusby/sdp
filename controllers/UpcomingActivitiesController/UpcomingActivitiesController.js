@@ -62,7 +62,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				if (success) {
 					AlertBanner.publish({
 						type: "success",
-						message: "Successfully cancelled your booking.",
+						message: "Booking cancelled.",
 						timeCollapse: 3000
 					});
 
