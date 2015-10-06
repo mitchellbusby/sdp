@@ -10,10 +10,13 @@ angular.module('utsHelps', [
 	'utsHelps.example',
 	'utsHelps.register',
 	'utsHelps.UpcomingActivities',
+	'utsHelps.registerService',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
-	'utsHelps.constants'
+	'utsHelps.constants',
+	'angular-alert-banner',
+	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
@@ -23,6 +26,14 @@ angular.module('utsHelps', [
 		function ($injector) {
 			return $injector.get('AuthInterceptor');
 	}]);
+}])
+.config(['$provide', function($provide) {
+  //Provides redirection for
+  $provide.decorator('$exceptionHandler', ['$delegate', function($delegate) {
+    return function(exception, cause) {
+      $delegate(exception, cause);
+      throw exception;
+  }}]);
 }])
 .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function($rootScope, AUTH_EVENTS, AuthService, $location) {
 	console.log("Angular initialised!");
@@ -49,7 +60,10 @@ angular.module('utsHelps', [
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.templateUrl!="views/loginView.html" || next.templateUrl.match('views/register/[0-9]*\.html') {
+			var pa = $location.path();
+			console.log(pa);
+			console.log(pa.match('/register[0-9]'));
+			if (next.templateUrl!="views/loginView.html" && !$location.path().match('#/register[0-9]*\'')) {
 				$location.path("/login");
 			}
 		}
@@ -64,31 +78,31 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope',
- function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService',
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
 	$scope.err_message = "";
-	$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
+	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
 		console.log("Error in API! "+err_message);
 		$scope.err_message = err_message;
 		$("#uh-error-modal").foundation('reveal', 'open');
-	});
+	});*/
 	$scope.triggerCloseModal = function() {
 		$("#uh-error-modal").foundation('reveal', 'close');
 	}
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
-	
-	$scope.setCurrentUser = function (user) { 
+
+	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {
 		AuthService.logoutFake().then(function success() {
 			$scope.currentUser = null;
-			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess); 
+			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 		}, function failure(err) {
 			// deal with failure to log out here
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);

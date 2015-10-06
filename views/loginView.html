@@ -1,5 +1,5 @@
 <style>
-	.login-fields 
+	.login-fields
 	{
 		padding: 1rem;
 		padding-left: 2rem;
@@ -17,13 +17,13 @@
 		<br>
 		<label for="username">Username:</label>
 		<input type="text" id="username" ng-model="credentials.username" required>
-	
+
 		<label for="password">Password:</label>
 		<input type="password" id="password" ng-model="credentials.password" required>
-		
+
 		<button class="button column medium-12 success" ng-click="login(credentials)" ng-disabled="loginForm.$invalid">Login</button>
-		
-		<button class="button column medium-12"><a href="#/register">Register</a></button>
+
+		<button class="button column medium-12" ng-click="goRegister(credentials)">Register</button>
 	</form>
 
 
@@ -31,6 +31,4 @@
 		Your login details were incorrect. Try again.
 		<div class="close" >&times;</div>
 	</div>
-	</div>
 </div>
-

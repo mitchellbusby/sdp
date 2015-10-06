@@ -232,14 +232,27 @@ angular.module('helpsModelsServices', [])
 
 .factory('Notification', function() {
 	var notification = {};
-	notification.create = function(notificationId, studentId, workshopId, notifyTime, hoursAhead) {
+	notification.create = function(notificationId, studentId, workshopId, notifyTime, hoursAhead, notificationTypeId) {
 		return {
 			"notificationId": notificationId,
 			"studentId": studentId,
 			"workshopId": workshopId,
 			"notifyTime": notifyTime,
-			"hoursAhead": hoursAhead
+			"hoursAhead": hoursAhead,
+			"notificationTypeId": notificationTypeId,
+		};
+	};	
+	return notification;
+})
+
+.factory('NotificationType', function() {
+	var notificationType = {};
+	notificationType.create = function(notificationTypeId, abbName, fullName){
+		return {
+			"notificationTypeId": notificationTypeId,
+			"abbName": abbName,
+			"fullName": fullName
 		};
 	};
-	return notification;
+	return notificationType;
 })
