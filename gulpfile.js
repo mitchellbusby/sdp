@@ -13,6 +13,8 @@ var sourcemaps = require('gulp-sourcemaps');
 // Dependency for minify
 var uglify = require('gulp-uglify');
 
+var gutil = require('gulp-util');
+
 gulp.task('default', ['sass'], function(){
 
 });
@@ -60,7 +62,7 @@ gulp.task('concat-js', function() {
 	return gulp.src(jsFiles, {base: './'})
 		.pipe(sourcemaps.init())
 			.pipe((concat('main.js')))
-				.pipe(uglify())
+				.pipe(uglify().on('error', gutil.log))
 					.pipe(sourcemaps.write())
 						.pipe(gulp.dest('.'));
 });

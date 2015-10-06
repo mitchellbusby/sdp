@@ -14,7 +14,8 @@ angular.module('utsHelps', [
 	'angular-loading-bar',
 	'utsHelps.constants',
 	'angular-alert-banner',
-	'utsHelps.UserMessagingService'
+	'utsHelps.UserMessagingService',
+	'LocalStorageModule',
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/example'});
@@ -32,6 +33,9 @@ angular.module('utsHelps', [
       $delegate(exception, cause);
       throw exception;
   }}]);
+}])
+.config(['localStorageServiceProvider', function(localStorageServiceProvider) {
+	localStorageServiceProvider.setPrefix('utsHelps');
 }])
 .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function($rootScope, AUTH_EVENTS, AuthService, $location) {
 	console.log("Angular initialised!");
@@ -73,8 +77,8 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService',
- function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService','Session',
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService, Session) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
@@ -87,10 +91,11 @@ angular.module('utsHelps', [
 	$scope.triggerCloseModal = function() {
 		$("#uh-error-modal").foundation('reveal', 'close');
 	}
-	$scope.currentUser = null;
-	$scope.userRoles = USER_ROLES;
+	/*$rootScope.currentUser = null;*/
+	$rootScope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
-	
+	$scope.isAuthenticated = AuthService.isAuthenticated;
+	$scope.Session = Session;
 	$scope.setCurrentUser = function (user) { 
 		$scope.currentUser = user;
 	};

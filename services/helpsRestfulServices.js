@@ -283,4 +283,5 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.username = null;
 		this.userRole = null;
 	};
+	//this.userId = null;
 }]);

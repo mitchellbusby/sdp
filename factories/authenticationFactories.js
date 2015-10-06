@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.constants'])
+angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.constants', 'LocalStorageModule', 'helpsModelsServices'])
 // These constants can be injected via HelpsRestfulServices
-.factory('AuthService',['$http', 'Session', '$q', function ($http, Session, $q) {
+.factory('AuthService',['$http', 'Session', '$q', 'localStorageService', 'User', function ($http, Session, $q, localStorageService, User) {
 	var authService = {};
 	authService.loginFake = function (credentials){
 		return $q(function(resolve, reject) {
@@ -12,6 +12,14 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.c
 				}
 				else {
 					Session.create('1', 11899859, credentials.username, 'User');
+					if (localStorageService.isSupported) {
+						localStorageService.set('session', JSON.stringify({
+							id: '1',
+							userId: 11899859,
+							username: credentials.username,
+							userRole: 'User' 
+						}));
+					}
 					resolve(credentials.username);
 				}
 			}, 1000);
@@ -42,10 +50,12 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.c
 	
 	authService.logout = function() {
 		//This is yet to be filled in
+		localStorageService.remove('session');
 		Session.destroy();
 	}
 
 	authService.logoutFake = function() {
+		if (localStorageService.isSupported) {localStorageService.remove('session');}
 		Session.destroy();
 		return $q(function(resolve, reject) {
 			setTimeout(function() {
@@ -54,7 +64,23 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.c
 			})
 		});
 	}
-
+	authService.onCreate = function() {
+		if (localStorageService.isSupported) {
+			var retrievedSession = localStorageService.get('session');
+			if (retrievedSession) {
+				var session = JSON.parse(retrievedSession);
+				Session.create(session.id, session.userId, session.username, session.userRole);
+			}
+			else {
+				//Do nothing, as the user does not exist yet
+			}
+		}
+		else {
+			//Degrade gracefully
+		}
+		console.log(Session);
+	}
+	authService.onCreate();
 	return authService;
 }])
 //There used to be a service in here but it should be injected from the restful 
