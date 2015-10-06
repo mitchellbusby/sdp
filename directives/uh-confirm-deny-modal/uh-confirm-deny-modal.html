@@ -1,8 +1,9 @@
 	<div id="uh-confirm-deny-modal" class="reveal-modal medium" data-reveal aria-labelledby="Confirm or deny">
 		<ng-transclude></ng-transclude>
+		<hr>
 		<p class="row">
-			<a class="button cancel round small-5 medium-4 medium-offset-1" ng-click="closeModal()">Cancel</a>
-			<a class="button confirm round small-5 medium-4 small-offset-1 medium-offset-1" ng-click="closeModal()">Confirm</a>
+			<a class="button secondary cancel round small-5 medium-4 medium-offset-1" ng-click="closeModal()">Cancel</a>
+			<a class="button success confirm round small-5 medium-4 small-offset-1 medium-offset-1" ng-click="closeModal()">Confirm</a>
 		</p>
 		<a class="close-reveal-modal cancel" aria-label="Close" ng-click="closeModal()">&#215;</a>
 	</div>
