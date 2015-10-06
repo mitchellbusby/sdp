@@ -208,7 +208,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				var uriTransform = this.transformParams(params);
 				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
 			}
-}])
+	}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
 	this.getActivities = function(params) {
@@ -216,58 +216,58 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
-		}
-		this.mergeActivities = function(newDataToMerge, existingData) {
-			if (newDataToMerge.IsSuccess) {
-				if (!existingData) {
-					var existingData = {};
-				}
-				for (var i=0; i<newDataToMerge["Results"].length; i++){
-					if (existingData.hasOwnProperty(newDataToMerge["Results"][i]["WorkShopSetID"])) {
-						// Append all workshop deets and whatnot into the workshop
-						existingData[newDataToMerge["Results"][i]["WorkShopSetID"]]["workshops"].push(newDataToMerge["Results"][i]);
-					}
-					else {
-						existingData[newDataToMerge["Results"][i]["WorkShopSetID"]] = {
-							"description":newDataToMerge["Results"][i]["description"],
-							"topic":newDataToMerge["Results"][i]["topic"],
-							"workshops":[newDataToMerge["Results"][i]]
-						};
-					}
-				}
-				return existingData;
+	}
+	this.mergeActivities = function(newDataToMerge, existingData) {
+		if (newDataToMerge.IsSuccess) {
+			if (!existingData) {
+				var existingData = {};
 			}
-			else {
-				// Failed to correctly load data
-				console.log("Failed to correctly load data.");
-				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
-				return {};
-			}
-		}
-		this.onCreate = function() {
-			this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
-				console.log(result);
-				scope.activities = scope.mergeActivities(result.data);
-			});
-		};
-		this.bookWorkshop = function(workshopId, studentId) {
-			//Create a nice model to send to the DB
-			// This method could be ported to Tomm's model tbh
-			var workshopBooking = WorkshopBooking.create(null, workshopId, studentId, null, studentId, null);
-			return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, workshopBooking).then(function success(response) {
-				if (response.data.IsSuccess) {
-					return true;
+			for (var i=0; i<newDataToMerge["Results"].length; i++){
+				if (existingData.hasOwnProperty(newDataToMerge["Results"][i]["WorkShopSetID"])) {
+					// Append all workshop deets and whatnot into the workshop
+					existingData[newDataToMerge["Results"][i]["WorkShopSetID"]]["workshops"].push(newDataToMerge["Results"][i]);
 				}
 				else {
-					$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
-					return false;
+					existingData[newDataToMerge["Results"][i]["WorkShopSetID"]] = {
+						"description":newDataToMerge["Results"][i]["description"],
+						"topic":newDataToMerge["Results"][i]["topic"],
+						"workshops":[newDataToMerge["Results"][i]]
+					};
 				}
-			}, function failure(error) {
-				// Bit of error handling
-				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
-			});
-		};
-		this.onCreate();
+			}
+			return existingData;
+		}
+		else {
+			// Failed to correctly load data
+			console.log("Failed to correctly load data.");
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
+			return {};
+		}
+	}
+	this.onCreate = function() {
+		this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
+			console.log(result);
+			scope.activities = scope.mergeActivities(result.data);
+		});
+	};
+	this.bookWorkshop = function(workshopId, studentId) {
+		//Create a nice model to send to the DB
+		// This method could be ported to Tomm's model tbh
+		var workshopBooking = WorkshopBooking.create(null, workshopId, studentId, null, studentId, null);
+		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.BOOK_SESSION_URI, workshopBooking).then(function success(response) {
+			if (response.data.IsSuccess) {
+				return true;
+			}
+			else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		}, function failure(error) {
+			// Bit of error handling
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
+		});
+	};
+	this.onCreate();
 }])
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
 		var scope = this;
