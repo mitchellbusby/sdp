@@ -322,13 +322,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		//Checks if booking exists for a workshop
 		var workshopId = workshop.WorkshopId;
 		for (var i=0; i<vm.Bookings.length; i++) {
-			//console.log("Run bookingExists against workshop " + workshopId + " and booking "+vm.Bookings[i].workshopId);
 			if (vm.Bookings[i].workshopID === workshopId && vm.Bookings[i].BookingArchived===null) {
 				return true;
 			}
 		}
 		return false;
-		//console.log("Run bookingExists against workshop " + workshopId);
 	}
 	this.getBooking = function(workshop) {
 		var workshopId = workshop.WorkshopId;
