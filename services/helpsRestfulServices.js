@@ -213,6 +213,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	var scope = this;
 	this.getActivities = function(params) {
 		// Gets data from a server
+		params.pageSize = 100;
 		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
 			params
 			);
@@ -308,7 +309,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	var vm = this;
 	vm.Bookings = [];
 	this.onCreate = function() {
-		ApiMethods.getResource(endpoint_constants.SEARCH_BOOKING_URI, {"studentId":Session.userId, "pageSize":2000}).then(function(result){
+		ApiMethods.getResource(endpoint_constants.SEARCH_BOOKINGS_URI, {"studentId":Session.userId, "pageSize":2000}).then(function(result){
 			if (result.data.IsSuccess) {
 				vm.Bookings = result.data.Results;
 			}
