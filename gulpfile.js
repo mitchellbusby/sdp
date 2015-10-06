@@ -81,5 +81,4 @@ var jsFiles = [
 	 './services/messagingService.js',
 	 './constants.js',
 	 './directives/directives.js',
-
-	 ];
+];
