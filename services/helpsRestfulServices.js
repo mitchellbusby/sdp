@@ -304,12 +304,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.userRole = null;
 	};
 }])
-.service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', function(WorkshopBooking, Session, ApiMethods) {
+.service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {
 	var vm = this;
 	vm.Bookings = [];
 	this.onCreate = function() {
-		ApiMethods.getResource("/workshop/booking/search", {"studentId":Session.userId, "pageSize":2000}).then(function(result){
-			console.log(result.data);
+		ApiMethods.getResource(endpoint_constants.SEARCH_BOOKING_URI, {"studentId":Session.userId, "pageSize":2000}).then(function(result){
 			if (result.data.IsSuccess) {
 				vm.Bookings = result.data.Results;
 			}
@@ -331,7 +330,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.getBooking = function(workshop) {
 		var workshopId = workshop.WorkshopId;
 		for (var i=0; i<vm.Bookings.length; i++) {
-			//console.log("Run bookingExists against workshop " + workshopId + " and booking "+vm.Bookings[i].workshopId);
 			if (vm.Bookings[i].workshopID === workshopId) {
 				return vm.Bookings[i];
 			}
