@@ -1,3 +1,11 @@
+<style>
+	.workshop-details {
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+	}
+</style>
+
+
 <div class="activity small-11 medium-8 large-6 column small-centered">
 	<div class="row">
 		<div class="small-12 column" id="title">
@@ -19,17 +27,58 @@
 				<p class="column small-12">{{activityDetails['description']}}</p>
 			</div>
 			<div class="row" ng-repeat="(campusKey, workshops) in activityDetails.workshops | groupBy: 'campus'">
-				<div class="row"><div class="column small-7 inner-card"><p><strong>Location: {{campusKey}}</strong></p></div></div>
 				<div class="row workshop-row" ng-repeat="workshop in workshops">
-					<div class="column small-12 workshop">
+					<div class="column small-11 small-centered medium-12 workshop">
 						<div class="row">
-							<div class="column small-12 medium-9">
-								<p>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</p>
+								<div class="column small-12 medium-12">
+									<div class="workshop-details">
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-clock-o small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Time: </strong>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm'}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-calendar small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Date:</strong>
+											{{workshop.StartDate | date: 'dd/MM/yyyy'}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-map-marker small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Location:</strong>
+											{{campusKey}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-info-circle small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Status: </strong>
+											<span ng-if="workshop.BookingCount >= workshop.maximum">
+											Bookings full
+											</span>
+											<span ng-if="workshop.BookingCount < workshop.maximum">
+											Available</span>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<!--<div class="column small-12 medium-9 large-12">-->
+										<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-12 large-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
+										<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-12 medium-12 large-12 alert disabled" stop-event>Full</a>
+									<!--</div>-->
+								</div>
 							</div>
-							<!--<div class="column small-3">-->
-								<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-3" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
-								<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-12 medium-3 alert disabled" stop-event>Full</a>
-							<!--</div>-->
 						</div>
 					</div>
 				</div>

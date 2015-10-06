@@ -26,7 +26,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		// Prepare
 		$scope.selectedWorkshop = workshop;
 		// Make it appear
-		$scope.$broadcast("SHOW_CONFIRM_DENY");		 
+		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");		 
 	};
 	$scope.confirmWorkshop = function(confirmation) {
 		if (confirmation) {
@@ -44,6 +44,18 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				 		// Don't trigger a banner
 				 	}
 				 });
+		}
+		$scope.selectedWorkshop = null;
+	}
+	$scope.cancelBooking = function(workshop) {
+		$scope.selectedWorkshop = workshop;
+		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL");
+	}
+	$scope.confirmCancel = function(confirmation) {
+		// Do nothing
+		if (confirmation) {
+		}
+		else {
 		}
 		$scope.selectedWorkshop = null;
 	}
