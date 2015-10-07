@@ -54,4 +54,11 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		$scope.selectedWorkshop = null;
 	}
 
+    $scope.addWaitlist = function(workshop){
+        // Prepare
+        $scope.selectedWorkshop = workshop;
+        // Show Waitlist CONFIRM_DENY
+        //$scope.$broadcast("SHOW_WAITLIST_CONFIRM_DENY");
+    };
+
 }]);

@@ -45,7 +45,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 							"reminder_num": 9999,
 							"reminder_sent": 0,
 							"DaysOfWeek": null,
-							"BookingCount": 44,
+							"BookingCount": 45,
 							"archived": null
 						}, {
 							"WorkshopId": 12,
@@ -213,7 +213,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	var scope = this;
 
     var pageNumber = 1;
-	var pageSize = 15;
+	var pageSize = 100;
 	/*this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}*/
@@ -221,7 +221,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
 			params
 			);
 	};
