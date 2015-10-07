@@ -32,6 +32,9 @@ angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.c
 		.then(function (res) { 
 			Session.create(res.data.id, res.data.user.id,
 				res.data.user.role);
+			if (localStorageService.isSupported) {
+				localStorageService.set('session', JSON.stringify(Session));
+			}
 			return res.data.user;
 		});
 	};
