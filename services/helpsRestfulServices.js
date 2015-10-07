@@ -221,7 +221,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
 			params
 			);
 	};

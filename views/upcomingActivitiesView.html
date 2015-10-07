@@ -9,12 +9,6 @@
 	<button ng-click = "onViewMore()" >View More</button>
 </div>
 
-<uh-confirm-deny-modal callback="confirmWorkshop(isConfirmed)">
-	<h2>Confirm Booking?</h2>
-	<p class="small-11 small-centered column">Are you sure you want to book in for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
-	<p class="small-11 small-centered column">If you book this workshop, your attendance will be marked unless you cancel.</p>
-</uh-confirm-deny-modal>
-
 
 <style>
 	h2.cdm
