@@ -212,12 +212,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
 
-    var pageNumber = 1;
-	var pageSize = 100;
 	/*this.create = function(activitiesToSave) {
 		scope.activities = activitiesToSave;
 	}*/
+	this.getDefaultParamsObject = function() {
+		return {
+			pageNumber: 1,
+			pageSize: 100,
+		}
+	}
 
+	scope.params = this.getDefaultParamsObject();
 
 	this.getActivities = function(params) {
 		// Gets data from a server
@@ -255,8 +260,8 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 
 	this.getMoreActivities = function(){
-		pageNumber++;
-		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
+		scope.params.pageSize++;
+		this.getActivities(scope.params).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
@@ -266,7 +271,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 
         //modified from mitch's code.
         //Using page number, instead of a date, to get activities
-		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
+		this.getActivities(scope.params).then(function(result) {
 		//this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
@@ -289,6 +294,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
+	
 	this.onCreate();
 }])
 
