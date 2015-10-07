@@ -80,5 +80,5 @@ var jsFiles = [
 	 './controllers/UpcomingActivitiesController/UpcomingActivitiesController.js',
 	 './services/messagingService.js',
 	 './constants.js',
-	 './directives/directives.js'
-	 ];
+	 './directives/directives.js',
+];

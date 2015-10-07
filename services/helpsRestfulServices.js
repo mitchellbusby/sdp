@@ -17,14 +17,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					}
 				};
 				return configObject;
-			}
+        };
 			this.getResource = function(resourceUri, params) {
 				// Given the resource URI (not including the endpoint URI), and parameters, call the endpoint
 				// and return a promise
 				var configObject = this.createConfigObject();
 				configObject["params"] = params;
 				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
-			}
+			};
 			this.getResourceFaked = function(resourceUri, params) {
 				var data;
 				if (resourceUri === endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI) {
@@ -45,7 +45,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 							"reminder_num": 9999,
 							"reminder_sent": 0,
 							"DaysOfWeek": null,
-							"BookingCount": 44,
+							"BookingCount": 45,
 							"archived": null
 						}, {
 							"WorkshopId": 12,
@@ -182,7 +182,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 						}
 					}, 1000);
 				});
-			}
+			};
 			this.transformParams = function(params) {
 				// This bit of code circumvents the issue whereby Angular doesn't support
 				// URI params for POST calls - for obvious security reasons. However, 
@@ -197,26 +197,40 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					return params;
 				}
 				
-			}
+			};
 			this.postResource = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
 				configObject.params = params;
 				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
-			}
+			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
 				var uriTransform = this.transformParams(params);
 				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
-			}
+			};
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
+
+	/*this.create = function(activitiesToSave) {
+		scope.activities = activitiesToSave;
+	}*/
+	this.getDefaultParamsObject = function() {
+		return {
+			pageNumber: 1,
+			pageSize: 100,
+		}
+	}
+
+	scope.params = this.getDefaultParamsObject();
+
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
 			params
 			);
-	}
+	};
+
 	this.mergeActivities = function(newDataToMerge, existingData) {
 		if (newDataToMerge.IsSuccess) {
 			if (!existingData) {
@@ -243,11 +257,24 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
 			return {};
 		}
-	}
-	this.onCreate = function() {
-		this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
+	};
+
+	this.getMoreActivities = function(){
+		scope.params.pageSize++;
+		this.getActivities(scope.params).then(function(result) {
 			console.log(result);
-			scope.activities = scope.mergeActivities(result.data);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
+		});
+	};
+
+	this.onCreate = function() {
+
+        //modified from mitch's code.
+        //Using page number, instead of a date, to get activities
+		this.getActivities(scope.params).then(function(result) {
+		//this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
+			console.log(result);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
 	};
 	this.refresh = function() {
@@ -271,6 +298,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
+	
 	this.cancelWorkshop = function(workshopId, studentId) {
 		var cancelModel = {"workshopId":workshopId, "studentId":studentId, "userId": studentId};
 		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.CANCEL_BOOKING_URI, cancelModel).then(function success(response){
@@ -287,10 +315,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	}
+	
 	this.onCreate();
 }])
+
+
+
+
+
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
+
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;

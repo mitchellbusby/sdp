@@ -22,38 +22,43 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				$scope.UpcomingActivitiesModel.activities[workshopId].isExpanded = false;
 			}
 		}
-	}
+	};
+
+	$scope.onViewMore = function(){
+        $scope.UpcomingActivitiesModel.getMoreActivities();
+	};
+
 	$scope.bookWorkshop = function(workshop) {
 		// Prepare
 		$scope.selectedWorkshop = workshop;
 		// Make it appear
 		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");		 
 	};
+
 	$scope.confirmWorkshop = function(confirmation) {
 		if (confirmation) {
 			UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
 			.then(function(success) {
 				if (success) {
-				 		// Trigger banner to say successful booking made
-				 		AlertBanner.publish({
-				 			type: "success",
-				 			message: "Successfully made a booking.",
-				 			timeCollapse: 3000
-				 		});
-				 	}		
-				 	else {
-				 		// Don't trigger a banner
-				 	}
-				 	UpcomingActivitiesModel.refresh();
-				 	WorkshopBookingsModel.refresh();
-				 });
+					// Trigger banner to say successful booking made
+					AlertBanner.publish({
+						type: "success",
+						message: "Successfully made a booking.",
+						timeCollapse: 3000
+					});
+				}
+				else {
+					// Don't trigger a banner
+				}
+			});
 		}
 		$scope.selectedWorkshop = null;
-	}
+	};
+
 	$scope.cancelBooking = function(workshop) {
 		$scope.selectedWorkshop = workshop;
 		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL");
-	}
+	};
 	$scope.confirmCancel = function(confirmation) {
 		// Do nothing
 		if (confirmation) {
@@ -77,5 +82,6 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		else {
 		}
 		$scope.selectedWorkshop = null;
-	}
+	};
+
 }]);
