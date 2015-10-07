@@ -45,6 +45,7 @@ gulp.task('webserver-public', function() {
 	gulp.src('')
 		.pipe(webserver({
 			host: '0.0.0.0',
+			liveReload: true,
 			port: '8080'
 		}));
 });

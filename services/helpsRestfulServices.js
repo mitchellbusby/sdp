@@ -217,8 +217,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	}*/
 	this.getDefaultParamsObject = function() {
 		return {
-			pageNumber: 1,
+			page: 1,
 			pageSize: 100,
+			StartingDtBegin: moment().format("YYYY-MM-DDTHH:mm:ss"),
+			StartingDtEnd: "9997-12-29T17:00:00"
 		}
 	}
 
@@ -260,10 +262,16 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 
 	this.getMoreActivities = function(){
-		scope.params.pageSize++;
-		this.getActivities(scope.params).then(function(result) {
+		scope.params.page = scope.params.page+1;
+		return this.getActivities(scope.params).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
+			if (result.data.Results.length < 1) {
+				return false;
+			}
+			else {
+				return true;
+			}
 		});
 	};
 
@@ -298,7 +306,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
-	
+
 	this.cancelWorkshop = function(workshopId, studentId) {
 		var cancelModel = {"workshopId":workshopId, "studentId":studentId, "userId": studentId};
 		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.CANCEL_BOOKING_URI, cancelModel).then(function success(response){

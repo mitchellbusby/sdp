@@ -25,7 +25,15 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	};
 
 	$scope.onViewMore = function(){
-        $scope.UpcomingActivitiesModel.getMoreActivities();
+        $scope.UpcomingActivitiesModel.getMoreActivities().then(function(moreActivitiesWereFound) {
+        	if (!moreActivitiesWereFound) {
+        		AlertBanner.publish({
+        			type: "info",
+        			message: "No more activities found.",
+        			timeCollapse: 3000
+        		});
+        	}
+        });
 	};
 
 	$scope.bookWorkshop = function(workshop) {
@@ -52,6 +60,8 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				}
 			});
 		}
+		UpcomingActivitiesModel.refresh();
+		WorkshopBookingsModel.refresh();
 		$scope.selectedWorkshop = null;
 	};
 
