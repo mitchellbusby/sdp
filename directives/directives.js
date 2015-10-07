@@ -80,11 +80,7 @@ angular.module('utsHelps.directives', [])
 			var hideModal = function() {
 				elem.find('div').foundation('reveal', 'close');
 			}
-<<<<<<< HEAD
-			scope.$on('SHOW_CONFIRM_DENY', showModal);
-=======
 			scope.$on('SHOW_CONFIRM_DENY_'+attrs.cdmId, showModal);
->>>>>>> origin
 			var denyModal = function() {
 				hideModal();
 				console.log("Modal hidden!");

@@ -68,16 +68,9 @@ gulp.task('concat-js', function() {
 gulp.task('concat:watch', function() {
 	gulp.watch(jsFiles, ['concat-js']);
 });
-<<<<<<< HEAD
 var jsFiles = ['./app.js',
-	 './services/helpsRestfulServices.js',
-	 './services/helpsModelServices.js',
 	 './services/messagingService.js',
 	 './services/registerService.js',
-=======
-var jsFiles = [
-	 './directives/directives.js',
-	 './app.js', 
 	 './services/helpsRestfulServices.js',
 	 './services/helpsModelServices.js',
 	 './factories/authenticationFactories.js',

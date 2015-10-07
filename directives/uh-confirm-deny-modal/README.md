@@ -36,11 +36,7 @@ Example usage:
 
 ### ControllerView.html
 ```
-<<<<<<< HEAD
-<uh-confirm-deny-modal callback="callbackFunctionInYourScope(isConfirmed)">
-=======
 <uh-confirm-deny-modal callback="callbackFunctionInYourScope(isConfirmed)" cdm-id="someUniqueIdForThisConfirmDenyModal">
->>>>>>> origin
     <h2>Example question?</h2>
     <p>Have some more details.</p>
     <p>Please note that your response to this will be taken seriously.</p>
