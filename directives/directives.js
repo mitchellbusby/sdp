@@ -7,7 +7,7 @@ angular.module('utsHelps.directives', [])
 			activityDetails: '=activityDetails',
 			expand: '=expand',
 			workshopClickHandler: '=workshopClickHandler',
-            waitlistClickHandler: '=waitlistClickHandler'
+
 		}
 	}
 })

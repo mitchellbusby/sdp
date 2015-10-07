@@ -1,6 +1,6 @@
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row" infinite-scroll="onViewMore()">
 	<a ng-click="clickedOnAnActivity(activity)">
-		<uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" waitlist-click-handler="addWaitlist" class="row">
+		<uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" class="row">
 
 		</uh-activity-details>
 	</a>
