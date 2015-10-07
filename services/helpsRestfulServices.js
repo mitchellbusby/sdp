@@ -45,7 +45,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 							"reminder_num": 9999,
 							"reminder_sent": 0,
 							"DaysOfWeek": null,
-							"BookingCount": 44,
+							"BookingCount": 45,
 							"archived": null
 						}, {
 							"WorkshopId": 12,
@@ -211,12 +211,21 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
+
+    var pageNumber = 1;
+	var pageSize = 100;
+	/*this.create = function(activitiesToSave) {
+		scope.activities = activitiesToSave;
+	}*/
+
+
 	this.getActivities = function(params) {
 		// Gets data from a server
-		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI, 
+		return ApiMethods.getResourceFaked(endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI,
 			params
 			);
-	}
+	};
+
 	this.mergeActivities = function(newDataToMerge, existingData) {
 		if (newDataToMerge.IsSuccess) {
 			if (!existingData) {
@@ -243,11 +252,24 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
 			return {};
 		}
-	}
-	this.onCreate = function() {
-		this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
+	};
+
+	this.getMoreActivities = function(){
+		pageNumber++;
+		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
 			console.log(result);
-			scope.activities = scope.mergeActivities(result.data);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
+		});
+	};
+
+	this.onCreate = function() {
+
+        //modified from mitch's code.
+        //Using page number, instead of a date, to get activities
+		this.getActivities({"Page":pageNumber,"PageSize":pageSize}).then(function(result) {
+		//this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
+			console.log(result);
+			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
 	};
 	this.bookWorkshop = function(workshopId, studentId) {
@@ -269,8 +291,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.onCreate();
 }])
+
+
+
+
+
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
+
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;

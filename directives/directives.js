@@ -6,7 +6,8 @@ angular.module('utsHelps.directives', [])
 		scope: {
 			activityDetails: '=activityDetails',
 			expand: '=expand',
-			workshopClickHandler: '=workshopClickHandler'
+			workshopClickHandler: '=workshopClickHandler',
+
 		}
 	}
 })
