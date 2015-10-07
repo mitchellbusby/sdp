@@ -57,7 +57,7 @@ angular.module('utsHelps.directives', [])
 		link: function (scope) {
 			var showDialog = function () {
 				scope.visible = true;
-			}
+			};
 			
 			scope.visible = false;
 			scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);

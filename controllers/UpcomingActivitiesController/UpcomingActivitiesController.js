@@ -54,10 +54,6 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		$scope.selectedWorkshop = null;
 	};
 
-
-
-
-
 	$scope.cancelBooking = function(workshop) {
 		$scope.selectedWorkshop = workshop;
 		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL");
