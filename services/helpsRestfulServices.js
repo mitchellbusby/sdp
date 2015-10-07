@@ -17,14 +17,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					}
 				};
 				return configObject;
-			}
+        };
 			this.getResource = function(resourceUri, params) {
 				// Given the resource URI (not including the endpoint URI), and parameters, call the endpoint
 				// and return a promise
 				var configObject = this.createConfigObject();
 				configObject["params"] = params;
 				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
-			}
+			};
 			this.getResourceFaked = function(resourceUri, params) {
 				var data;
 				if (resourceUri === endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI) {
@@ -182,7 +182,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 						}
 					}, 1000);
 				});
-			}
+			};
 			this.transformParams = function(params) {
 				// This bit of code circumvents the issue whereby Angular doesn't support
 				// URI params for POST calls - for obvious security reasons. However, 
@@ -197,17 +197,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					return params;
 				}
 				
-			}
+			};
 			this.postResource = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
 				configObject.params = params;
 				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
-			}
+			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
 				var uriTransform = this.transformParams(params);
 				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
-			}
+			};
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
