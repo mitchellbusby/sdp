@@ -7,7 +7,7 @@
 
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
     <a ng-click="clickedOnAnActivity(activity)">
-        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" class="row">
+        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" class="row">
 
         </uh-activity-details>
     </a>
@@ -25,4 +25,7 @@
 	<h2 class="cdm">Cancel Booking?</h2>
 	<p class="small-11 small-centered column">Blah blah blah blah blah</p>
 </uh-confirm-deny-modal>
-
+<uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
+    <h2 class="cdm">Workshop is Full!</h2>
+    <p class="small-11 small-centered column">Would you like to add yourself to the waitlist?</p>
+</uh-confirm-deny-modal>
