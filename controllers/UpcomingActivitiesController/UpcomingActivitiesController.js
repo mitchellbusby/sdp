@@ -7,7 +7,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		controller: 'UpcomingActivitiesCtrl'
 	})
 }])
-.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', 'WorkshopBookingsServiceMitchell', function($scope, UpcomingActivitiesModel, Session, AlertBanner, WorkshopBookingsModel){
+.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', 'BookingsModel', function($scope, UpcomingActivitiesModel, Session, AlertBanner, WorkshopBookingsModel){
 	$scope.globals.pageTitle = "Upcoming Activities";
 	$scope.WorkshopBookingsModel = WorkshopBookingsModel;
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;

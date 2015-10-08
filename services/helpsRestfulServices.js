@@ -329,14 +329,18 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
 		var scope = this;
 
+		scope.params = {
+			pageSize: 1000
+		};
+
 		this.getBookings = function(params) {
 			// Gets data from the server
+			params.pageSize = scope.params.pageSize;
 			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
 		};
 
-		CampusesModel.onCreate();
 
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
@@ -383,8 +387,33 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.onCreate = function() {
 			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
+				console.log(scope.bookings);
 			});
 		};
+		this.refresh = function() {
+			scope.bookings = undefined;
+			this.onCreate();
+		}
+		this.bookingExists = function(workshop) {
+			//Checks if booking exists for a workshop
+			var workshopId = workshop.WorkshopId;
+			for (bookingId in scope.bookings) {
+				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+					console.log("Matched "+scope.bookings[bookingId].workshopID+" with "+workshopId);
+					return true;
+				}
+			}
+			return false;
+		}
+		this.getBooking = function(workshop) {
+			var workshopId = workshop.WorkshopID;
+			for (bookingId in scope.bookings) {
+				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+					return scope.bookings[bookingId];
+				}
+			}
+			return -1;
+		}
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
@@ -417,6 +446,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
             scope.campuses = scope.mergeCampuses(result.data);
         });
     };
+	this.onCreate();
 }])
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
