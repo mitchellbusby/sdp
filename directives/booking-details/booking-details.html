@@ -4,7 +4,7 @@
             {{bookingDetails['topic']}}
 
             <ul>
-                <li>{{bookingDetails.starting | date : 'hh:mm' }} until {{bookingDetails.ending | date : 'hh:mm on dd/MM/yyyy' }}</li>
+                <li>{{bookingDetails.starting | date : 'hh:mm a'}} until {{bookingDetails.ending | date : 'hh:mm a on dd/MM/yyyy'}}</li>
                 <li>{{ bookingDetails.campus }}</li>
             </ul>
         </div>
