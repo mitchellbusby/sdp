@@ -10,7 +10,7 @@ angular.module('helpsModelsServices', [])
 			"name":name,
 			"password":password
 		};
-	}
+	};
 	return user;
 })
 
