@@ -82,4 +82,6 @@ var jsFiles = [
 	 './services/messagingService.js',
 	 './constants.js',
 	 './directives/directives.js',
+	 './controllers/UpcomingBookingsController/UpcomingBookingsController.js',
+	 './controllers/PastBookingsController/PastBookingsController.js',
 ];

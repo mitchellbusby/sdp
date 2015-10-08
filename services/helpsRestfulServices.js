@@ -326,11 +326,98 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	
 	this.onCreate();
 }])
+.service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
+		var scope = this;
 
+		this.getBookings = function(params) {
+			// Gets data from the server
+			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
+				params
+			);
+		};
 
+		CampusesModel.onCreate();
 
+		this.mergeBookings = function(newDataToMerge, existingData) {
+			if (newDataToMerge.IsSuccess) {
 
+				existingData = typeof existingData !== 'undefined' ? existingData : {};
 
+				for (var i=0; i<newDataToMerge["Results"].length; i++) {
+                    var bookingID = newDataToMerge["Results"][i]["BookingId"];
+					existingData[bookingID] = (newDataToMerge["Results"][i]);
+					existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
+				}
+
+				return existingData;
+			}
+			else {
+				// Failed to correctly load data
+				console.log("Failed to correctly load data.");
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
+				return {};
+			}
+		};
+
+		this.bookingsArray = function () {
+			if (typeof scope.bookings !== 'undefined') {
+				return $.map(scope.bookings, function(value) {
+					return [value];
+				});
+			}
+			else {
+				return [];
+			}
+		};
+
+		this.isUpcomingBooking = function (booking) {
+			var startDate = new Date(booking.starting);
+			var now = new Date();
+			return now < startDate;
+		};
+
+		this.isPastBooking = function (booking) {
+			return !scope.isUpcomingBooking(booking);
+		};
+
+		this.onCreate = function() {
+			this.getBookings({"studentID":Session.userId}).then(function(result) {
+				scope.bookings = scope.mergeBookings(result.data);
+			});
+		};
+		this.onCreate();
+}])
+.service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
+    var scope = this;
+
+    this.getCampuses = function() {
+        return ApiMethods.getResource(endpoint_constants.CAMPUSES_URI);
+    };
+
+    this.mergeCampuses = function (newDataToMerge, existingData) {
+        if (newDataToMerge.IsSuccess) {
+            existingData = typeof existingData !== 'undefined' ? existingData : {};
+
+            for (var i=0; i<newDataToMerge["Results"].length; i++) {
+                existingData[newDataToMerge["Results"][i]["id"]] = (newDataToMerge["Results"][i]);
+            }
+
+            return existingData;
+        }
+        else {
+            // Failed to correctly load data
+            console.log("Failed to correctly load data.");
+            $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, newDataToMerge.DisplayMessage);
+            return {};
+        }
+    };
+
+    this.onCreate = function() {
+        this.getCampuses().then(function (result) {
+            scope.campuses = scope.mergeCampuses(result.data);
+        });
+    };
+}])
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
 

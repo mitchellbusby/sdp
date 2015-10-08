@@ -26,4 +26,6 @@ angular.module('utsHelps.constants', [])
 	"BOOK_SESSION_URI":"/workshop/booking/create",
 	"CANCEL_BOOKING_URI":"/workshop/booking/cancel",
 	"SEARCH_BOOKINGS_URI":"/workshop/booking/search",
+	"BOOKINGS_URI": "/workshop/booking",
+	"CAMPUSES_URI": "/misc/campus",
 });

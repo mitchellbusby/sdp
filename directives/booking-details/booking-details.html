@@ -1,0 +1,12 @@
+<div class="booking small-11 medium-8 large-6 column small-centered">
+    <div class="row">
+        <div id="title">
+            {{bookingDetails['topic']}}
+
+            <ul>
+                <li>{{bookingDetails.starting | date : 'hh:mm a'}} until {{bookingDetails.ending | date : 'hh:mm a on dd/MM/yyyy'}}</li>
+                <li>{{ bookingDetails.campus }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
