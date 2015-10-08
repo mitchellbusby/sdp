@@ -7,6 +7,7 @@ angular.module('utsHelps.directives', [])
 			activityDetails: '=activityDetails',
 			expand: '=expand',
 			workshopClickHandler: '=workshopClickHandler'
+
 		}
 	}
 })
@@ -65,7 +66,7 @@ angular.module('utsHelps.directives', [])
 		link: function (scope) {
 			var showDialog = function () {
 				scope.visible = true;
-			}
+			};
 			
 			scope.visible = false;
 			scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
@@ -82,13 +83,13 @@ angular.module('utsHelps.directives', [])
 			var callbackFunction = $parse(attrs.callback);
 			var decision = function(isConfirmed) {
 				callbackFunction(scope, {isConfirmed:isConfirmed});
-			}
+			};
 			var showModal = function() {
 				elem.find('div').foundation('reveal', 'open');
-			}
+			};
 			var hideModal = function() {
 				elem.find('div').foundation('reveal', 'close');
-			}
+			};
 			scope.$on('SHOW_CONFIRM_DENY_'+attrs.cdmId, showModal);
 			var denyModal = function() {
 				hideModal();
@@ -98,7 +99,7 @@ angular.module('utsHelps.directives', [])
 			var confirmModal = function() {
 				hideModal();
 				decision(true);
-			}
+			};
 			// I can't work out how to do this in JQlite yet so I've used $...
 			$(elem).find(".cancel").on('click', function() {
 				console.log("Modal declined");
@@ -107,7 +108,7 @@ angular.module('utsHelps.directives', [])
 			$(elem).find(".confirm").on('click', function() {
 				console.log("Modal accepted");
 				confirmModal();
-			})
+			});
 		}
 	}
 }]);
