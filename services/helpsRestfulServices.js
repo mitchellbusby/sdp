@@ -222,7 +222,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			StartingDtBegin: moment().format("YYYY-MM-DDTHH:mm:ss"),
 			StartingDtEnd: "9997-12-29T17:00:00"
 		}
-	}
+	};
 
 	scope.params = this.getDefaultParamsObject();
 
@@ -306,7 +306,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
-
 	this.cancelWorkshop = function(workshopId, studentId) {
 		var cancelModel = {"workshopId":workshopId, "studentId":studentId, "userId": studentId};
 		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.CANCEL_BOOKING_URI, cancelModel).then(function success(response){
@@ -323,7 +322,25 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	}
-	
+    this.addToWaitlist = function(workshopId, studentId){
+        var waiting = {
+            "workshopId":workshopId,
+            "studentId":studentId,
+            "userId":studentId,
+            "priority":null
+        };
+        return ApiMethods.postResourceWithParamsInUri(endpoint_constants.ADD_WAITLIST_URI, waiting).then(function success(response) {
+            if (response.data.IsSuccess) {
+                return true;
+            }
+            else {
+                $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+                return false;
+            }
+        }, function failure(error){
+                $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
+        });
+    };	
 	this.onCreate();
 }])
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {

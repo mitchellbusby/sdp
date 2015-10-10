@@ -94,4 +94,28 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		$scope.selectedWorkshop = null;
 	};
 
+    $scope.addToWaitlist = function(workshop){
+        $scope.selectedWorkshop = workshop;
+        $scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");
+    };
+
+    $scope.confirmAddToWaitlist = function(confirmation){
+        if (confirmation){
+            UpcomingActivitiesModel.addToWaitlist($scope.selectedWorkshop.WorkshopId, Session.userId)
+                .then(function(success){
+                    if (success){
+                        AlertBanner.publish({
+                            type: "success",
+                            message: "Successfully added to waitlist",
+                            timeCollapse: 3000
+                        });
+                    }
+                    else{
+                        //Do nothing
+                    }
+                });
+        }
+        //reset seleted workshop
+        $scope.selectedWorkshop = null;
+    }
 }]);

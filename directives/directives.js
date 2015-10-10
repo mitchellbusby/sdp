@@ -9,6 +9,7 @@ angular.module('utsHelps.directives', [])
 			workshopClickHandler: '=workshopClickHandler',
 			workshopCancelHandler: '=workshopCancelHandler',
 			bookings: '=bookings'
+            addToWaitlistClickHandler: '=addToWaitlistClickHandler'
 		}
 	}
 })
