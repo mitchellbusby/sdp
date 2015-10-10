@@ -399,7 +399,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			var workshopId = workshop.WorkshopId;
 			for (bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
-					console.log("Matched "+scope.bookings[bookingId].workshopID+" with "+workshopId);
 					return true;
 				}
 			}
