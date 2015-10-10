@@ -218,9 +218,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.getDefaultParamsObject = function() {
 		return {
 			pageNumber: 1,
-			pageSize: 100,
+			pageSize: 100
 		}
-	}
+	};
 
 	scope.params = this.getDefaultParamsObject();
 
@@ -294,6 +294,27 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
+    this.addToWaitlist = function(workshopId, studentId){
+        var waiting = {
+            "workshopId":workshopId,
+            "studentId":studentId,
+            "userId":studentId,
+            "priority":null
+        };
+        return ApiMethods.postResourceWithParamsInUri(endpoint_constants.ADD_WAITLIST_URI, waiting).then(function success(response) {
+            if (response.data.IsSuccess) {
+                return true;
+            }
+            else {
+                $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+                return false;
+            }
+        }, function failure(error){
+                $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
+        });
+    };
+
+
 	
 	this.onCreate();
 }])
