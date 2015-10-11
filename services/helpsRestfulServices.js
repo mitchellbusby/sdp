@@ -408,7 +408,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			});
 		};
 		this.refresh = function() {
-			scope.bookings = undefined;
+			scope.bookings = {};
 			this.onCreate();
 		}
 		this.bookingExists = function(workshop) {

@@ -58,10 +58,11 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				else {
 					// Don't trigger a banner
 				}
+				UpcomingActivitiesModel.refresh();
+				WorkshopBookingsModel.refresh();
 			});
+			
 		}
-		UpcomingActivitiesModel.refresh();
-		WorkshopBookingsModel.refresh();
 		$scope.selectedWorkshop = null;
 	};
 
