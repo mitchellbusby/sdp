@@ -365,9 +365,13 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				existingData = typeof existingData !== 'undefined' ? existingData : {};
 
 				for (var i=0; i<newDataToMerge["Results"].length; i++) {
-                    var bookingID = newDataToMerge["Results"][i]["BookingId"];
-					existingData[bookingID] = (newDataToMerge["Results"][i]);
-					existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
+					var booking = newDataToMerge["Results"][i];
+
+					if (typeof booking.BookingArchived != "string") {
+						var bookingID = booking["BookingId"];
+						existingData[bookingID] = (newDataToMerge["Results"][i]);
+						existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
+					}
 				}
 
 				return existingData;
@@ -404,7 +408,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.onCreate = function() {
 			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
-				console.log(JSON.stringify(scope.bookings));
 			});
 		};
 		this.refresh = function() {
