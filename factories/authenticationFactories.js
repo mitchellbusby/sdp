@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute', 'helpsRestfulServices', 'utsHelps.constants'])
+angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 // These constants can be injected via HelpsRestfulServices
 .factory('AuthService',['$http', 'Session', '$q', function ($http, Session, $q) {
 	var authService = {};
