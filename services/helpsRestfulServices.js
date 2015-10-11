@@ -404,32 +404,32 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.onCreate = function() {
 			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
-				console.log(scope.bookings);
+				console.log(JSON.stringify(scope.bookings));
 			});
 		};
 		this.refresh = function() {
 			scope.bookings = {};
 			this.onCreate();
-		}
+		};
 		this.bookingExists = function(workshop) {
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
-			for (bookingId in scope.bookings) {
+			for (var bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
 					return true;
 				}
 			}
 			return false;
-		}
+		};
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
-			for (bookingId in scope.bookings) {
+			for (var bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
 					return scope.bookings[bookingId];
 				}
 			}
 			return -1;
-		}
+		};
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
