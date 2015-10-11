@@ -40,7 +40,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		// Prepare
 		$scope.selectedWorkshop = workshop;
 		// Make it appear
-		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");		 
+		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");
 	};
 
 	$scope.confirmWorkshop = function(confirmation) {
@@ -61,7 +61,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				UpcomingActivitiesModel.refresh();
 				WorkshopBookingsModel.refresh();
 			});
-			
+
 		}
 		$scope.selectedWorkshop = null;
 	};
@@ -93,8 +93,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		else {
 		}
 		$scope.selectedWorkshop = null;
-	};
-
+	}
     $scope.addToWaitlist = function(workshop){
         $scope.selectedWorkshop = workshop;
         $scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");

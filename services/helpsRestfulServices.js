@@ -4,7 +4,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 .config(['$sceDelegateProvider', 'helps_endpoint_constants', function($sceDelegateProvider, helps_endpoint_constants) {
 	// Resolves the long wait for the OPTIONS pre flight request; very much a hack
 	// and is not supported by the CORS official spec: http://stackoverflow.com/a/16570604
-	$sceDelegateProvider.resourceUrlWhitelist(['self', 
+	$sceDelegateProvider.resourceUrlWhitelist(['self',
 		helps_endpoint_constants.ENDPOINT_URI+'/**']);
 }])
 .service('ApiMethods', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', '$q',
@@ -185,9 +185,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			};
 			this.transformParams = function(params) {
 				// This bit of code circumvents the issue whereby Angular doesn't support
-				// URI params for POST calls - for obvious security reasons. However, 
+				// URI params for POST calls - for obvious security reasons. However,
 				// ITD have decided that security is not important so eschewed this important
-				// safety measure. 
+				// safety measure.
 				// Enclosed in a try catch because if there is no return, things get ugly.
 				try {
 					if (params === undefined) {return params;}
@@ -196,7 +196,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				catch(err) {
 					return params;
 				}
-				
+
 			};
 			this.postResource = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
@@ -287,7 +287,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.refresh = function() {
 		scope.activities = null;
-		scope.onCreate();		
+		scope.onCreate();
 	}
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
@@ -317,7 +317,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
 				return false;
 			}
-		}, 
+		},
 		function fail(response) {
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
@@ -340,9 +340,22 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         }, function failure(error){
                 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
         });
-    };	
+    };
 	this.onCreate();
 }])
+.service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS){
+	this.registerStudent = function(student) {
+		// Use the nice model we've been given (it's all in JSON) to register a
+		// student
+		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(respoint) {
+			if (response.data.IsSuccess) {
+				return true;
+			} else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to register your details. Please try again and if issues persist contact UTS HELPS.");
+				return false;
+			}
+		})
+	}
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
 		var scope = this;
 
@@ -365,9 +378,13 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				existingData = typeof existingData !== 'undefined' ? existingData : {};
 
 				for (var i=0; i<newDataToMerge["Results"].length; i++) {
-                    var bookingID = newDataToMerge["Results"][i]["BookingId"];
-					existingData[bookingID] = (newDataToMerge["Results"][i]);
-					existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
+					var booking = newDataToMerge["Results"][i];
+
+					if (typeof booking.BookingArchived != "string") {
+						var bookingID = booking["BookingId"];
+						existingData[bookingID] = (newDataToMerge["Results"][i]);
+						existingData[bookingID].campus = CampusesModel.campuses[existingData[bookingID].campusID].campus;
+					}
 				}
 
 				return existingData;
@@ -404,32 +421,31 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.onCreate = function() {
 			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
-				console.log(scope.bookings);
 			});
 		};
 		this.refresh = function() {
 			scope.bookings = {};
 			this.onCreate();
-		}
+		};
 		this.bookingExists = function(workshop) {
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
-			for (bookingId in scope.bookings) {
+			for (var bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
 					return true;
 				}
 			}
 			return false;
-		}
+		};
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
-			for (bookingId in scope.bookings) {
+			for (var bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
 					return scope.bookings[bookingId];
 				}
 			}
 			return -1;
-		}
+		};
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
@@ -472,7 +488,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.username = username;
 		this.userRole = userRole;
 	};
-	
+
 	this.destroy = function() {
 		this.id = null;
 		this.userId = null;
