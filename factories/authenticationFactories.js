@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
+angular.module('utsHelps.auths', ['ngRoute'git, 'utsHelps.constants'])
 // These constants can be injected via HelpsRestfulServices
 .factory('AuthService',['$http', 'Session', '$q', function ($http, Session, $q) {
 	var authService = {};
@@ -29,7 +29,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 	};
 	
 	authService.isAuthenticated = function() {
-		return !!Session.userId;
+		return /*!!Session.userId;*/ Session.userId != undefined;
 	}
 	
 	authService.isAuthorized = function (authorizedRoles) {
