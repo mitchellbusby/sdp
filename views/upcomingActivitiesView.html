@@ -7,21 +7,25 @@
 
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
     <a ng-click="clickedOnAnActivity(activity)">
-        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" class="row">
-
+        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" workshop-cancel-handler="cancelBooking" bookings="WorkshopBookingsModel" class="row">
         </uh-activity-details>
     </a>
 </div>
 <div class="small-centered" ng-if="UpcomingActivitiesModel.activities != null">
-    <button ng-click = "onViewMore()" >View More</button>
+    <center><button class="round small" ng-click = "onViewMore()">View More</button></center>
 </div>
 
 <uh-confirm-deny-modal callback="confirmWorkshop(isConfirmed)" cdm-id="BOOK">
-	<h2 class="cdm">Confirm Booking?</h2>
-	<p class="small-11 small-centered column">Are you sure you want to book in for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+	<h2 class="cdm">Confirm Booking</h2>
+	<p class="small-11 small-centered column">Are you sure you want to book this for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 	<p class="small-11 small-centered column">If you book this workshop, your attendance will be marked unless you cancel.</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
-	<h2 class="cdm">Cancel Booking?</h2>
-	<p class="small-11 small-centered column">Blah blah blah blah blah</p>
+	<h2 class="cdm">Cancel Booking</h2>
+	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+</uh-confirm-deny-modal>
+<uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
+    <h2 class="cdm">Waitlist Workshop</h2>
+    <p class="small-11 small-centered column">Unfortunately this workshop is fully booked, however you can add yourself to the waitlist which will automatically book the workshop for you if a position becomes available.</p>
+	<p class="small-11 small-centered column">Are you sure you want to be added to the waitlist for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>

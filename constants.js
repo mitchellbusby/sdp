@@ -27,4 +27,10 @@ angular.module('utsHelps.constants', [])
 	"REGISTER_STUDENT_URI":"/api/student/register",
 	"BOOKINGS_URI": "/workshop/booking",
 	"CAMPUSES_URI": "/misc/campus",
+	"CANCEL_BOOKING_URI":"/workshop/booking/cancel",
+	"SEARCH_BOOKINGS_URI":"/workshop/booking/search",
+    "ADD_WAITLIST_URI":"/workshop/wait/create",
+	"BOOKINGS_URI": "/workshop/booking",
+	"CAMPUSES_URI": "/misc/campus"
 });
+>>>>>>> master

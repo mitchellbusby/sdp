@@ -7,8 +7,9 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		controller: 'UpcomingActivitiesCtrl'
 	})
 }])
-.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', function($scope, UpcomingActivitiesModel, Session, AlertBanner){
+.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', 'BookingsModel', function($scope, UpcomingActivitiesModel, Session, AlertBanner, WorkshopBookingsModel){
 	$scope.globals.pageTitle = "Upcoming Activities";
+	$scope.WorkshopBookingsModel = WorkshopBookingsModel;
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
 	$scope.selectedWorkshop = null;
 	$scope.clickedOnAnActivity = function(activity) {
@@ -24,7 +25,15 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	};
 
 	$scope.onViewMore = function(){
-        $scope.UpcomingActivitiesModel.getMoreActivities();
+        $scope.UpcomingActivitiesModel.getMoreActivities().then(function(moreActivitiesWereFound) {
+        	if (!moreActivitiesWereFound) {
+        		AlertBanner.publish({
+        			type: "info",
+        			message: "No more activities found.",
+        			timeCollapse: 3000
+        		});
+        	}
+        });
 	};
 
 	$scope.bookWorkshop = function(workshop) {
@@ -49,7 +58,10 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 				else {
 					// Don't trigger a banner
 				}
+				UpcomingActivitiesModel.refresh();
+				WorkshopBookingsModel.refresh();
 			});
+
 		}
 		$scope.selectedWorkshop = null;
 	};
@@ -61,15 +73,49 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	$scope.confirmCancel = function(confirmation) {
 		// Do nothing
 		if (confirmation) {
+			//Do the booking thing
+			UpcomingActivitiesModel.cancelWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId).then(function(success){
+				if (success) {
+					AlertBanner.publish({
+						type: "success",
+						message: "Booking cancelled.",
+						timeCollapse: 3000
+					});
+
+				}
+				else {
+					// Don't trigger a banner
+				}
+				UpcomingActivitiesModel.refresh();
+				WorkshopBookingsModel.refresh();
+			});
 		}
 		else {
 		}
 		$scope.selectedWorkshop = null;
-<<<<<<< HEAD
 	}
-}]);
-=======
-	};
+    $scope.addToWaitlist = function(workshop){
+        $scope.selectedWorkshop = workshop;
+        $scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");
+    };
 
+    $scope.confirmAddToWaitlist = function(confirmation){
+        if (confirmation){
+            UpcomingActivitiesModel.addToWaitlist($scope.selectedWorkshop.WorkshopId, Session.userId)
+                .then(function(success){
+                    if (success){
+                        AlertBanner.publish({
+                            type: "success",
+                            message: "Successfully added to waitlist",
+                            timeCollapse: 3000
+                        });
+                    }
+                    else{
+                        //Do nothing
+                    }
+                });
+        }
+        //reset seleted workshop
+        $scope.selectedWorkshop = null;
+    }
 }]);
->>>>>>> master
