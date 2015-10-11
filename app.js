@@ -10,6 +10,8 @@ angular.module('utsHelps', [
 	'utsHelps.register',
 	'utsHelps.UpcomingActivities',
 	'utsHelps.registerService',
+	'utsHelps.UpcomingBookings',
+	'utsHelps.PastBookings',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',

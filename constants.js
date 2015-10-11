@@ -18,11 +18,13 @@ angular.module('utsHelps.constants', [])
 	user: 'user'
 })
 .constant("helps_endpoint_constants", {
-	"ENDPOINT_URI":"http://helpshere.cloudapp.net/api",
+	"ENDPOINT_URI":"http://helpstoo.cloudapp.net/api",
 	"port":"80",
 	"APP_KEY":'123456',
 	"ACTIVITIES_URI":"/workshop",
 	"SEARCH_URI":"/search",
 	"BOOK_SESSION_URI":"/workshop/booking/create",
 	"REGISTER_STUDENT_URI":"/api/student/register",
+	"BOOKINGS_URI": "/workshop/booking",
+	"CAMPUSES_URI": "/misc/campus",
 });
