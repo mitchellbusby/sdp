@@ -75,11 +75,12 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService',
- function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService', 'Session'
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService, Session) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
+	$scope.Session = Session;
 	$scope.err_message = "";
 	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
 		console.log("Error in API! "+err_message);
@@ -92,6 +93,7 @@ angular.module('utsHelps', [
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
+	$scope.isAuthenticated = AuthService.isAuthenticated;
 	
 	$scope.setCurrentUser = function (user) { 
 		$scope.currentUser = user;
