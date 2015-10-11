@@ -217,8 +217,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	}*/
 	this.getDefaultParamsObject = function() {
 		return {
-			pageNumber: 1,
-			pageSize: 100
+			page: 1,
+			pageSize: 100,
+			StartingDtBegin: moment().format("YYYY-MM-DDTHH:mm:ss"),
+			StartingDtEnd: "9997-12-29T17:00:00"
 		}
 	};
 
@@ -260,10 +262,16 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 
 	this.getMoreActivities = function(){
-		scope.params.pageSize++;
-		this.getActivities(scope.params).then(function(result) {
+		scope.params.page = scope.params.page+1;
+		return this.getActivities(scope.params).then(function(result) {
 			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
+			if (result.data.Results.length < 1) {
+				return false;
+			}
+			else {
+				return true;
+			}
 		});
 	};
 
@@ -277,6 +285,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
 	};
+	this.refresh = function() {
+		scope.activities = null;
+		scope.onCreate();		
+	}
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
 		// This method could be ported to Tomm's model tbh
@@ -294,6 +306,22 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
 	};
+	this.cancelWorkshop = function(workshopId, studentId) {
+		var cancelModel = {"workshopId":workshopId, "studentId":studentId, "userId": studentId};
+		return ApiMethods.postResourceWithParamsInUri(endpoint_constants.CANCEL_BOOKING_URI, cancelModel).then(function success(response){
+			// What to do if it worked
+			if (response.data.IsSuccess) {
+				return true;
+			}
+			else {
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		}, 
+		function fail(response) {
+			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
+		});
+	}
     this.addToWaitlist = function(workshopId, studentId){
         var waiting = {
             "workshopId":workshopId,
@@ -312,23 +340,24 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         }, function failure(error){
                 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
         });
-    };
-
-
-	
+    };	
 	this.onCreate();
 }])
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
 		var scope = this;
 
+		scope.params = {
+			pageSize: 1000
+		};
+
 		this.getBookings = function(params) {
 			// Gets data from the server
+			params.pageSize = scope.params.pageSize;
 			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
 		};
 
-		CampusesModel.onCreate();
 
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
@@ -375,8 +404,32 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.onCreate = function() {
 			this.getBookings({"studentID":Session.userId}).then(function(result) {
 				scope.bookings = scope.mergeBookings(result.data);
+				console.log(scope.bookings);
 			});
 		};
+		this.refresh = function() {
+			scope.bookings = {};
+			this.onCreate();
+		}
+		this.bookingExists = function(workshop) {
+			//Checks if booking exists for a workshop
+			var workshopId = workshop.WorkshopId;
+			for (bookingId in scope.bookings) {
+				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+					return true;
+				}
+			}
+			return false;
+		}
+		this.getBooking = function(workshop) {
+			var workshopId = workshop.WorkshopID;
+			for (bookingId in scope.bookings) {
+				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+					return scope.bookings[bookingId];
+				}
+			}
+			return -1;
+		}
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
@@ -409,6 +462,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
             scope.campuses = scope.mergeCampuses(result.data);
         });
     };
+	this.onCreate();
 }])
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
@@ -425,4 +479,42 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.username = null;
 		this.userRole = null;
 	};
+}])
+.service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {
+	var vm = this;
+	vm.Bookings = [];
+	this.onCreate = function() {
+		ApiMethods.getResource(endpoint_constants.SEARCH_BOOKINGS_URI, {"studentId":Session.userId, "pageSize":2000}).then(function(result){
+			if (result.data.IsSuccess) {
+				vm.Bookings = result.data.Results;
+			}
+			else {
+				// Error messaging
+			}
+		});
+	}
+	this.bookingExists = function(workshop) {
+		//Checks if booking exists for a workshop
+		var workshopId = workshop.WorkshopId;
+		for (var i=0; i<vm.Bookings.length; i++) {
+			if (vm.Bookings[i].workshopID === workshopId && vm.Bookings[i].BookingArchived===null) {
+				return true;
+			}
+		}
+		return false;
+	}
+	this.getBooking = function(workshop) {
+		var workshopId = workshop.WorkshopId;
+		for (var i=0; i<vm.Bookings.length; i++) {
+			if (vm.Bookings[i].workshopID === workshopId) {
+				return vm.Bookings[i];
+			}
+		}
+		return -1;
+	}
+	this.refresh = function() {
+		vm.Bookings = [];
+		vm.onCreate();
+	}
+	vm.onCreate();
 }]);

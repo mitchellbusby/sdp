@@ -1,8 +1,8 @@
 <style>
-	.workshop-details {
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
-	}
+.workshop-details {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
 </style>
 
 
@@ -30,8 +30,8 @@
 				<div class="row workshop-row" ng-repeat="workshop in workshops">
 					<div class="column small-11 small-centered medium-12 workshop">
 						<div class="row">
-								<div class="column small-12 medium-12">
-									<div class="workshop-details">
+							<div class="column small-12 medium-12">
+								<div class="workshop-details">
 									<div class="row">
 										<div class="column small-1">
 											<i class="fa fa-clock-o small"></i>
@@ -65,26 +65,24 @@
 										<div class="column small-10 medium 11">
 											<strong>Status: </strong>
 											<span ng-if="workshop.BookingCount >= workshop.maximum">
-											Bookings full
+												Bookings full
 											</span>
 											<span ng-if="workshop.BookingCount < workshop.maximum">
-											Available</span>
+												Available
+											</span>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<!--<div class="column small-12 medium-9 large-12">-->
-										<a ng-if="workshop.BookingCount < workshop.maximum" class="button column small-12 medium-12 large-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
-										<a ng-if="workshop.BookingCount >= workshop.maximum" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
-									<!--</div>-->
+									<a class="button column small-12 alert" ng-if="bookings.bookingExists(workshop)" ng-click="workshopCancelHandler(workshop)" stop-event>Cancel</a>
+									<a ng-if="workshop.BookingCount < workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
+									<a ng-if="workshop.BookingCount >= workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
 								</div>
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 </div>

@@ -7,8 +7,7 @@
 
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
     <a ng-click="clickedOnAnActivity(activity)">
-        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" class="row">
-
+        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" workshop-cancel-handler="cancelBooking" bookings="WorkshopBookingsModel" class="row">
         </uh-activity-details>
     </a>
 </div>
@@ -23,7 +22,7 @@
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
 	<h2 class="cdm">Cancel Booking</h2>
-	<p class="small-11 small-centered column">Blah blah blah blah blah</p>
+	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
     <h2 class="cdm">Waitlist Workshop</h2>
