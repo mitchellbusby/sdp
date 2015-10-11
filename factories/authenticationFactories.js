@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute'git, 'utsHelps.constants'])
+angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 // These constants can be injected via HelpsRestfulServices
-.factory('AuthService',['$http', 'Session', '$q', function ($http, Session, $q) {
+.factory('AuthService',['$http', 'Session', '$q', 'helps_endpoint_constants', function ($http, Session, $q, endpoint_constants) {
 	var authService = {};
 	authService.loginFake = function (credentials){
 		return $q(function(resolve, reject) {
@@ -20,16 +20,28 @@ angular.module('utsHelps.auths', ['ngRoute'git, 'utsHelps.constants'])
 	authService.login = function (credentials) {
 		// this will probably need to be rewritten when real login functionality 
 		// is implemented
-		return $http.post('/', credentials)
-		.then(function (res) { 
-			Session.create(res.data.id, res.data.user.id,
-				res.data.user.role);
-			return res.data.user;
+		var loginConfig = {
+			"params": {"studentId" : credentials.username},
+			"headers": {"AppKey" : endpoint_constants.APP_KEY},
+		};
+		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.GET_STUDENT_URI, loginConfig)
+		.then(function success(result) {
+			if (result.data.Results.length > 0 && result.data.Results[0] !== undefined) {
+				// Login is successful
+				var user = result.data.Results[0];
+				Session.create('1', credentials.username, 
+					 user.preferredName!==undefined ? user.preferredName : credentials.username,
+					 'User');
+				return Session.username;
+			}
+			else {
+				return "User is unauthenticated";
+			}
 		});
 	};
 	
 	authService.isAuthenticated = function() {
-		return /*!!Session.userId;*/ Session.userId != undefined;
+		 return !!Session.userId;
 	}
 	
 	authService.isAuthorized = function (authorizedRoles) {
@@ -41,7 +53,6 @@ angular.module('utsHelps.auths', ['ngRoute'git, 'utsHelps.constants'])
 	};
 	
 	authService.logout = function() {
-		//This is yet to be filled in
 		Session.destroy();
 	}
 

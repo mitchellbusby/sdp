@@ -28,5 +28,6 @@ angular.module('utsHelps.constants', [])
 	"SEARCH_BOOKINGS_URI":"/workshop/booking/search",
     "ADD_WAITLIST_URI":"/workshop/wait/create",
 	"BOOKINGS_URI": "/workshop/booking",
-	"CAMPUSES_URI": "/misc/campus"
+	"CAMPUSES_URI": "/misc/campus",
+	"GET_STUDENT_URI": "/student/search",
 });

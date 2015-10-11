@@ -14,13 +14,11 @@ angular.module('utsHelps.login', ['ngRoute'])
 			username: '',
 			password: ''
 		};
-		$scope.loginFailed = false;
 		$scope.login = function (credentials) {
-			AuthService.loginFake(credentials).then(function (user) {
+			AuthService.login(credentials).then(function (user) {
 				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 				$scope.setCurrentUser(user);
 			}, function (err) {
-				$scope.loginFailed = true;
 				$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
 			});
 		};

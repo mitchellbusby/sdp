@@ -75,7 +75,7 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService', 'Session'
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService', 'Session',
  function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService, Session) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
@@ -94,7 +94,6 @@ angular.module('utsHelps', [
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
 	$scope.isAuthenticated = AuthService.isAuthenticated;
-	
 	$scope.setCurrentUser = function (user) { 
 		$scope.currentUser = user;
 	};
