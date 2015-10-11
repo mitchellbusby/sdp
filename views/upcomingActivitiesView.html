@@ -17,15 +17,16 @@
 </div>
 
 <uh-confirm-deny-modal callback="confirmWorkshop(isConfirmed)" cdm-id="BOOK">
-	<h2 class="cdm">Confirm Booking?</h2>
-	<p class="small-11 small-centered column">Are you sure you want to book in for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+	<h2 class="cdm">Confirm Booking</h2>
+	<p class="small-11 small-centered column">Are you sure you want to book this for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 	<p class="small-11 small-centered column">If you book this workshop, your attendance will be marked unless you cancel.</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
-	<h2 class="cdm">Cancel Booking?</h2>
+	<h2 class="cdm">Cancel Booking</h2>
 	<p class="small-11 small-centered column">Blah blah blah blah blah</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
-    <h2 class="cdm">Workshop is Full!</h2>
-    <p class="small-11 small-centered column">Would you like to add yourself to the waitlist?</p>
+    <h2 class="cdm">Waitlist Workshop</h2>
+    <p class="small-11 small-centered column">Unfortunately this workshop is fully booked, however you can add yourself to the waitlist which will automatically book the workshop for you if a position becomes available.</p>
+	<p class="small-11 small-centered column">Are you sure you want to be added to the waitlist for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>
