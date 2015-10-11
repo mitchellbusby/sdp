@@ -1,0 +1,50 @@
+<style>
+	.register-fields
+	{
+		padding: 1rem;
+		padding-left: 2rem;
+		padding-right: 2rem;
+		width: 20rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+</style>
+
+
+<div>
+
+	<form name="studentDetails" class="register-fields">
+		<br>
+		<br>
+
+		<label for="faculty">Faculty:</label>
+		<input type="text" id="faculty" ng-model="details.student.faculty">
+
+		<label for="courseCode">Course Code:</label>
+		<input type="text" id="courseCode" ng-model="details.student.courseCode">
+
+		<label for="degree">Degree:</label>
+	    <input type="radio" name="degree" value="Undergraduate" id="undergraduate"><label for="undergraduate" ng-model="details.student.degree">Under Graduate</label>
+        <input type="radio" name="degree" value="Postgraduate" id="postgraduate"><label for="postgraduate" ng-model="details.student.degree">Post Graduate</label>
+
+		<label for="year">Year:</label>
+		<input type="text" id="year" ng-model="details.student.year">
+
+		<label for="status">Status:</label>
+	  <input type="radio" name="status" value="Permanent" 	id="permanent">
+		<label for="permanent" ng-model="details.student.status">Under Graduate</label>
+    <input type="radio" name="status" value="International" id="international"
+		><label for="international" ng-model="details.student.status">Post Graduate</label>
+
+		<label for="firstLanguage">First Language:</label>
+		<input type="text" id="firstLanguage" ng-model="details.student.firstLanguage">
+
+		<label for="country">Country of Origin:</label>
+		<input type="text" id="country" ng-model="details.student.country">
+
+		<button class="button column medium-12 failure" ng-click="goRegisterOne()" ng-disabled="studentDetails.$invalid">Previous</button>
+		<button class="button column medium-12 success" ng-click="goRegisterThree()" ng-disabled="studentDetails.$invalid">Next</button>
+
+		</form>
+</div>

@@ -7,8 +7,9 @@ angular.module('utsHelps', [
 	'utsHelps.example',
 	'utsHelps.login',
 	'helpsRestfulServices',
-	'utsHelps.example',
+	'utsHelps.register',
 	'utsHelps.UpcomingActivities',
+	'utsHelps.registerService',
 	'utsHelps.UpcomingBookings',
 	'utsHelps.PastBookings',
 	'angular.filter',
@@ -19,7 +20,7 @@ angular.module('utsHelps', [
 	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/example'});
+	$routeProvider.otherwise({redirectTo:'/login'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
@@ -60,13 +61,14 @@ angular.module('utsHelps', [
 	// Redirect the user if they're lost
 	$rootScope.$on("$locationChangeStart", function (event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.templateUrl!="views/loginView.html"){
+			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
 				$location.path("/login");
 			}
 		}
 	});
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
+		console.log("login success");
 		$location.path("/example"); // dashboard
 	});
 	$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
@@ -92,14 +94,14 @@ angular.module('utsHelps', [
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
-	
-	$scope.setCurrentUser = function (user) { 
+
+	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {
 		AuthService.logoutFake().then(function success() {
 			$scope.currentUser = null;
-			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess); 
+			$rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
 		}, function failure(err) {
 			// deal with failure to log out here
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);

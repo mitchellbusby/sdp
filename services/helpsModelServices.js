@@ -17,38 +17,42 @@ angular.module('helpsModelsServices', [])
 .factory('Student', function () {
 	var student = {};
 
-	student.create = function (studentId, creatorId, dob, gender, degree, status, 
+	student.empty = function() {
+		return student.create("", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "","", "", "", "", "","", "", "","");
+	};
+
+	student.create = function (studentId, creatorId, dob, gender, degree, status,
 		firstLanguage, countryOfOrigin, background, degreeDetails, altContact,
 		HSC, HSCMarks, IELTS, IELTSMarks, TOELF, TOELFMarks, TAFE,
 		TAFEMarks, CULT, CULTMarks, insearchDEEP, insearchDEEPMarks,
 		insearchDiploma, insearchDiplomaMarks, foundationCourse,
 		foundationCourseMarks) {
 			return {
-				"studentId":studentId, 
-				"creatorId": creatorId, 
-				"dob": dob, 
-				"gender": gender, 
-				"degree": degree, 
+				"studentId":studentId,
+				"creatorId": creatorId,
+				"dob": dob,
+				"gender": gender,
+				"degree": degree,
 				"status": status,
-				"firstLanguage": firstLanguage, 
-				"countryOfOrigin": countryOfOrigin, 
-				"background": background, 
-				"degreeDetails": degreeDetails, 
+				"firstLanguage": firstLanguage,
+				"countryOfOrigin": countryOfOrigin,
+				"background": background,
+				"degreeDetails": degreeDetails,
 				"altContact": altContact,
-				"HSC": HSC, 
-				"HSCMarks": HSCMarks, 
-				"IELTS": IELTS, 
-				"IELTSMarks": IELTSMarks, 
-				"TOELF": TOELF, 
-				"TOELFMarks": TOELFMarks, 
+				"HSC": HSC,
+				"HSCMarks": HSCMarks,
+				"IELTS": IELTS,
+				"IELTSMarks": IELTSMarks,
+				"TOELF": TOELF,
+				"TOELFMarks": TOELFMarks,
 				"TAFE": TAFE,
-				"TAFEMarks": TAFEMarks, 
-				"CULT": CULT, 
-				"CULTMarks": CULTMarks, 
-				"insearchDEEP": insearchDEEP, 
+				"TAFEMarks": TAFEMarks,
+				"CULT": CULT,
+				"CULTMarks": CULTMarks,
+				"insearchDEEP": insearchDEEP,
 				"insearchDEEPMarks": insearchDEEPMarks,
 				"insearchDiploma": insearchDiploma,
-				"insearchDiplomaMarks": insearchDiplomaMarks, 
+				"insearchDiplomaMarks": insearchDiplomaMarks,
 				"foundationCourse": foundationCourse,
 				"foundationCourseMarks": foundationCourseMarks
 			};
@@ -65,37 +69,37 @@ angular.module('helpsModelsServices', [])
 			"archived": archived
 		};
 	};
-	
+
 	return campus;
 })
 
 .factory('Workshop', function() {
 	var workshop = {};
-	
-	workshop.create = function (workshopId, workshopSetId, 
+
+	workshop.create = function (workshopId, workshopSetId,
 		campusId, topic, startDate, endDate, description,
 		targetingGroup, maximum, cutoff, type, reminderNum,
 		reminderSent, daysOfWeek, bookingCount, archived) {
 		return {
-			"workshopId": workshopId, 
-			"workshopSetId": workshopSetId, 
-			"campusId": campusId, 
-			"topic": topic, 
-			"startDate": startDate, 
-			"endDate": endDate, 
+			"workshopId": workshopId,
+			"workshopSetId": workshopSetId,
+			"campusId": campusId,
+			"topic": topic,
+			"startDate": startDate,
+			"endDate": endDate,
 			"description": description,
-			"targetingGroup": targetingGroup, 
-			"maximum": maximum, 
-			"cutoff": cutoff, 
-			"type": type, 
+			"targetingGroup": targetingGroup,
+			"maximum": maximum,
+			"cutoff": cutoff,
+			"type": type,
 			"reminderNum": reminderNum,
-			"reminderSent": reminderSent, 
-			"daysOfWeek": daysOfWeek, 
-			"bookingCount": bookingCount, 
+			"reminderSent": reminderSent,
+			"daysOfWeek": daysOfWeek,
+			"bookingCount": bookingCount,
 			"archived": archived
 		};
 	};
-	
+
 	return workshop;
 })
 
@@ -130,11 +134,11 @@ angular.module('helpsModelsServices', [])
 	var workshopBooking = {};
 	workshopBooking.create = function (workshopBookingId, workshopId, studentId, workshopSetId, userId, isActive) {
 		return {
-			"workshopBookingId":workshopBookingId, 
-			"workshopId": workshopId, 
-			"studentId": studentId, 
-			"workshopSetId": workshopSetId, 
-			"userId": userId, 
+			"workshopBookingId":workshopBookingId,
+			"workshopId": workshopId,
+			"studentId": studentId,
+			"workshopSetId": workshopSetId,
+			"userId": userId,
 			"isActive": isActive
 		};
 	};
@@ -175,26 +179,26 @@ angular.module('helpsModelsServices', [])
 	var sessionBooking = {};
 	sessionBooking.create = function(sessionId, bookingId, studentId, userId, isCanceled, assistance, reason, attended, waitingId, isGroup, numPeople, lecturerComment, learningIssuesId, isLocked, assignType, assignTypeOther, subject, appointments, appointmentsOther, assistanceText, archived) {
 		return {
-			"sessionId": sessionId, 
-			"bookingId": bookingId, 
-			"studentId": studentId, 
-			"userId": userId, 
-			"isCanceled": isCanceled, 
-			"assistance": assistance, 
-			"reason": reason, 
-			"attended": attended, 
-			"waitingId": waitingId, 
-			"isGroup": isGroup, 
-			"numPeople": numPeople, 
-			"lecturerComment": lecturerComment, 
-			"learningIssuesId": learningIssuesId, 
-			"isLocked": isLocked, 
-			"assignType": assignType, 
-			"assignTypeOther": assignTypeOther, 
-			"subject": subject, 
-			"appointments": appointments, 
-			"appointmentsOther": appointmentsOther, 
-			"assistanceText": assistanceText, 
+			"sessionId": sessionId,
+			"bookingId": bookingId,
+			"studentId": studentId,
+			"userId": userId,
+			"isCanceled": isCanceled,
+			"assistance": assistance,
+			"reason": reason,
+			"attended": attended,
+			"waitingId": waitingId,
+			"isGroup": isGroup,
+			"numPeople": numPeople,
+			"lecturerComment": lecturerComment,
+			"learningIssuesId": learningIssuesId,
+			"isLocked": isLocked,
+			"assignType": assignType,
+			"assignTypeOther": assignTypeOther,
+			"subject": subject,
+			"appointments": appointments,
+			"appointmentsOther": appointmentsOther,
+			"assistanceText": assistanceText,
 			"archived": archived
 		};
 	};
@@ -214,7 +218,7 @@ angular.module('helpsModelsServices', [])
 	return wait;
 })
 
-.factory('WaitingList', function() { 
+.factory('WaitingList', function() {
 	var waitingList = {};
 	waitingList.create = function (waitingListId, workshopId, numberInList) {
 		return {
@@ -237,7 +241,7 @@ angular.module('helpsModelsServices', [])
 			"hoursAhead": hoursAhead,
 			"notificationTypeId": notificationTypeId,
 		};
-	};	
+	};
 	return notification;
 })
 
