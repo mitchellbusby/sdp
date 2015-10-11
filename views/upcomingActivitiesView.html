@@ -21,7 +21,7 @@
 	<p class="small-11 small-centered column">If you book this workshop, your attendance will be marked unless you cancel.</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
-	<h2 class="cdm">Cancel Booking?</h2>
+	<h2 class="cdm">Cancel Booking</h2>
 	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
