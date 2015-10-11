@@ -23,5 +23,6 @@ angular.module('utsHelps.constants', [])
 	"APP_KEY":'123456',
 	"ACTIVITIES_URI":"/workshop",
 	"SEARCH_URI":"/search",
-	"BOOK_SESSION_URI":"/workshop/booking/create"
+	"BOOK_SESSION_URI":"/workshop/booking/create",
+	"REGISTER_STUDENT_URI":"/api/student/register",
 });

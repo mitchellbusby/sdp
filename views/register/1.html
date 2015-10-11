@@ -19,7 +19,7 @@
 		<br>
 
 		<label for="studentId">Student ID:</label>
-		<input type="text" id="studentId" ng-model="details.user.studentId" required>
+		<input type="text" id="studentId" ng-model="details.student.studentId" required>
 
 		<label for="password">Password:</label>
 		<input type="password" id="password" ng-model="details.user.password" required>
@@ -33,6 +33,14 @@
 		<!--
 			Gender
 		-->
+		<label for="gender">Gender:</label>
+		<input type="radio" name="gender" value="Male" id="male">
+		<label for="male" ng-model="details.student.gender">Male</label>
+		<input type="radio" name="gender" value="Female" id="female">
+		<label for="female" ng-model="details.student.gender">Female</label>
+		<input type="radio" name="gender" value="Other" id="other">
+		<label for="other" ng-model="details.student.gender">Other</label>
+
 
 		<!-- Email is not in the model -->
 		<label for="email">Email:</label>

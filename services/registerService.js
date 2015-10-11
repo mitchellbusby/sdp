@@ -3,7 +3,8 @@
 angular.module('utsHelps.registerService', ['ngRoute'])
 
 .service('RegisterService', ['$location', 'User', 'Student',
-function($location, User, Student) {
+	'StudentRegisterService',
+function($location, User, Student, StudentRegisterService) {
 	var registerDetails = {};
 
 	registerDetails.user = User.create("", "", "", "");
@@ -31,10 +32,16 @@ function($location, User, Student) {
 	};
 
 	var registerUserDetails = function () {
-		// no idea, send the info to the API.
-		$location.path('/login');
-		registerDetails.student = null;
-		registerDetails.user = null;
+		if (StudentRegisterService.registerStudent(registerDetails.student))
+		{
+			console.log("Successfully registered!")
+			console.log(registerDetails.student);
+			$location.path('/login');
+			registerDetails.student = null;
+			registerDetails.user = null;
+		} else {
+			// something went wrong. Error is broadcast elsewhere, so just leave it
+		}
 	};
 
 	return {
