@@ -354,8 +354,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to register your details. Please try again and if issues persist contact UTS HELPS.");
 				return false;
 			}
-		})
-	}
+		});
+	};
+}])
 .service('BookingsModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'Session', 'CampusesModel', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, Session, CampusesModel) {
 		var scope = this;
 

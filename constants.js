@@ -33,4 +33,3 @@ angular.module('utsHelps.constants', [])
 	"BOOKINGS_URI": "/workshop/booking",
 	"CAMPUSES_URI": "/misc/campus"
 });
->>>>>>> master
