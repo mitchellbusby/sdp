@@ -56,16 +56,20 @@ angular.module('utsHelps', [
 		$("#loading-bar").removeClass("hide");
 		$('#loading-bar-spinner').addClass("hide");
 	});
-
-
+	$location.path("/");
 	// Redirect the user if they're lost
-	$rootScope.$on("$locationChangeStart", function (event, next, current) {
+	function redirect(event, next, current) {
 		if (!AuthService.isAuthenticated()) {
 			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
 				$location.path("/login");
 			}
+			console.log(event);
+			console.log(next);
+			console.log(current);
 		}
-	});
+	};
+	$rootScope.$on("$locationChangeStart", redirect);
+	
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		console.log("login success");

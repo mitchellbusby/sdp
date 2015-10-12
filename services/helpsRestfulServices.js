@@ -483,7 +483,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 }])
 .service('Session', [function () {
 	this.create = function (sessionId, userId, username, userRole) {
-
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;
