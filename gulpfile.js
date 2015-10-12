@@ -63,8 +63,8 @@ gulp.task('external-server', ['sass:watch', 'concat:watch', 'webserver-public'],
 gulp.task('concat-js', function() {
 	return gulp.src(jsFiles, {base: './'})
 		.pipe(sourcemaps.init())
-			.pipe((concat('main.js')))
-				.pipe(uglify().on('error', gutil.log))
+			.pipe(uglify().on('error', gutil.log))
+				.pipe((concat('main.js')))
 					.pipe(sourcemaps.write())
 						.pipe(gulp.dest('.'));
 });
