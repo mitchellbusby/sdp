@@ -439,6 +439,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			return false;
 		};
 
+		this.getBooking = function (bookingID) {
+			return this.bookings[bookingID] !== 'undefined' ? this.bookings[bookingID] : false;
+		};
+
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
