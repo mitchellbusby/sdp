@@ -88,4 +88,5 @@ var jsFiles = ['./app.js',
 	 './directives/directives.js',
 	 './controllers/UpcomingBookingsController/UpcomingBookingsController.js',
 	 './controllers/PastBookingsController/PastBookingsController.js',
+	'./controllers/BookingDetailsController/BookingDetailsController.js',
 ];
