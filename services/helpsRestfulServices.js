@@ -438,15 +438,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 			return false;
 		};
-		this.getBooking = function(workshop) {
-			var workshopId = workshop.WorkshopID;
-			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
-					return scope.bookings[bookingId];
-				}
-			}
-			return -1;
-		};
+
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
