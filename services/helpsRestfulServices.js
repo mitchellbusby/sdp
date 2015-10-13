@@ -496,42 +496,4 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.username = null;
 		this.userRole = null;
 	};
-}])
-.service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {
-	var vm = this;
-	vm.Bookings = [];
-	this.onCreate = function() {
-		ApiMethods.getResource(endpoint_constants.SEARCH_BOOKINGS_URI, {"studentId":Session.userId, "pageSize":2000}).then(function(result){
-			if (result.data.IsSuccess) {
-				vm.Bookings = result.data.Results;
-			}
-			else {
-				// Error messaging
-			}
-		});
-	}
-	this.bookingExists = function(workshop) {
-		//Checks if booking exists for a workshop
-		var workshopId = workshop.WorkshopId;
-		for (var i=0; i<vm.Bookings.length; i++) {
-			if (vm.Bookings[i].workshopID === workshopId && vm.Bookings[i].BookingArchived===null) {
-				return true;
-			}
-		}
-		return false;
-	}
-	this.getBooking = function(workshop) {
-		var workshopId = workshop.WorkshopId;
-		for (var i=0; i<vm.Bookings.length; i++) {
-			if (vm.Bookings[i].workshopID === workshopId) {
-				return vm.Bookings[i];
-			}
-		}
-		return -1;
-	}
-	this.refresh = function() {
-		vm.Bookings = [];
-		vm.onCreate();
-	}
-	vm.onCreate();
 }]);
