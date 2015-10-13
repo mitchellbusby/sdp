@@ -12,7 +12,7 @@ angular.module('utsHelps', [
 	'utsHelps.registerService',
 	'utsHelps.UpcomingBookings',
 	'utsHelps.PastBookings',
-	'utsHelps.BookingDetails',
+	'utsHelps.WorkshopDetails',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
