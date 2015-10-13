@@ -56,16 +56,20 @@ angular.module('utsHelps', [
 		$("#loading-bar").removeClass("hide");
 		$('#loading-bar-spinner').addClass("hide");
 	});
-
-
+	$location.path("/");
 	// Redirect the user if they're lost
-	$rootScope.$on("$locationChangeStart", function (event, next, current) {
+	function redirect(event, next, current) {
 		if (!AuthService.isAuthenticated()) {
 			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
 				$location.path("/login");
 			}
+			console.log(event);
+			console.log(next);
+			console.log(current);
 		}
-	});
+	};
+	$rootScope.$on("$locationChangeStart", redirect);
+	
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		console.log("login success");
@@ -77,11 +81,12 @@ angular.module('utsHelps', [
 
 
 }])
-.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService',
- function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService) {
+.controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService', 'Session',
+ function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService, Session) {
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
+	$scope.Session = Session;
 	$scope.err_message = "";
 	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
 		console.log("Error in API! "+err_message);
@@ -94,8 +99,8 @@ angular.module('utsHelps', [
 	$scope.currentUser = null;
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
-
-	$scope.setCurrentUser = function (user) {
+	$scope.isAuthenticated = AuthService.isAuthenticated;
+	$scope.setCurrentUser = function (user) { 
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {

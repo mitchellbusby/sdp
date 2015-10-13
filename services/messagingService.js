@@ -1,5 +1,5 @@
 angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-alert-banner'])
-.service('UserMessagingService', ['AlertBanner', '$rootScope', 'ERR_BROADCASTS', "ErrorRegistry", function(AlertBanner, $rootScope, ERR_BROADCASTS, ErrorRegistry){
+.service('UserMessagingService', ['AlertBanner', '$rootScope', 'ERR_BROADCASTS', "ErrorRegistry", "AUTH_EVENTS", function(AlertBanner, $rootScope, ERR_BROADCASTS, ErrorRegistry, AUTH_EVENTS){
 	var scope = this;
 	this.errorAlertBanner = function(message) {
 		AlertBanner.publish({
@@ -13,7 +13,9 @@ angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-
 		var friendlyError = ErrorRegistry.retrieveFriendlyError(err_msg);
 		scope.errorAlertBanner(friendlyError);
 	});
-
+	$rootScope.$on(AUTH_EVENTS.loginFailed, function(e, err_msg) {
+		scope.errorAlertBanner("Your login details were incorrect. Try again.");
+	});
 }])
 .service('ErrorRegistry', [function() {
 	this.errorDictionary = {
