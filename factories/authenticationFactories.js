@@ -26,16 +26,16 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 		};
 		return $http.get(endpoint_constants.ENDPOINT_URI+endpoint_constants.GET_STUDENT_URI, loginConfig)
 		.then(function success(result) {
-			if (result.data.Results.length > 0 && result.data.Results[0] !== undefined) {
+			if (result.data.Results.length > 0 && result.data.Results[0] != undefined) {
 				// Login is successful
 				var user = result.data.Results[0];
 				Session.create('1', credentials.username, 
 					 user.preferredName!==undefined ? user.preferredName : credentials.username,
 					 'User');
-				return Session.username;
+				return true;
 			}
 			else {
-				return "User is unauthenticated";
+				return false;
 			}
 		});
 	};
