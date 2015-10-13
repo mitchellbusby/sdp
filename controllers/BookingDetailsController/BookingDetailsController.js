@@ -12,4 +12,5 @@ angular.module('utsHelps.BookingDetails', ['utsHelps.directives', 'helpsRestfulS
 		$scope.globals.pageTitle = "Booking Details";
 		$scope.bookingID = $routeParams.bookingID;
 		$scope.BookingsModel = BookingsModel;
+		$scope.bookingDetails = BookingsModel.getBooking($scope.bookingID);
 	}]);
