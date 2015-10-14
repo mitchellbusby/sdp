@@ -22,7 +22,7 @@ function($location, User, Student, StudentRegisterService) {
 
 	var getStudent = function() { return registerDetails.student; };
 
-	var goRegisterPageOne = function() { $location.path('/register1') };
+	var goRegisterPageOne = function () { $location.path('/register1')	};
 	var goRegisterPageTwo = function () { $location.path('/register2') };
 	var goRegisterPageThree = function() { $location.path('/register3') };
 
@@ -32,13 +32,15 @@ function($location, User, Student, StudentRegisterService) {
 	};
 
 	var registerUserDetails = function () {
-		if (StudentRegisterService.registerStudent(registerDetails.student))
+		console.log("about to call StudentRegisterService.registerStudent");
+		if (StudentRegisterService.registerStudent(registerDetails.student,
+			function () {
+				$location.path('/login');
+				registerDetails.student = null;
+				registerDetails.user = null;
+			}))
 		{
-			console.log("Successfully registered!")
-			console.log(registerDetails.student);
-			$location.path('/login');
-			registerDetails.student = null;
-			registerDetails.user = null;
+			console.log("Successfully registered");
 		} else {
 			// something went wrong. Error is broadcast elsewhere, so just leave it
 		}

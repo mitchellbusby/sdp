@@ -25,164 +25,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				configObject["params"] = params;
 				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
 			};
-			this.getResourceFaked = function(resourceUri, params) {
-				var data;
-				if (resourceUri === endpoint_constants.ACTIVITIES_URI+endpoint_constants.SEARCH_URI) {
-					data = {
-						"Results": [
-						{
-							"WorkshopId": 11,
-							"topic": "Planning and researching for an assignment",
-							"description": "“I have an assignment due soon, but I don’t know where and how to begin.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-07-07T17:00:00",
-							"EndDate": "2012-07-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 4,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 45,
-							"archived": null
-						}, {
-							"WorkshopId": 12,
-							"topic": "Planning and researching for an assignment",
-							"description": "“I have an assignment due soon, but I don’t know where and how to begin.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-08-07T17:00:00",
-							"EndDate": "2012-08-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 4,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 44,
-							"archived": null
-						}, {
-							"WorkshopId": 14,
-							"topic": "Planning and researching for an assignment",
-							"description": "“I have an assignment due soon, but I don’t know where and how to begin.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-08-07T17:00:00",
-							"EndDate": "2012-08-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 4,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 45,
-							"archived": null
-						}, {
-							"WorkshopId": 16,
-							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
-							"description": "This workshop will empower you to write excellent essays and "+
-							"provide valuable support for the upcoming assignment.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-09-07T17:00:00",
-							"EndDate": "2012-09-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 5,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 44,
-							"archived": null
-						},
-						{
-							"WorkshopId": 16,
-							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
-							"description": "This workshop will empower you to write excellent essays and "+
-							"provide valuable support for the upcoming assignment.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-09-07T17:00:00",
-							"EndDate": "2012-09-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 9,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 44,
-							"archived": null
-						},
-						{
-							"WorkshopId": 16,
-							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
-							"description": "This workshop will empower you to write excellent essays and "+
-							"provide valuable support for the upcoming assignment.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-09-07T17:00:00",
-							"EndDate": "2012-09-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 10,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 44,
-							"archived": null
-						},
-						{
-							"WorkshopId": 16,
-							"topic": "U:PASSwrite for 21129 Managing People & Organisations",
-							"description": "This workshop will empower you to write excellent essays and "+
-							"provide valuable support for the upcoming assignment.",
-							"targetingGroup": "all students",
-							"campus": "CB02.05.32",
-							"StartDate": "2012-09-07T17:00:00",
-							"EndDate": "2012-09-07T18:00:00",
-							"maximum": 45,
-							"WorkShopSetID": 15,
-							"cutoff": null,
-							"type": "single",
-							"reminder_num": 9999,
-							"reminder_sent": 0,
-							"DaysOfWeek": null,
-							"BookingCount": 44,
-							"archived": null
-						}
-						],
-						"IsSuccess": true,
-						"DisplayMessage": null
-					};
-				}
-				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI && (params.WorkshopId === 1 || params.workshopId === 11) ) {
-					data = {"IsSuccess":false, "DisplayMessage":"Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS."};
-				}
-				else if (resourceUri === endpoint_constants.BOOK_SESSION_URI) {
-					data = {"IsSuccess":true, "DisplayMessage":""};
-				}
-				else {
-					console.log("Resource not faked");
-					data = null;
-				}
-				return $q(function(resolve, reject){
-					setTimeout(function() {
-						if (data) {
-							resolve({"data":data});
-						}
-						else {
-							reject({"data":data});
-						}
-					}, 1000);
-				});
-			};
 			this.transformParams = function(params) {
 				// This bit of code circumvents the issue whereby Angular doesn't support
 				// URI params for POST calls - for obvious security reasons. However,
@@ -198,10 +40,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				}
 
 			};
-			this.postResource = function(resourceUri, params) {
+			this.postResource = function(resourceUri, data) {
 				var configObject = this.createConfigObject();
-				configObject.params = params;
-				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
+				console.log("Config Object:")
+				console.log(configObject);
+				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, data, configObject);
 			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
@@ -344,13 +187,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.onCreate();
 }])
 .service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS){
-	this.registerStudent = function(student) {
+	this.registerStudent = function(student, then) {
 		// Use the nice model we've been given (it's all in JSON) to register a
 		// student
-		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(respoint) {
+		console.log("register student called");
+		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(response) {
 			if (response.data.IsSuccess) {
+				console.log("About to call then");
+				then();
 				return true;
 			} else {
+				console.log(response.data.DisplayMessage);
 				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to register your details. Please try again and if issues persist contact UTS HELPS.");
 				return false;
 			}

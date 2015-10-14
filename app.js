@@ -69,7 +69,7 @@ angular.module('utsHelps', [
 		}
 	};
 	$rootScope.$on("$locationChangeStart", redirect);
-	
+
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		console.log("login success");
@@ -100,7 +100,7 @@ angular.module('utsHelps', [
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
 	$scope.isAuthenticated = AuthService.isAuthenticated;
-	$scope.setCurrentUser = function (user) { 
+	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {
@@ -111,6 +111,6 @@ angular.module('utsHelps', [
 			// deal with failure to log out here
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);
 		});
-	}
+	};
 	$scope.isLoginPage = true;
 }]);
