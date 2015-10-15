@@ -15,11 +15,16 @@
 	<form name="loginForm" class="login-fields">
 		<br>
 		<br>
-		<label for="username">Username:</label>
+		<label for="username">Student ID:</label>
 		<input type="text" id="username" ng-model="credentials.username" required>
 
 		<label for="password">Password:</label>
 		<input type="password" id="password" ng-model="credentials.password" required>
+
+		<div ng-show="localStorageIsSupported">
+			<input type="checkbox" ng-model="credentials.rememberMe" name="rememberMe"/>
+			<label for="rememberMe" ng-click="credentials.rememberMe=!credentials.rememberMe">Remember me</label>
+		</div>
 
 		<button class="button column medium-12 success" ng-click="login(credentials)" ng-disabled="loginForm.$invalid">Login</button>
 
