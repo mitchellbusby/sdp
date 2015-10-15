@@ -22,7 +22,7 @@ angular.module('helpsModelsServices', [])
 	};
 
 	student.create = function (studentId, creatorId, dob, gender, degree, status,
-		firstLanguage, countryOfOrigin, background, degreeDetails, altContact, preferredName,
+		firstLanguage, countryOfOrigin, background, degreeDetails, altContact, mobile, preferredName,
 		HSC, HSCMarks, IELTS, IELTSMarks, TOELF, TOELFMarks, TAFE,
 		TAFEMarks, CULT, CULTMarks, insearchDEEP, insearchDEEPMarks,
 		insearchDiploma, insearchDiplomaMarks, foundationCourse,
@@ -39,6 +39,7 @@ angular.module('helpsModelsServices', [])
 				"Background": background,
 				"DegreeDetails": degreeDetails,
 				"AltContact": altContact,
+				"mobile": mobile,
 				"PreferredName": preferredName,
 				"HSC": HSC,
 				"HSCMarks": HSCMarks,
