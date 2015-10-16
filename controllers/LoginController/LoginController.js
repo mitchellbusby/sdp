@@ -13,7 +13,7 @@ angular.module('utsHelps.login', ['ngRoute', 'LocalStorageModule'])
 		$scope.credentials = {
 			username: '',
 			password: '',
-			rememberMe: false
+			rememberMe: true
 		};
 		$scope.localStorageIsSupported = localStorageService.isSupported;
 		$scope.login = function (credentials) {
