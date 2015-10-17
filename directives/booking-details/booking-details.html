@@ -1,12 +1,39 @@
-<div class="booking small-11 medium-8 large-6 column small-centered">
-    <div class="row">
-        <div id="title">
-            {{bookingDetails['topic']}}
+<style>
 
-            <ul>
+	.smallBooking
+	{
+		font-size: 10px;
+	}
+
+	.divider
+	{
+		margin: 0.3rem 0.3rem;
+	}
+
+	.icon
+	{
+		padding-top: 0.7rem;
+	}
+
+</style>
+
+<div class="booking small-10 medium-8 large-6 column small-centered">
+    <div class="row">
+        <!--<div id="title">-->
+            <strong>{{bookingDetails['topic']}}</strong>
+            <div class="right column small-1">
+            	<i class="icon fa fa-angle-right small"></i>
+        	</div>
+            <br>
+            <div class="smallBooking">
+            	{{bookingDetails.starting | date : 'dd/MM/yyyy'}}
+            </div>
+            <hr class="divider">
+
+            <!--<ul>
                 <li>{{bookingDetails.starting | date : 'hh:mm a'}} until {{bookingDetails.ending | date : 'hh:mm a on dd/MM/yyyy'}}</li>
                 <li>{{ bookingDetails.campus }}</li>
-            </ul>
-        </div>
+            </ul>-->
+        <!--</div>-->
     </div>
 </div>
