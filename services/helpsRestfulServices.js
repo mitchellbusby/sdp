@@ -193,7 +193,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(response) {
 			if (response.data.IsSuccess) {
 				then();
-				UserMessagingService.successAlertBanner("Successfully registered.");
 				return true;
 			} else {
 				console.log(response.data.DisplayMessage);

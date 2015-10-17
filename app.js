@@ -86,6 +86,7 @@ angular.module('utsHelps', [
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
+	UserMessagingService.successAlertBanner("Hello world");
 	$scope.Session = Session;
 	$scope.err_message = "";
 	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {

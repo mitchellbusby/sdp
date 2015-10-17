@@ -42,7 +42,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		// Make it appear
 		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");
 	};
-
+	
 	$scope.confirmWorkshop = function(confirmation) {
 		if (confirmation) {
 			UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
