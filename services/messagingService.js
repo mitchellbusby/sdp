@@ -8,6 +8,13 @@ angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-
 			timeCollapse: 3000
 		});
 	}
+	this.successAlertBanner = function(message) {
+		AlertBanner.publisH({
+			type: "success",
+			message: message,
+			timeCollapse: 3000;
+		});
+	}
 	$rootScope.$on(ERR_BROADCASTS.API_ERROR, function(e, err_msg) {
 		console.log("ALERT BANNER SHOULD HAVE FIRED");
 		var friendlyError = ErrorRegistry.retrieveFriendlyError(err_msg);
