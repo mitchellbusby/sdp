@@ -20,7 +20,7 @@ angular.module('utsHelps', [
 	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/login'});
+	$routeProvider.otherwise({redirectTo:'/UpcomingActivities'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
@@ -56,20 +56,29 @@ angular.module('utsHelps', [
 		$("#loading-bar").removeClass("hide");
 		$('#loading-bar-spinner').addClass("hide");
 	});
-	$location.path("/");
+
 	// Redirect the user if they're lost
 	function redirect(event, next, current) {
 		if (!AuthService.isAuthenticated()) {
-			if (next.templateUrl!="views/loginView.html" && $location.path().match('/register[0-9]*\'') != null) {
-				$location.path("/login");
-			}
-			console.log(event);
-			console.log(next);
-			console.log(current);
+			//$location.path("views/autoLoginView.html");
+			return AuthService.onCreate().then(function(isLoggedIn) {
+				if (isLoggedIn) {
+					console.log("user is logged in");
+					// All g, continue redirecting
+				}
+				else {
+					if ($location.path()=="/login" || $location.path().match(/register[0-9]*/) != null) {
+						// 
+					}
+					else {
+						console.log($location.path().match('/register[0-9]*\''));
+						$location.path("/login");
+					}
+				}
+			});
 		}
 	};
 	$rootScope.$on("$locationChangeStart", redirect);
-	
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		console.log("login success");
@@ -78,8 +87,6 @@ angular.module('utsHelps', [
 	$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
 		$location.path("/login");
 	});
-
-
 }])
 .controller('ApplicationController', ['$scope', 'USER_ROLES', 'AuthService', 'ERR_BROADCASTS', 'AUTH_EVENTS', '$rootScope', 'UserMessagingService', 'Session',
  function($scope, USER_ROLES, AuthService, ERR_BROADCASTS, AUTH_EVENTS, $rootScope, UserMessagingService, Session) {
