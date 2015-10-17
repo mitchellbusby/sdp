@@ -190,11 +190,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.registerStudent = function(student, then) {
 		// Use the nice model we've been given (it's all in JSON) to register a
 		// student
-		console.log("register student called");
 		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(response) {
 			if (response.data.IsSuccess) {
 				then();
-				UserMessagingService.successAlertBanner(message);
+				UserMessagingService.successAlertBanner("Successfully registered.");
 				return true;
 			} else {
 				console.log(response.data.DisplayMessage);
