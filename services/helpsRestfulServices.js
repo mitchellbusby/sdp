@@ -342,12 +342,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         });
     };
 
-	this.getWorkshopFromID = function (workshopID) {
+	this.getWorkshop = function (workshopID) {
 
-		for (var workshopSets in scope.activities) {
+		for (var workshopSetID in scope.activities) {
 
-			var workshops = workshopSets.filter(function (w) {
-				return w.WorkshopId === workshopID;
+			var workshops = scope.activities[workshopSetID].workshops.filter(function (w) {
+				return w.workshopID === workshopID;
 			});
 
 			if (workshops.length > 0) {
