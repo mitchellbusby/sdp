@@ -341,6 +341,24 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
                 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
         });
     };
+
+	this.getWorkshopFromID = function (workshopID) {
+
+		for (var workshopSets in scope.activities) {
+
+			var workshops = workshopSets.filter(function (w) {
+				return w.WorkshopId === workshopID;
+			});
+
+			if (workshops.length > 0) {
+				return workshops[0];
+			}
+		}
+
+		return null;
+
+	};
+
 	this.onCreate();
 }])
 .service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS){
