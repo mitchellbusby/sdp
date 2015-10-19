@@ -33,4 +33,10 @@ angular.module('utsHelps.constants', [])
 	"BOOKINGS_URI": "/workshop/booking",
 	"CAMPUSES_URI": "/misc/campus",
 	"GET_STUDENT_URI": "/student/search",
-});
+	"GET_NOTIFICATIONS_URI": "/notifications/search",
+})
+.constant("notification_times", [
+	{title:"1 day before", value:24},
+	{title:"7 days before", value:7},
+	{title:"1 hour before", value:1},
+]);

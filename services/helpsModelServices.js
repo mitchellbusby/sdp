@@ -244,7 +244,20 @@ angular.module('helpsModelsServices', [])
 	};
 	return notification;
 })
-
+.factory('PostNotification', function() {
+	var notification = {};
+	notification.create = function(studentId, bookingId, notifyTime, message, notificationType) {
+		return {
+			"notificationID":notificationId,
+			"notificationTime":notifyTime,
+			"notificationNumber":notificationType,
+			"notificationMessage":message,
+			"userID":studentId,
+			"bookingID":bookingId,
+		};
+	};
+	return notification;
+})
 .factory('NotificationType', function() {
 	var notificationType = {};
 	notificationType.create = function(notificationTypeId, abbName, fullName){

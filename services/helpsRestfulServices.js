@@ -420,9 +420,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		};
 
 		this.onCreate = function() {
-			this.getBookings({"studentID":Session.userId}).then(function(result) {
-				scope.bookings = scope.mergeBookings(result.data);
-			});
+			setTimeout(function() {
+				scope.getBookings({"studentID":Session.userId}).then(function(result) {
+					scope.bookings = scope.mergeBookings(result.data);
+				});
+			}, 2000);
 		};
 		this.refresh = function() {
 			scope.bookings = {};
@@ -533,4 +535,32 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		vm.onCreate();
 	}
 	vm.onCreate();
+}])
+.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', function(ApiMethods, Session, endpoint_constants) {
+	var vm = this;
+	vm.notifications = {};
+	vm.getNotificationsForUser = function() {
+		var params = {"studentId": Session.userId};
+		ApiMethods.getResource(endpoint_constants.GET_NOTIFICATIONS_URI, params)
+			.then(function success(response) {
+				vm.mergeNotifications(vm.notifications, response.data.Results);
+		});
+	};
+	vm.mergeNotifications = function(existingNotifications, newNotifications) {
+		for (var i=0; i<vm.notifications.length; i++) {
+			if (newNotifications[i].bookingID in existingNotifications) {
+				// Don't add
+			}
+			else {
+				vm.notifications[newNotifications[i]] = newNotifications[i];
+			}
+		}
+	}
+	vm.add = function(booking) {
+		// Do nothing so far
+	}
+	vm.refresh = function() {
+		vm.notifications = {};
+		vm.getNotificationsForUser();
+	}
 }]);
