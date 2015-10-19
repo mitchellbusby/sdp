@@ -7,9 +7,9 @@ angular.module('utsHelps.WorkshopDetails', ['utsHelps.directives', 'helpsRestful
 			controller: 'WorkshopDetailsCtrl'
 		})
 	}])
-	.controller('WorkshopDetailsCtrl', ['$scope', '$routeParams', 'BookingsModel', function($scope, $routeParams, BookingsModel) {
-		$scope.globals.pageTitle = "Details";
-		$scope.bookingID = $routeParams.workshopID;
+	.controller('WorkshopDetailsCtrl', ['$scope', '$routeParams', 'UpcomingActivitiesModel', 'BookingsModel', function($scope, $routeParams, UpcomingActivitiesModel, BookingsModel) {
+		$scope.globals.pageTitle = "Workshop Details";
+		$scope.workshopID = $routeParams.workshopID;
 		$scope.BookingsModel = BookingsModel;
-		$scope.bookingDetails = BookingsModel.getBooking($scope.bookingID);
+		$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
 	}]);

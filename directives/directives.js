@@ -22,6 +22,16 @@ angular.module('utsHelps.directives', [])
 		}
 	}
 })
+.directive('uhWorkshopDetails', function() {
+	return {
+		templateUrl: "directives/workshop-details/workshop-details.html",
+		restrict: 'E',
+		scope: {
+			bookingDetails: '=bookingDetails',
+			workshopDetails: '=workshopDetails',
+		}
+	}
+})
 .directive('uhErrorBox', function() {
 	return {
 		templateUrl: "directives/uh-error-box/uh-error-box.html",

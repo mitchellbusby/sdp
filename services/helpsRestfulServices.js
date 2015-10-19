@@ -281,7 +281,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         //Using page number, instead of a date, to get activities
 		this.getActivities(scope.params).then(function(result) {
 		//this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
-			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
 	};
@@ -347,7 +346,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		for (var workshopSetID in scope.activities) {
 
 			var workshops = scope.activities[workshopSetID].workshops.filter(function (w) {
-				return w.workshopID === workshopID;
+				return w.WorkshopId == workshopID;
 			});
 
 			if (workshops.length > 0) {
@@ -458,7 +457,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		};
 
 		this.getBooking = function (bookingID) {
-			return this.bookings[bookingID] !== 'undefined' ? this.bookings[bookingID] : false;
+			return this.bookings[bookingID] !== 'undefined' ? this.bookings[bookingID] : null;
+		};
+
+		this.getBookingFromWorkshopID = function (workshopID) {
+			for (var bookingID in scope.bookings) {
+				if (scope.bookings[bookingID].workshopID == workshopID) {
+                    return scope.bookings[bookingID];
+                }
+			}
+
+            return null;
 		};
 
 		this.onCreate();
