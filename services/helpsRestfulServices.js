@@ -538,7 +538,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	vm.onCreate();
 }])
-.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', function(ApiMethods, Session, endpoint_constants) {
+.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', 'notification_times', function(ApiMethods, Session, endpoint_constants, notification_times) {
 	var vm = this;
 	vm.notifications = {};
 	vm.getNotificationsForUser = function() {
@@ -580,8 +580,13 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		});
 	};
 	vm.applyTimeShiftToNotification = function(notificationTimeId, bookingTime) {
-		return "2015-10-20T11:50:51";
+        var constant = notification_times.filter(function (notification_constant) {
+            return notification_constant.value == notificationTimeId;
+        });
+
+        return bookingTime - constant[0].seconds;
 	};
+
 	vm.refresh = function() {
 		vm.notifications = {};
 		vm.getNotificationsForUser();
