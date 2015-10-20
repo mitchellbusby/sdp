@@ -584,7 +584,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
             return notification_constant.value == notificationTimeId;
         });
 
-        return bookingTime - constant[0].seconds;
+        var time = bookingTime - constant[0].seconds;
+
+        return moment(time).format("YYYY-MM-DD HH:mm:ss");
 	};
 
 	vm.refresh = function() {
