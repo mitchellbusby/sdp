@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
+angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants', 'LocalStorageModule'])
 // These constants can be injected via HelpsRestfulServices
-.factory('AuthService',['$http', 'Session', '$q', 'helps_endpoint_constants', function ($http, Session, $q, endpoint_constants) {
+.factory('AuthService',['$http', 'Session', '$q', 'helps_endpoint_constants', 'localStorageService', function ($http, Session, $q, endpoint_constants, localStorageService) {
 	var authService = {};
 	authService.loginFake = function (credentials){
 		return $q(function(resolve, reject) {
@@ -32,6 +32,10 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 				Session.create('1', credentials.username, 
 					 user.preferredName!==undefined ? user.preferredName : credentials.username,
 					 'User');
+				if (localStorageService.isSupported && credentials.rememberMe) {
+					localStorageService.set('username',credentials.username);
+					localStorageService.set('pwd', credentials.password);
+				}
 				return true;
 			}
 			else {
@@ -54,10 +58,18 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 	
 	authService.logout = function() {
 		Session.destroy();
+		if (localStorageService.isSupported) {
+			localStorageService.remove('username');
+			localStorageService.remove('pwd');
+		}
 	}
 
 	authService.logoutFake = function() {
 		Session.destroy();
+		if (localStorageService.isSupported) {
+			localStorageService.remove('username');
+			localStorageService.remove('pwd');
+		}
 		return $q(function(resolve, reject) {
 			setTimeout(function() {
 				if (true) {return resolve();}
@@ -65,7 +77,24 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants'])
 			})
 		});
 	}
-
+	authService.onCreate = function() {
+		if (localStorageService.isSupported) {
+			//if (localStorageService.key)
+			var username = localStorageService.get('username');
+			var password = localStorageService.get('pwd');
+			console.log("Getting called!");
+			console.log(username);
+			console.log(password);
+			if (username!=undefined && password!=undefined) {
+				var credentials = {
+					username: username,
+					password: password
+				};
+				return authService.login(credentials);
+			}
+		}
+		return {then:function(callback){callback(false)}};
+	}
 	return authService;
 }])
 //There used to be a service in here but it should be injected from the restful 
