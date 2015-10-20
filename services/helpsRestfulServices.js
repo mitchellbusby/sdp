@@ -198,10 +198,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				}
 
 			};
-			this.postResource = function(resourceUri, params) {
+			this.postResource = function(resourceUri, data) {
 				var configObject = this.createConfigObject();
-				configObject.params = params;
-				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
+				//return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
+				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, data, configObject);
 			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
 				var configObject = this.createConfigObject();
@@ -484,11 +484,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.onCreate();
 }])
 .service('Session', [function () {
-	this.create = function (sessionId, userId, username, userRole) {
+	this.create = function (sessionId, userId, username, userRole, mobile) {
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;
 		this.userRole = userRole;
+		this.mobile = mobile;
 	};
 
 	this.destroy = function() {
@@ -496,6 +497,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.userId = null;
 		this.username = null;
 		this.userRole = null;
+		this.mobile = mobile;
 	};
 }])
 .service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {
@@ -556,11 +558,36 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 	}
-	vm.add = function(booking) {
+	vm.notificationExists = function(bookingId) {
+		if (bookingId in vm.notifications) {
+			return true;
+		}
+	}
+	vm.add = function(notificationToBeSent) {
 		// Do nothing so far
+		//shift the thing
+		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
+		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
+			then(function success(response){
+				if (response.data.IsSuccess) {
+					console.log("Successful notification sent");
+					return true;
+				}
+				else {
+					console.log("Unsuccessful notification sent");
+					return false;
+				}
+		});
+	}
+	vm.applyTimeShiftToNotification = function(notificationTimeId, bookingTime) {
+		return "2015-10-20T11:50:51";
 	}
 	vm.refresh = function() {
 		vm.notifications = {};
 		vm.getNotificationsForUser();
 	}
+	vm.onCreate = function() {
+		setTimeout(vm.getNotificationsForUser, 1000);
+	}
+	vm.onCreate();
 }]);

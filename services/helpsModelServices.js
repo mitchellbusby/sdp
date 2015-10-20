@@ -246,14 +246,14 @@ angular.module('helpsModelsServices', [])
 })
 .factory('PostNotification', function() {
 	var notification = {};
-	notification.create = function(studentId, bookingId, notifyTime, message, notificationType) {
+	notification.create = function(studentId, bookingId, notifyTime, message, bookingTime, mobile) {
 		return {
-			"notificationID":notificationId,
 			"notificationTime":notifyTime,
-			"notificationNumber":notificationType,
 			"notificationMessage":message,
 			"userID":studentId,
 			"bookingID":bookingId,
+			"bookingTime":bookingTime,
+			"mobile": mobile
 		};
 	};
 	return notification;

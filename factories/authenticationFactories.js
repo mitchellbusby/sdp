@@ -31,7 +31,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants', 'LocalStorage
 				var user = result.data.Results[0];
 				Session.create('1', credentials.username, 
 					 user.preferredName!==undefined ? user.preferredName : credentials.username,
-					 'User');
+					 'User', user.mobile!=null ? user.mobile : "");
 				if (localStorageService.isSupported && credentials.rememberMe) {
 					localStorageService.set('username',credentials.username);
 					localStorageService.set('pwd', credentials.password);
