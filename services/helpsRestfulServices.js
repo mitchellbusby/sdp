@@ -288,7 +288,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.refresh = function() {
 		scope.activities = null;
 		scope.onCreate();
-	}
+	};
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
 		// This method could be ported to Tomm's model tbh
@@ -321,7 +321,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		function fail(response) {
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
-	}
+	};
     this.addToWaitlist = function(workshopId, studentId){
         var waiting = {
             "workshopId":workshopId,
@@ -512,7 +512,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				// Error messaging
 			}
 		});
-	}
+	};
 	this.bookingExists = function(workshop) {
 		//Checks if booking exists for a workshop
 		var workshopId = workshop.WorkshopId;
@@ -522,7 +522,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 		return false;
-	}
+	};
 	this.getBooking = function(workshop) {
 		var workshopId = workshop.WorkshopId;
 		for (var i=0; i<vm.Bookings.length; i++) {
@@ -531,14 +531,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 		return -1;
-	}
+	};
 	this.refresh = function() {
 		vm.Bookings = [];
 		vm.onCreate();
-	}
+	};
 	vm.onCreate();
 }])
-.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', function(ApiMethods, Session, endpoint_constants) {
+.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', 'notification_times', function(ApiMethods, Session, endpoint_constants, notification_times) {
 	var vm = this;
 	vm.notifications = {};
 	vm.getNotificationsForUser = function() {
@@ -557,12 +557,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				vm.existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
 			}
 		}
-	}
+	};
 	vm.notificationExists = function(bookingId) {
 		if (bookingId in vm.notifications) {
 			return true;
 		}
-	}
+	};
 	vm.add = function(notificationToBeSent) {
 		// Do nothing so far
 		//shift the thing
@@ -578,16 +578,21 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					return false;
 				}
 		});
-	}
+	};
 	vm.applyTimeShiftToNotification = function(notificationTimeId, bookingTime) {
-		return "2015-10-20T11:50:51";
-	}
+        var constant = notification_times.filter(function (notification_constant) {
+            return notification_constant.value == notificationTimeId;
+        });
+
+        return bookingTime - constant[0].seconds;
+	};
+
 	vm.refresh = function() {
 		vm.notifications = {};
 		vm.getNotificationsForUser();
-	}
+	};
 	vm.onCreate = function() {
 		setTimeout(vm.getNotificationsForUser, 1000);
-	}
+	};
 	vm.onCreate();
 }]);
