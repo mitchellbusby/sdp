@@ -10,6 +10,7 @@ angular.module('utsHelps.login', ['ngRoute', 'LocalStorageModule'])
 }])
 .controller('loginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'RegisterService', 'localStorageService',
 	function($scope, $rootScope, AUTH_EVENTS, AuthService, RegisterService, localStorageService) {
+		$scope.globals.pageTitle = "UTS: HELPS";
 		$scope.credentials = {
 			username: '',
 			password: '',
