@@ -554,13 +554,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				// Don't add
 			}
 			else {
-				vm.existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
+				existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
 			}
 		}
 	}
 	vm.notificationExists = function(bookingId) {
+		console.log(vm.notifications);
 		if (bookingId in vm.notifications) {
 			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	vm.add = function(notificationToBeSent) {

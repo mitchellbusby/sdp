@@ -11,7 +11,7 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 	$scope.globals.pageTitle = "Bookings";
 	$scope.BookingsModel = BookingsModel;
 	$scope.notification = {"triggerTime":1};
-	$scope.NotificationsModel = NotificationsModel.notifications;
+	$scope.NotificationsModel = NotificationsModel;
 	$scope.availableNotificationTimes = notification_times
 	$scope.addNotification = function(booking) {
 		//NotificationsModel.refresh();
