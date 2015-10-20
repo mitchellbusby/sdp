@@ -90,6 +90,7 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants', 'LocalStorage
 					username: username,
 					password: password
 				};
+				Session.userId = username;
 				return authService.login(credentials);
 			}
 		}
