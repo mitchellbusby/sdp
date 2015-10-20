@@ -253,7 +253,7 @@ angular.module('helpsModelsServices', [])
 			"userID":studentId,
 			"bookingID":bookingId,
 			"bookingTime":bookingTime,
-			"mobile": mobile
+			"notificationNumber": mobile
 		};
 	};
 	return notification;
