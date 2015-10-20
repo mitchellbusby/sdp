@@ -5,9 +5,11 @@
 		</uh-booking-details>
 	</a>
 	<p ng-if="NotificationsModel.notificationExists(booking.BookingId)">
-		Notification exists
+		<a class="button round" ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
+			Notification exists, click to delete
+		</a>
 	</p>
-	<a ng-if="!NotificationsModel.notificationExists(booking.BookingId)" ng-click="addNotification(booking)">
+	<a class="button round" ng-if="!NotificationsModel.notificationExists(booking.BookingId)" ng-click="addNotification(booking)">
 		Add notification
 	</a>
 	<hr ng-if="!$last" class="small-12 medium-8 large-6 column small-centered">
@@ -21,4 +23,8 @@
 			{{option.title}}
 		</option>
 	</select>
+</uh-confirm-deny-modal>
+<uh-confirm-deny-modal callback="confirmCancelNotification(isConfirmed)" cdm-id="CANCEL_NOTIF">
+	<h2>Cancel notification</h2>
+	<p>Are you sure you want to cancel this notification?</p>
 </uh-confirm-deny-modal>

@@ -559,7 +559,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		}
 	};
 	vm.notificationExists = function(bookingId) {
-		console.log(vm.notifications);
 		if (bookingId in vm.notifications) {
 			return true;
 		}
@@ -574,11 +573,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
-					console.log("Successful notification sent");
 					return true;
 				}
 				else {
-					console.log("Unsuccessful notification sent");
 					return false;
 				}
 		});
@@ -598,5 +595,25 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	vm.onCreate = function() {
 		setTimeout(vm.getNotificationsForUser, 1000);
 	};
+	vm.cancelNotification = function(notificationID) {
+		var params = {"notificationID":notificationID};
+		return ApiMethods.getResource(endpoint_constants.CANCEL_NOTIFICATION_URI, params)
+			.then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});	
+	};
+	vm.getNotificationByBookingId = function(bookingID) {
+		if (bookingID in vm.notifications) {
+			return vm.notifications[bookingID];
+		}
+		else {
+			return -1;
+		}
+	}
 	vm.onCreate();
 }]);

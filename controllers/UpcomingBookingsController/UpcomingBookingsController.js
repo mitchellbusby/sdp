@@ -35,4 +35,24 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 			});			
 		}
 	}
+	$scope.cancelNotification = function(notification) {
+		$scope.notification = notification;
+		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL_NOTIF");
+	}
+	$scope.confirmCancelNotification = function(isConfirmed) {
+		if (isConfirmed) {
+			NotificationsModel.cancelNotification($scope.notification.notificationID).then(function success(isSuccess) {
+				if (isSuccess) {
+					AlertBanner.publish({
+						type:"success",
+						message: "Notification cancelled."
+					});
+					$scope.NotificationsModel.refresh();
+				}
+				else {
+					$scope.$broadcast("API_ERROR", "Failed to cancel notification.");
+				}
+			});
+		}
+	}
 }]);
