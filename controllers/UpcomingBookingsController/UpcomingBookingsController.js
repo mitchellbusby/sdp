@@ -27,6 +27,7 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 						type:"success",
 						message: "Notification created!"
 					});
+					$scope.NotificationsModel.refresh();
 				}
 				else {
 					$scope.$broadcast("API_ERROR", "Failed to create notification.");
