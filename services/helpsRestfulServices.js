@@ -186,14 +186,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
     };
 	this.onCreate();
 }])
-.service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS){
+.service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', 'UserMessagingService', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS, UserMessagingService){
 	this.registerStudent = function(student, then) {
 		// Use the nice model we've been given (it's all in JSON) to register a
 		// student
-		console.log("register student called");
 		return ApiMethods.postResource(endpoint_constants.REGISTER_STUDENT_URI, student).then(function success(response) {
 			if (response.data.IsSuccess) {
-				console.log("About to call then");
 				then();
 				return true;
 			} else {

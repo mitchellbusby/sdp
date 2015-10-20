@@ -3,9 +3,9 @@
 angular.module('utsHelps.registerService', ['ngRoute'])
 
 .service('RegisterService', ['$location', 'User', 'Student',
-	'StudentRegisterService', 'ApiMethods', 'helps_endpoint_constants',
-function($location, User, Student, StudentRegisterService, ApiMethods,
-	endpoint_constants) {
+	'StudentRegisterService', 'ApiMethods', 'helps_endpoint_constants', 'UserMessagingService',
+function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_constants,
+	UserMessagingService) {
 	var registerDetails = {};
 
 	registerDetails.user = User.create("", "", "", "");
@@ -59,6 +59,7 @@ function($location, User, Student, StudentRegisterService, ApiMethods,
 				registerDetails.user = null;
 			}))
 		{
+			UserMessagingService.successAlertBanner("Successfully registered.");
 			console.log("Successfully registered");
 		} else {
 			// something went wrong. Error is broadcast elsewhere, so just leave it

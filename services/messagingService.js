@@ -1,9 +1,16 @@
-angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-alert-banner'])
+angular.module('utsHelps.UserMessagingService', ['utsHelps.constants'])
 .service('UserMessagingService', ['AlertBanner', '$rootScope', 'ERR_BROADCASTS', "ErrorRegistry", "AUTH_EVENTS", function(AlertBanner, $rootScope, ERR_BROADCASTS, ErrorRegistry, AUTH_EVENTS){
 	var scope = this;
 	this.errorAlertBanner = function(message) {
 		AlertBanner.publish({
 			type: "error",
+			message: message,
+			timeCollapse: 3000
+		});
+	}
+	this.successAlertBanner = function(message) {
+		AlertBanner.publish({
+			type: "success",
 			message: message,
 			timeCollapse: 3000
 		});
