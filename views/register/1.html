@@ -39,21 +39,19 @@
 		<label for="other" ng-model="details.student.gender">Other</label>
 
 
-		<!-- Email is not in the model -->
 		<label for="email">Email:</label>
 		<input type="text" id="email" ng-model="details.user.Email" required>
 
-		<!-- No mobile phone number stored in model -->
 		<label for="mobile">Mobile:</label>
-		<input type="text" id="mobile" ng-model="details.student.mobile" required>
+		<input type="text" id="mobile" ng-model="details.student.mobile">
 
 		<label for="altcontact">Alternate Contact:</label>
-		<input type="text" id="altcontact" ng-model="details.student.AltContact" required>
+		<input type="text" id="altcontact" ng-model="details.student.AltContact">
 
 		<label for="dob">Date Of Birth:</label>
 		<input type="text" id="dob" ng-model="details.student.DateOfBirth" required>
 
-		<button class="button column medium-12 success" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Next</button>
+		<button class="button column medium-12 success" ng-click="pageOneToTwo()" ng-disabled="studentDetails.$invalid">Next</button>
 
 		</form>
 </div>

@@ -3,8 +3,9 @@
 angular.module('utsHelps.registerService', ['ngRoute'])
 
 .service('RegisterService', ['$location', 'User', 'Student',
-	'StudentRegisterService',
-function($location, User, Student, StudentRegisterService) {
+	'StudentRegisterService', 'ApiMethods', 'helps_endpoint_constants',
+function($location, User, Student, StudentRegisterService, ApiMethods,
+	endpoint_constants) {
 	var registerDetails = {};
 
 	registerDetails.user = User.create("", "", "", "");
@@ -25,6 +26,24 @@ function($location, User, Student, StudentRegisterService) {
 	var goRegisterPageOne = function () { $location.path('/register1')	};
 	var goRegisterPageTwo = function () { $location.path('/register2') };
 	var goRegisterPageThree = function() { $location.path('/register3') };
+
+	var isStudentRegistered = function(studentId)
+	{
+		 var json = { "studentId": studentId };
+		 ApiMethods.postResource(endpoint_constants.SEARCH_STUDENT).then(function (result) {
+			 if (result.data.IsSuccess) {
+				 if (result.data.IsRegistered) {
+					 return true;
+				 } else {
+				 	$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+					 return false;
+				 }
+			 } else {
+				 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				 return false;
+			 }
+		 });
+	};
 
 	var setUserFromLogin = function (username, password) {
 		registerDetails.user.name = username;
@@ -56,5 +75,6 @@ function($location, User, Student, StudentRegisterService) {
 		goRegisterPageThree: goRegisterPageThree,
 		setUserFromLogin: setUserFromLogin,
 		registerUserDetails: registerUserDetails,
+		isStudentRegistered: isStudentRegistered,
 	};
 }]);
