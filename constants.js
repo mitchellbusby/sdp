@@ -37,7 +37,10 @@ angular.module('utsHelps.constants', [])
 	"POST_NOTIFICATION_URI": "/notifications",
 })
 .constant("notification_times", [
-	{title:"1 day before", value:24},
-	{title:"7 days before", value:7},
-	{title:"1 hour before", value:1},
+	{title:"10 minutes before", value:10, seconds: (10*60)},
+	{title:"30 minutes before", value:30, seconds: (30*60)},
+	{title:"1 hour before", value:1, seconds: (60*60)},
+	{title:"1 day before", value:24, seconds: (24*60*60)},
+	{title:"7 days before", value:7, seconds: (7*24*60*60)},
+
 ]);
