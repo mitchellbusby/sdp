@@ -20,7 +20,7 @@ angular.module('utsHelps', [
 	'utsHelps.UserMessagingService'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/UpcomingActivities'});
+	$routeProvider.otherwise({redirectTo:'/upcomingActivities'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',

@@ -497,7 +497,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.userId = null;
 		this.username = null;
 		this.userRole = null;
-		this.mobile = mobile;
+		this.mobile = null;
 	};
 }])
 .service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {

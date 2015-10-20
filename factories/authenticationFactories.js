@@ -82,9 +82,6 @@ angular.module('utsHelps.auths', ['ngRoute', 'utsHelps.constants', 'LocalStorage
 			//if (localStorageService.key)
 			var username = localStorageService.get('username');
 			var password = localStorageService.get('pwd');
-			console.log("Getting called!");
-			console.log(username);
-			console.log(password);
 			if (username!=undefined && password!=undefined) {
 				var credentials = {
 					username: username,
