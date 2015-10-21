@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('utsHelps.login', ['ngRoute'])
+angular.module('utsHelps.login', ['ngRoute', 'LocalStorageModule'])
 
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/login', {
@@ -8,12 +8,15 @@ angular.module('utsHelps.login', ['ngRoute'])
 		controller: 'loginCtrl'
 	});
 }])
-.controller('loginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'RegisterService',
-	function($scope, $rootScope, AUTH_EVENTS, AuthService, RegisterService) {
+.controller('loginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'RegisterService', 'localStorageService',
+	function($scope, $rootScope, AUTH_EVENTS, AuthService, RegisterService, localStorageService) {
+		$scope.globals.pageTitle = "UTS: HELPS";
 		$scope.credentials = {
 			username: '',
-			password: ''
+			password: '',
+			rememberMe: true
 		};
+		$scope.localStorageIsSupported = localStorageService.isSupported;
 		$scope.login = function (credentials) {
 			AuthService.login(credentials).then(function (isSuccess) {
 				if (isSuccess) {$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);}
