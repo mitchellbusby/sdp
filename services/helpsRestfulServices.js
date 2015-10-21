@@ -42,8 +42,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			};
 			this.postResource = function(resourceUri, data) {
 				var configObject = this.createConfigObject();
-				console.log("Config Object:")
-				console.log(configObject);
 				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, data, configObject);
 			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
