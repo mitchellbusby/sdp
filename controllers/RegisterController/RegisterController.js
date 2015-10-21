@@ -26,11 +26,18 @@ angular.module('utsHelps.register', ['ngRoute'])
 	};
 
 	$scope.pageOneToTwo = function() {
-		if (!RegisterService.isStudentRegistered($scope.details.student.StudentId)) {
-			$scope.goRegisterTwo();
-		} else {
-			//$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "StudentIdExists");
-		}
+		RegisterService.isStudentRegistered($scope.details.student.StudentId).then(function (result) {
+			console.log(result.data);
+			if (result.data.IsSuccess) {
+				if (result.data.IsRegistered) {
+					$scope.goRegisterTwo();
+				}
+			} else {
+
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		});
 	}
 
 	$scope.goRegisterOne = function() {

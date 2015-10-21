@@ -30,19 +30,7 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 	var isStudentRegistered = function(studentId)
 	{
 		 var json = { "studentId": studentId };
-		 ApiMethods.getResourceWithParamsInURI(endpoint_constants.SEARCH_STUDENT, json).then(function (result) {
-			 if (result.data.IsSuccess) {
-				 if (result.data.IsRegistered) {
-					 return true;
-				 } else {
-					 return false;
-				 }
-			 } else {
-
-				 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
-				 return false;
-			 }
-		 });
+		 return ApiMethods.getResourceWithParamsInURI(endpoint_constants.SEARCH_STUDENT, json);
 	};
 
 	var setUserFromLogin = function (username, password) {
@@ -51,7 +39,6 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 	};
 
 	var registerUserDetails = function () {
-		console.log("about to call StudentRegisterService.registerStudent");
 		if (StudentRegisterService.registerStudent(registerDetails.student,
 			function () {
 				$location.path('/login');
@@ -60,7 +47,6 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 			}))
 		{
 			UserMessagingService.successAlertBanner("Successfully registered.");
-			console.log("Successfully registered");
 		} else {
 			// something went wrong. Error is broadcast elsewhere, so just leave it
 		}

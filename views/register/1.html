@@ -9,6 +9,11 @@
 		margin-right: auto;
 	}
 
+	.small-alert {
+		color: #df1111;
+		font-weight: bold;
+	}
+
 </style>
 
 
@@ -38,12 +43,11 @@
 		<input type="radio" name="gender" value="Other" id="other">
 		<label for="other" ng-model="details.student.gender">Other</label>
 
+		<label for="emailinput">Email:</label>
+		<input type="email" id="emailinput" name="email" ng-model="details.user.Email" required>
 
-		<label for="email">Email:</label>
-		<input type="text" id="email" ng-model="details.user.Email" required>
-		<span style="color:red" ng-show="details.user.Email.$dirty && details.user.email.$invalid">
-		<span ng-show="details.user.Email.$error.email">Invalid email address</span>
-	  </span>
+		<span class="small-alert" ng-show="studentDetails.email.$error.email && studentDetails.$dirty">Invalid email address</span>
+		<span class="small-alert" ng-show="studentDetails.email.$error.required && studentDetails.$dirty">Email required</span>
 
 		<label for="mobile">Mobile:</label>
 		<input type="text" id="mobile" ng-model="details.student.mobile">
