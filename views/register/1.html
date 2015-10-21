@@ -41,6 +41,9 @@
 
 		<label for="email">Email:</label>
 		<input type="text" id="email" ng-model="details.user.Email" required>
+		<span style="color:red" ng-show="details.user.Email.$dirty && details.user.email.$invalid">
+		<span ng-show="details.user.Email.$error.email">Invalid email address</span>
+	  </span>
 
 		<label for="mobile">Mobile:</label>
 		<input type="text" id="mobile" ng-model="details.student.mobile">

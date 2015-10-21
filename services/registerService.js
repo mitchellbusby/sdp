@@ -36,7 +36,7 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 				 if (result.data.IsRegistered) {
 					 return true;
 				 } else {
-				 	$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				 	 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
 					 return false;
 				 }
 			 } else {
