@@ -17,6 +17,7 @@
     min-height: 100%;
     min-height: 100vh;
   }
+  
   </style>
 </head>
 <body ng-controller="ApplicationController">
@@ -35,6 +36,9 @@
           <section class="left-small">
               <a class="left-off-canvas-toggle menu-icon"><span></span></a>
           </section>
+          <section class="right">
+              <a class="fa fa-question-circle medium" id="help-link" href="#/help"><span></span></a>
+          </section>
         </div>
       </nav>
     </div>
@@ -50,10 +54,6 @@
           <li><a ng-click="logout()">Logout</a></li>
           <li><a href="#/settings">Settings</a></li>
           <li><a href="#/help">Help</a></li>
-        <!--<div ng-if="!currentUser">
-          <li><a href="#/login">Login</a></li>
-          <li><a href="#/help">Help</a></li>
-        </div>-->
       </ul>
     </aside>
     <article class="main-section" ng-view>
@@ -78,17 +78,4 @@
 <script type="text/javascript" src="bower_components/moment/moment.js"></script>
 <script type="text/javascript" src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
 <script type="text/javascript" src="main.js"></script>
-<!--<script src="directives/directives.js"></script>
-<script type="text/javascript" src="constants.js"></script>-->
-<!--<script src="app.js"></script>-->
-<!--
-<script src="services/helpsRestfulServices.js"></script>
-<script src="factories/authenticationFactories.js"></script>
-<script src="services/messagingService.js"></script>
-<script type="text/javascript" src="services/helpsModelServices.js"></script>
-<script type="text/javascript" src="controllers/ExampleController/ExampleController.js"></script>
-<script type="text/javascript" src="controllers/LoginController/LoginController.js"></script>
-<script type="text/javascript" src="controllers/UpcomingActivitiesController/UpcomingActivitiesController.js"></script>
-<script type="text/javascript" src="controllers/RegisterController/RegisterController.js"></script>
-<script type="text/javascript" src="controllers/UpcomingActivitiesController/UpcomingActivitiesController.js"></script>-->
 </html>
