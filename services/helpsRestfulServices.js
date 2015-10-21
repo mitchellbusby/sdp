@@ -25,6 +25,13 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				configObject["params"] = params;
 				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
 			};
+			this.getResourceWithParamsInURI = function(resourceUri, params) {
+				// Given the resource URI and parameters, call the end point and return a promise
+				// Do it with the parameters in the uri
+				var configObject = this.createConfigObject();
+				var uriTransform = this.transformParams(params);
+				return $http.get(endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, configObject);
+			};
 			this.transformParams = function(params) {
 				// This bit of code circumvents the issue whereby Angular doesn't support
 				// URI params for POST calls - for obvious security reasons. However,

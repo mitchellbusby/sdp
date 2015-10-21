@@ -26,10 +26,10 @@ angular.module('utsHelps.register', ['ngRoute'])
 	};
 
 	$scope.pageOneToTwo = function() {
-		if (RegisterService.isStudentRegistered($scope.details.student.studentId)) {
-			goRegisterTwo();
+		if (!RegisterService.isStudentRegistered($scope.details.student.StudentId)) {
+			$scope.goRegisterTwo();
 		} else {
-			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "StudentIdExists");
+			//$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "StudentIdExists");
 		}
 	}
 

@@ -30,13 +30,11 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 	var isStudentRegistered = function(studentId)
 	{
 		 var json = { "studentId": studentId };
-		 ApiMethods.postResourceWithParamsInUri(endpoint_constants.SEARCH_STUDENT, json).then(function (result) {
-			 console.log(result.data);
+		 ApiMethods.getResourceWithParamsInURI(endpoint_constants.SEARCH_STUDENT, json).then(function (result) {
 			 if (result.data.IsSuccess) {
 				 if (result.data.IsRegistered) {
 					 return true;
 				 } else {
-				 	 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
 					 return false;
 				 }
 			 } else {
