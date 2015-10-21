@@ -26,6 +26,11 @@ angular.module('utsHelps.register', ['ngRoute'])
 	};
 
 	$scope.pageOneToTwo = function() {
+		if (parseInt($scope.details.student.StudentId) !== parseFloat($scope.details.student.StudentId)) {
+			// Who's bad? I'm bad!
+			// plz no judge.
+			return;
+		}
 		RegisterService.isStudentRegistered($scope.details.student.StudentId).then(function (result) {
 			console.log(result.data);
 			if (result.data.IsSuccess) {

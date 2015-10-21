@@ -24,7 +24,11 @@
 		<br>
 
 		<label for="studentId">Student ID:</label>
-		<input type="text" id="studentId" ng-model="details.student.StudentId" required>
+		<input type="number" min="0" step="1" name="studentIdInput" id="studentId" ng-model="details.student.StudentId" required>
+
+		<!--<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.integer && studentDetails.$dirty">Id must be a number</span>-->
+		<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.required && studentDetails.$dirty">Student Id required</span>
+
 
 		<label for="password">Password:</label>
 		<input type="password" id="password" ng-model="details.user.Password" required>
