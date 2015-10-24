@@ -34,7 +34,9 @@ angular.module('utsHelps.register', ['ngRoute'])
 		RegisterService.isStudentRegistered($scope.details.student.StudentId).then(function (result) {
 			console.log(result.data);
 			if (result.data.IsSuccess) {
-				if (result.data.IsRegistered) {
+				if (!result.data.IsRegistered) {
+					console.log(result.data.IsRegistered);
+					console.log("Student is not already registered, so we should move on");
 					$scope.goRegisterTwo();
 				}
 			} else {
