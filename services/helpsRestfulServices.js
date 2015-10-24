@@ -570,6 +570,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		// Do nothing so far
 		//shift the thing
 		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
+		notificationToBeSent.message = vm.generateMessage(notificationToBeSent);
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
@@ -586,14 +587,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         });
 
         var time = moment(bookingTime);
-        console.log(time);
-        console.log(constant[0]);
         var timeToNotify = time.subtract(constant[0].seconds, 'seconds');
         var result = timeToNotify.format("YYYY-MM-DDTHH:mm:ss");
         console.log(result);
         return result;
 	};
-
+	vm.generateMessage = function(notification) {
+		return "Reminder from UTS HELPS: You have a HELPS workshop in "+ notification_times.filter(function(notification_constant) {
+			return notification_constant.value == notification.notificationTime;
+		})[0].msg +" (at "+
+		notification.notificationTime+").";
+	}
 	vm.refresh = function() {
 		vm.notifications = {};
 		vm.getNotificationsForUser();
