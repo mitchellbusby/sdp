@@ -7,9 +7,10 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 		controller: 'UpcomingBookingsCtrl'
 	})
 }])
-.controller('UpcomingBookingsCtrl', ['$scope', 'BookingsModel', 'NotificationsModel', 'notification_times', 'PostNotification', 'Session', 'AlertBanner',function($scope, BookingsModel, NotificationsModel, notification_times, PostNotification, Session, AlertBanner) {
+.controller('UpcomingBookingsCtrl', ['$scope', 'BookingsModel', 'NotificationsModel', 'notification_times', 'PostNotification', 'Session', 'AlertBanner', 'UpcomingActivitiesModel', function($scope, BookingsModel, NotificationsModel, notification_times, PostNotification, Session, AlertBanner, UpcomingActivitiesModel) {
 	$scope.globals.pageTitle = "Bookings";
 	$scope.BookingsModel = BookingsModel;
+	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
 	$scope.notification = {"triggerTime":1};
 	$scope.booking = null;
 	$scope.NotificationsModel = NotificationsModel;
@@ -56,5 +57,33 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 				}
 			});
 		}
+	}
+	$scope.cancelBooking = function(workshopID) {
+		$scope.selectedWorkshop = workshopID;
+		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL");
+	};
+	$scope.confirmCancel = function(confirmation) {
+		// Do nothing
+		if (confirmation) {
+			//Do the booking thing
+			UpcomingActivitiesModel.cancelWorkshop($scope.selectedWorkshop, Session.userId).then(function(success){
+				if (success) {
+					AlertBanner.publish({
+						type: "success",
+						message: "Booking cancelled.",
+						timeCollapse: 3000
+					});
+
+				}
+				else {
+					// Don't trigger a banner
+				}
+				UpcomingActivitiesModel.refresh();
+				BookingsModel.refresh();
+			});
+		}
+		else {
+		}
+		$scope.selectedWorkshop = null;
 	}
 }]);

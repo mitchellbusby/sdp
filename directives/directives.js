@@ -18,7 +18,8 @@ angular.module('utsHelps.directives', [])
 		templateUrl: "directives/booking-details/booking-details.html",
 		restrict: 'E',
 		scope: {
-			bookingDetails: '=bookingDetails'
+			bookingDetails: '=bookingDetails',
+			workshopCancelHandler: '=workshopCancelHandler',
 		}
 	}
 })
