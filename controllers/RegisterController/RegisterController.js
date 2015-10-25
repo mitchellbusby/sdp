@@ -31,11 +31,14 @@ angular.module('utsHelps.register', ['ngRoute'])
 			// plz no judge.
 			return;
 		}
-		RegisterService.isStudentRegistered($scope.details.student.StudentId).then(function (result) {
+		RegisterService.isStudentIdAvailable($scope.details.student.StudentId).then(function (result) {
 			console.log(result.data);
 			if (result.data.IsSuccess) {
-				if (!result.data.IsRegistered) {
+				if (result.data.IsRegistered) { // this ought to be IsAvailable
 					$scope.goRegisterTwo();
+				}
+				else {
+					$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "StudentIdExists");
 				}
 			} else {
 

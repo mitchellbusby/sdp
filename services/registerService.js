@@ -27,7 +27,7 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 	var goRegisterPageTwo = function () { $location.path('/register2') };
 	var goRegisterPageThree = function() { $location.path('/register3') };
 
-	var isStudentRegistered = function(studentId)
+	var isStudentIdAvailable = function(studentId)
 	{
 		 var json = { "studentId": studentId };
 		 return ApiMethods.getResourceWithParamsInURI(endpoint_constants.SEARCH_STUDENT, json);
@@ -62,6 +62,6 @@ function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_
 		goRegisterPageThree: goRegisterPageThree,
 		setUserFromLogin: setUserFromLogin,
 		registerUserDetails: registerUserDetails,
-		isStudentRegistered: isStudentRegistered,
+		isStudentIdAvailable: isStudentIdAvailable,
 	};
 }]);
