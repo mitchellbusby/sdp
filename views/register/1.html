@@ -9,6 +9,11 @@
 		margin-right: auto;
 	}
 
+	.small-alert {
+		color: #df1111;
+		font-weight: bold;
+	}
+
 </style>
 
 
@@ -19,16 +24,17 @@
 		<br>
 
 		<label for="studentId">Student ID:</label>
-		<input type="text" id="studentId" ng-model="details.student.studentId" required>
+		<input type="number" min="0" step="1" name="studentIdInput" id="studentId" ng-model="details.student.StudentId" required>
+
+		<!--<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.integer && studentDetails.$dirty">Id must be a number</span>-->
+		<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.required && studentDetails.$dirty">Student Id required</span>
+
 
 		<label for="password">Password:</label>
-		<input type="password" id="password" ng-model="details.user.password" required>
-
-		<label for="passwordConfirm">Confirm password:</label>
-		<input type="password" id="passwordConfirm" required>
+		<input type="password" id="password" ng-model="details.user.Password" required>
 
 		<label for="name">Name:</label>
-		<input type="text" id="name" ng-model="details.user.name" required>
+		<input type="text" id="name" ng-model="details.student.PreferredName" required>
 
 		<!--
 			Gender
@@ -41,19 +47,22 @@
 		<input type="radio" name="gender" value="Other" id="other">
 		<label for="other" ng-model="details.student.gender">Other</label>
 
+		<label for="emailinput">Email:</label>
+		<input type="email" id="emailinput" name="email" ng-model="details.user.Email" required>
 
-		<!-- Email is not in the model -->
-		<label for="email">Email:</label>
-		<input type="text" id="email" ng-model="details.student.email" required>
+		<span class="small-alert" ng-show="studentDetails.email.$error.email && studentDetails.$dirty">Invalid email address</span>
+		<span class="small-alert" ng-show="studentDetails.email.$error.required && studentDetails.$dirty">Email required</span>
 
-		<!-- No mobile phone number stored in model -->
 		<label for="mobile">Mobile:</label>
-		<input type="text" id="mobile" ng-model="details.student.altContact" required>
+		<input type="text" id="mobile" ng-model="details.student.mobile">
+
+		<label for="altcontact">Alternate Contact:</label>
+		<input type="text" id="altcontact" ng-model="details.student.AltContact">
 
 		<label for="dob">Date Of Birth:</label>
-		<input type="text" id="dob" ng-model="details.student.dob" required>
+		<input type="text" id="dob" ng-model="details.student.DateOfBirth" required>
 
-		<button class="button column medium-12 success" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Next</button>
+		<button class="button column medium-12 success" ng-click="pageOneToTwo()" ng-disabled="studentDetails.$invalid">Next</button>
 
 		</form>
 </div>

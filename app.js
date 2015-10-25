@@ -94,6 +94,7 @@ angular.module('utsHelps', [
 	$scope.globals = {
 		pageTitle: "UTS HELPS"
 	};
+	UserMessagingService.successAlertBanner("Hello world");
 	$scope.Session = Session;
 	$scope.err_message = "";
 	/*$scope.$on(ERR_BROADCASTS.API_ERROR, function triggerErrorModal(e, err_message) {
@@ -108,7 +109,7 @@ angular.module('utsHelps', [
 	$scope.userRoles = USER_ROLES;
 	$scope.isAuthorized = AuthService.isAuthorized;
 	$scope.isAuthenticated = AuthService.isAuthenticated;
-	$scope.setCurrentUser = function (user) { 
+	$scope.setCurrentUser = function (user) {
 		$scope.currentUser = user;
 	};
 	$scope.logout = function() {
@@ -119,6 +120,6 @@ angular.module('utsHelps', [
 			// deal with failure to log out here
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, err);
 		});
-	}
+	};
 	$scope.isLoginPage = true;
 }]);
