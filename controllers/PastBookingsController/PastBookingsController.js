@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulServices', 'ngRoute', 'utsHelps.UserMessagingService'])
+angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulServices', 'ngRoute', 'utsHelps.UserMessagingService', 'utsHelps.constants'])
 .config(['$routeProvider', function($routeProvider){
 	$routeProvider.when('/pastBookings', {
 		templateUrl: 'views/pastBookingsView.html',
 		controller: 'PastBookingsCtrl'
 	})
 }])
-.controller('PastBookingsCtrl', ['$scope', 'BookingsModel', 'UserMessagingService', function($scope, BookingsModel, UserMessagingService) {
+.controller('PastBookingsCtrl', ['$scope', 'BookingsModel', 'UserMessagingService', 'ERR_BROADCASTS', function($scope, BookingsModel, UserMessagingService, ERR_BROADCASTS) {
 	$scope.globals.pageTitle = "Past Bookings";
 	$scope.BookingsModel = BookingsModel;
 	$scope.saveNote = function(booking) {
@@ -19,6 +19,7 @@ angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulSer
 				}
 				else {
 					// Error!
+					$scope.$broadcast(endpoint_constants.ERR_BROADCASTS, response.data.DisplayMessage);
 				}
 			});
 	};
