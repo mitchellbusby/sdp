@@ -21,7 +21,7 @@ angular.module('utsHelps', [
 	'utsHelps.Help',
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/UpcomingActivities'});
+	$routeProvider.otherwise({redirectTo:'/upcomingActivities'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
