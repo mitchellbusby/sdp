@@ -57,6 +57,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				var uriTransform = this.transformParams(params);
 				return $http({url:endpoint_constants.ENDPOINT_URI+resourceUri+"?"+uriTransform, method: 'POST', headers:configObject['headers']});
 			};
+			this.putResource = function(resourceUri, data) {
+				var configObject = this.createConfigObject();
+				return $http.put(endpoint_constants.ENDPOINT_URI+resourceUri, data, configObject);
+			}
 		}])
 .service('UpcomingActivitiesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', 'WorkshopBooking', 'AlertBanner', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods, WorkshopBooking, AlertBanner) {
 	var scope = this;
@@ -300,6 +304,16 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 			return -1;
 		};
+		this.saveNote = function(booking) {
+			var updatedBooking = {
+				notes: booking.notes,
+				WorkshopId: booking.workshopID,
+				UserId: Session.userId,
+				StudentId: Session.userId
+			};
+			return ApiMethods.putResource(endpoint_constants.UPDATE_BOOKING_URI, updatedBooking)
+			// Need to create a put method
+		}
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
