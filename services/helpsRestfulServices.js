@@ -49,6 +49,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			};
 			this.postResource = function(resourceUri, data) {
 				var configObject = this.createConfigObject();
+				//return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, configObject);
 				return $http.post(endpoint_constants.ENDPOINT_URI+resourceUri, data, configObject);
 			};
 			this.postResourceWithParamsInUri = function(resourceUri, params) {
@@ -136,7 +137,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.refresh = function() {
 		scope.activities = null;
 		scope.onCreate();
-	}
+	};
 	this.bookWorkshop = function(workshopId, studentId) {
 		//Create a nice model to send to the DB
 		// This method could be ported to Tomm's model tbh
@@ -169,7 +170,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		function fail(response) {
 			$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to cancel your booking. Please try again and if issues persist contact UTS HELPS.");
 		});
-	}
+	};
     this.addToWaitlist = function(workshopId, studentId){
         var waiting = {
             "workshopId":workshopId,
@@ -270,9 +271,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		};
 
 		this.onCreate = function() {
-			this.getBookings({"studentID":Session.userId}).then(function(result) {
-				scope.bookings = scope.mergeBookings(result.data);
-			});
+			setTimeout(function() {
+				scope.getBookings({"studentID":Session.userId}).then(function(result) {
+					scope.bookings = scope.mergeBookings(result.data);
+				});
+			}, 2000);
 		};
 		this.refresh = function() {
 			scope.bookings = {};
@@ -332,11 +335,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	this.onCreate();
 }])
 .service('Session', [function () {
-	this.create = function (sessionId, userId, username, userRole) {
+	this.create = function (sessionId, userId, username, userRole, mobile) {
 		this.id = sessionId;
 		this.userId = userId;
 		this.username = username;
 		this.userRole = userRole;
+		this.mobile = mobile;
 	};
 
 	this.destroy = function() {
@@ -344,6 +348,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.userId = null;
 		this.username = null;
 		this.userRole = null;
+		this.mobile = null;
 	};
 }])
 .service('WorkshopBookingsServiceMitchell', ['WorkshopBooking', 'Session', 'ApiMethods', 'helps_endpoint_constants', function(WorkshopBooking, Session, ApiMethods, endpoint_constants) {
@@ -358,7 +363,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				// Error messaging
 			}
 		});
-	}
+	};
 	this.bookingExists = function(workshop) {
 		//Checks if booking exists for a workshop
 		var workshopId = workshop.WorkshopId;
@@ -368,7 +373,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 		return false;
-	}
+	};
 	this.getBooking = function(workshop) {
 		var workshopId = workshop.WorkshopId;
 		for (var i=0; i<vm.Bookings.length; i++) {
@@ -377,10 +382,102 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 		return -1;
-	}
+	};
 	this.refresh = function() {
 		vm.Bookings = [];
 		vm.onCreate();
+	};
+	vm.onCreate();
+}])
+.service('NotificationsModel', ['ApiMethods', 'Session', 'helps_endpoint_constants', 'notification_times', function(ApiMethods, Session, endpoint_constants, notification_times) {
+	var vm = this;
+	vm.notifications = {};
+	vm.getNotificationsForUser = function() {
+		var params = {"studentId": Session.userId};
+		ApiMethods.getResource(endpoint_constants.GET_NOTIFICATIONS_URI, params)
+			.then(function success(response) {
+				vm.mergeNotifications(vm.notifications, response.data.Results);
+		});
+	};
+	vm.mergeNotifications = function(existingNotifications, newNotifications) {
+		for (var i=0; i<newNotifications.length; i++) {
+			if (newNotifications[i].bookingID in existingNotifications) {
+				// Don't add
+			}
+			else {
+				existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
+			}
+		}
+	};
+	vm.notificationExists = function(bookingId) {
+		if (bookingId in vm.notifications) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	};
+	vm.add = function(notificationToBeSent) {
+		// Do nothing so far
+		//shift the thing
+		var notificationTimeId = notificationToBeSent.notificationTime.toString();
+		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
+		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.notificationTime);
+		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
+			then(function success(response){
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+		});
+	};
+	vm.applyTimeShiftToNotification = function(notificationTimeId, bookingTime) {
+        var constant = notification_times.filter(function (notification_constant) {
+            return notification_constant.value == notificationTimeId;
+        });
+
+        var time = moment(bookingTime);
+        var timeToNotify = time.subtract(constant[0].seconds, 'seconds');
+        var result = timeToNotify.format("YYYY-MM-DDTHH:mm:ss");
+        return result;
+	};
+	vm.generateMessage = function(notification, notificationTimeId, notificationTime) {
+		console.log(notificationTimeId);
+		var constant = notification_times.filter(function (notification_constant) {
+			return notification_constant.value == notificationTimeId;
+		})[0];
+		var workshopTime = moment(notificationTime).format('dddd Do MMMM YYYY, h:mm:ss a');;
+		return "Reminder from UTS HELPS: You have a HELPS workshop in "+ constant.msg +" ("+
+		workshopTime+").";
+	}
+	vm.refresh = function() {
+		vm.notifications = {};
+		vm.getNotificationsForUser();
+	};
+	vm.onCreate = function() {
+		setTimeout(vm.getNotificationsForUser, 1000);
+	};
+	vm.cancelNotification = function(notificationID) {
+		var params = {"notificationID":notificationID};
+		return ApiMethods.getResource(endpoint_constants.CANCEL_NOTIFICATION_URI, params)
+			.then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});	
+	};
+	vm.getNotificationByBookingId = function(bookingID) {
+		if (bookingID in vm.notifications) {
+			return vm.notifications[bookingID];
+		}
+		else {
+			return -1;
+		}
 	}
 	vm.onCreate();
 }]);
