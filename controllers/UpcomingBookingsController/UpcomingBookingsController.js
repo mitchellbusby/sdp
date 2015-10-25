@@ -11,11 +11,13 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 	$scope.globals.pageTitle = "Bookings";
 	$scope.BookingsModel = BookingsModel;
 	$scope.notification = {"triggerTime":1};
+	$scope.booking = null;
 	$scope.NotificationsModel = NotificationsModel;
 	$scope.availableNotificationTimes = notification_times
 	$scope.addNotification = function(booking) {
 		//NotificationsModel.refresh();
 		$scope.notification = PostNotification.create(Session.userId, booking.BookingId, 1, "You have a HELPS booking in x time", booking.starting, Session.mobile);
+		$scope.booking = booking;
 		$scope.$broadcast("SHOW_CONFIRM_DENY_CONFIRM_NOTIF");
 	}
 	$scope.confirmNotificationAdd = function(isConfirmed) {

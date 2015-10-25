@@ -571,7 +571,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		//shift the thing
 		var notificationTimeId = notificationToBeSent.notificationTime.toString();
 		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
-		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId);
+		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.notificationTime);
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
@@ -592,14 +592,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         var result = timeToNotify.format("YYYY-MM-DDTHH:mm:ss");
         return result;
 	};
-	vm.generateMessage = function(notification, notificationTimeId) {
+	vm.generateMessage = function(notification, notificationTimeId, notificationTime) {
 		console.log(notificationTimeId);
 		var constant = notification_times.filter(function (notification_constant) {
 			return notification_constant.value == notificationTimeId;
 		})[0];
-		console.log(constant);
-		return "Reminder from UTS HELPS: You have a HELPS workshop in "+ constant.msg +" (at "+
-		notification.notificationTime+").";
+		var workshopTime = moment(notificationTime).format('dddd Do MMMM YYYY, h:mm:ss a');;
+		return "Reminder from UTS HELPS: You have a HELPS workshop in "+ constant.msg +" ("+
+		workshopTime+").";
 	}
 	vm.refresh = function() {
 		vm.notifications = {};
