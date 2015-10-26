@@ -12,6 +12,7 @@ angular.module('utsHelps', [
 	'utsHelps.registerService',
 	'utsHelps.UpcomingBookings',
 	'utsHelps.PastBookings',
+	'utsHelps.ActivitySets',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',

@@ -190,6 +190,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
                 $rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "Error encountered whilst trying to add yourself to waitlist. Please try again and if issues persist contact UTS HELPS.");
         });
     };
+
+	this.getWorkshopSets = function () {
+
+	};
 	this.onCreate();
 }])
 .service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', 'UserMessagingService', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS, UserMessagingService){
