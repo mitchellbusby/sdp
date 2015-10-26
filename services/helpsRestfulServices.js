@@ -129,10 +129,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         //modified from mitch's code.
         //Using page number, instead of a date, to get activities
 		this.getActivities(scope.params).then(function(result) {
-		//this.getActivities({"StartingDtBegin":"2015-08-07T17:00:00", "StartingDtEnd":"9999-12-29T17:00:00"}).then(function(result) {
-			console.log(result);
 			scope.activities = scope.mergeActivities(result.data, scope.activities);
 		});
+		this.getWorkshopSets({}).then(function(result) {
+			scope.activitySets = result.data.Results;
+		});
+
 	};
 	this.refresh = function() {
 		scope.activities = null;
@@ -191,9 +193,10 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
         });
     };
 
-	this.getWorkshopSets = function () {
-
+	this.getWorkshopSets = function (params) {
+		return ApiMethods.getResource(endpoint_constants.ACTIVITIES_URI+endpoint_constants.WORKSHOP_SETS_URI, params);
 	};
+
 	this.onCreate();
 }])
 .service('StudentRegisterService', ['Session', '$rootScope', 'ApiMethods', 'helps_endpoint_constants', 'ERR_BROADCASTS', 'UserMessagingService', function(Session, $rootScope, ApiMethods, endpoint_constants, ERR_BROADCASTS, UserMessagingService){

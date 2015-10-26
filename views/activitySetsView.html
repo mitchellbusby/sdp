@@ -1,3 +1,9 @@
-<div>
-
+<div ng-repeat="activitySet in UpcomingActivitiesModel.activitySets" ng-if="UpcomingActivitiesModel.activities[activitySet.id] != null">
+    <p>{{activitySet.name}}</p>
+    <div>
+        <div ng-repeat="workshop in UpcomingActivitiesModel.activities[activitySet.id].workshops">
+            {{workshop.topic}}
+        </div>
+    </div>
+    <hr>
 </div>
