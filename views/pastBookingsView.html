@@ -18,7 +18,7 @@
 		<div class="booking small-12 medium-9 large-7 column small-centered">
 			<div class="row collapse notes-text" ng-if="booking.editNote">
 				<div class="small-11 medium-10 columns small-centered medium-uncentered">
-					<input type="text" placeholder="Notes" ng-model="booking.notes"></input>
+					<textarea placeholder="Notes" ng-model="booking.notes"></textarea>
 				</div>
 				<div class="small-12 medium-2 columns small-centered medium-uncentered">
 					<a class="button postfix" ng-click="saveNote(booking)">Save</a>
