@@ -19,7 +19,6 @@ angular.module('utsHelps.directives', [])
 		restrict: 'E',
 		scope: {
 			bookingDetails: '=bookingDetails',
-			workshopCancelHandler: '=workshopCancelHandler',
 		}
 	}
 })
