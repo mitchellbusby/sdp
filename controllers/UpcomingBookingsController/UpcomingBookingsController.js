@@ -57,4 +57,18 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 			});
 		}
 	}
+	$scope.testNotification = function(notificationId) {
+		NotificationsModel.testNotification(notificationId).then(function success(isSuccess) {
+			if (isSuccess) {
+				AlertBanner.publish({
+					type:"success",
+					message: "Notification fired."
+				});
+				$scope.NotificationsModel.refresh();
+			}
+			else {
+				$scope.$broadcast("API_ERROR", "Failed to fire notification.");
+			}
+		});
+	}
 }]);

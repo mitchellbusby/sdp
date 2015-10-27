@@ -5,9 +5,14 @@
 		</uh-booking-details>
 	</a>
 	<div ng-if="NotificationsModel.notificationExists(booking.BookingId)" class="row">
-		<center><a class="button round small-centered small-8 medium-3 column" ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
-			Delete notification
-		</a></center>
+		<center>
+			<a class="button round small-centered small-8 medium-3 column" ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
+				Delete notification
+			</a>
+			<a class="button round small-centered small-8 medium-3 column" ng-click="testNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId).notificationID)">
+				Test notification
+			</a>
+		</center>
 	</div>
 	<div ng-if="!NotificationsModel.notificationExists(booking.BookingId)" class="row">
 		<center><a class="button round small-centered small-8 medium-3 column" ng-click="addNotification(booking)">
