@@ -12,6 +12,7 @@ angular.module('utsHelps', [
 	'utsHelps.registerService',
 	'utsHelps.UpcomingBookings',
 	'utsHelps.PastBookings',
+	'utsHelps.Dashboard',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
@@ -21,7 +22,7 @@ angular.module('utsHelps', [
 	'utsHelps.Help',
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/upcomingActivities'});
+	$routeProvider.otherwise({redirectTo:'/'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
