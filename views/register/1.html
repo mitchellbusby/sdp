@@ -18,11 +18,16 @@
 
 
 <div>
-
+	</br>
+	<div class="row">
+		<div class="progress radius large-6 small-centered progress round" style="margin-left: auto; margin-right: auto;">
+			<span class="meter" style="width: 0%"></span>
+		</div>
+	</div>
+	<div class="row">
+		<h2 style="text-align: center;">Personal Details</h2>
+	</div>
 	<form name="studentDetails" class="register-fields">
-		<br>
-		<br>
-
 		<label for="studentId">Student ID: 	*	
 			<span class="round alert label" ng-show="studentDetails.studentIdInput.$error.required && studentDetails.studentIdInput.$dirty || studentDetails.studentIdInput.$invalid">Student ID required, numeric</span>
 		</label>
