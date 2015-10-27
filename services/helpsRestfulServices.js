@@ -493,5 +493,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			return -1;
 		}
 	}
+	vm.testNotification = function(notificationId) {
+		var params = {id: notificationId};
+		return ApiMethods.getResource(endpoint_constants.TEST_NOTIFICATION_URI, params).
+			then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+	}
 	vm.onCreate();
 }]);
