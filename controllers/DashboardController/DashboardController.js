@@ -9,5 +9,5 @@ angular.module('utsHelps.Dashboard', ['ngRoute'])
     }])
     .controller('dashboardCtrl', ['$scope', 'AlertBanner', 'BookingsModel', function($scope, AlertBanner, BookingsModel) {
         $scope.globals.pageTitle = "UTS HELPS";
-        $scope.bookingsModel = BookingsModel;
+        $scope.BookingsModel = BookingsModel;
     }]);

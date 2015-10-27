@@ -1,1 +1,20 @@
-<div>Dashboard</div>
+<div>
+    <p>Welcome to the UTS HELPS booking portal</p>
+    <ul>
+        <li><a href="#/upcomingActivities">Activities</a></li>
+        <li><a href="#/upcomingBookings">Upcoming Bookings</a></li>
+        <li><a href="#/pastBookings">Past Bookings</a></li>
+
+        <li><a href="#/help">Help</a></li>
+    </ul>
+    <div ng-if="BookingsModel.hasUpcomingBookings()">
+        <h2>My Bookings</h2>
+        <a href="#/upcomingBookings" ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isUpcomingBooking | limitTo:2">
+            <uh-booking-details booking-details="booking" class="row">
+
+            </uh-booking-details>
+        </a>
+        <a href="#/upcomingBookings" ng-if="BookingsModel.bookingsArray().length > 2">Show more</a>
+    </div>
+
+</div>
