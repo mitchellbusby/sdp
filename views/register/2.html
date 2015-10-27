@@ -18,36 +18,38 @@
 		<br>
 		<br>
 
-		<label for="faculty">Faculty:</label>
+		<label for="faculty">Faculty: *</label>
 		<input type="text" id="faculty" ng-model="details.user.faculty" required>
 
 		<label for="courseCode">Course Code:</label>
 		<input type="text" id="courseCode" ng-model="details.user.courseCode" required>
 
-		<label for="degree">Degree:</label>
-    <input type="radio" name="degree" value="Undergraduate" id="undergraduate" required><label for="undergraduate" ng-model="details.student.Degree">Under Graduate</label>
-    <input type="radio" name="degree" value="Postgraduate" id="postgraduate" required><label for="postgraduate" ng-model="details.student.Degree">Post Graduate</label>
+		<label for="degree">Degree: *</label>
+    	<input type="radio" name="degree" value="Undergraduate" id="undergraduate" required><label for="undergraduate" ng-model="details.student.Degree">Under Graduate</label>
+    	</br>
+    	<input type="radio" name="degree" value="Postgraduate" id="postgraduate" required><label for="postgraduate" ng-model="details.student.Degree">Post Graduate</label>
 
-		<label for="year">Year:</label>
+		<label for="year">Year: *</label>
 		<input type="text" id="year" ng-model="details.user.year" required>
 
-		<label for="status">Status:</label>
-	  <input type="radio" name="status" value="Permanent" 	id="permanent" required>
-		<label for="permanent" ng-model="details.student.Status">Under Graduate</label>
-    <input type="radio" name="status" value="International" id="international" required>
-		<label for="international" ng-model="details.student.Status">Post Graduate</label>
+		<label for="status">Status: *</label>
+	  	<input type="radio" name="status" value="Permanent" 	id="permanent" required>
+		<label for="permanent" ng-model="details.student.Status">Permanent</label>
+		</br>
+    	<input type="radio" name="status" value="International" id="international" required>
+		<label for="international" ng-model="details.student.Status">International</label>
 
-		<label for="firstLanguage">First Language:</label>
+		<label for="firstLanguage">First language: *</label>
 		<input type="text" id="firstLanguage" ng-model="details.student.FirstLanguage" required>
 
-		<label for="country">Country of Origin:</label>
+		<label for="country">Country of origin: *</label>
 		<input type="text" id="country" ng-model="details.student.CountryOrigin" required>
 
-		<label for="background">Background:</label>
+		<label for="background">Background: *</label>
 		<input type="text" id="background" ng-model="details.student.Background" required>
 
-		<button class="button column medium-12 failure" ng-click="goRegisterOne()">Previous</button>
 		<button class="button column medium-12 success" ng-click="goRegisterThree()" ng-disabled="studentDetails.$invalid">Next</button>
+		<button class="button column medium-12 failure" ng-click="goRegisterOne()">Previous</button>
 
 		</form>
 </div>
