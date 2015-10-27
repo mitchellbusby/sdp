@@ -30,7 +30,7 @@ angular.module('utsHelps.UserMessagingService', ['utsHelps.constants'])
 		"Error encountered whilst trying to register your details. Please try again and if issues persist contact UTS HELPS.":"Couldn't register details.",
 		"Error creating workshop booking: Booking already exists.":"Booking already exists.",
 		"Error creating workshop booking: Workshop has reached cut-off for bookings.":"Workshop has reached cut-off for bookings",
-		"StudentIdExists":"A student with this id already exists."
+		"StudentIdExists":"A student with this ID already exists."
 	}
 	this.retrieveFriendlyError = function(message) {
 		if (message in this.errorDictionary) {
