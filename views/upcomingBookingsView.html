@@ -4,6 +4,9 @@
 
 		</uh-booking-details>
 	</a>
+	<div class="row">
+		<center><a class="button round small-centered small-8 medium-3 column" ng-click="cancelBooking(booking.workshopID)" stop-event>Cancel</a></center>
+	</div>
 	<div ng-if="NotificationsModel.notificationExists(booking.BookingId)" class="row">
 		<center>
 			<a class="button round small-centered small-8 medium-3 column" ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
@@ -34,4 +37,8 @@
 <uh-confirm-deny-modal callback="confirmCancelNotification(isConfirmed)" cdm-id="CANCEL_NOTIF">
 	<h2>Cancel notification</h2>
 	<p>Are you sure you want to cancel this notification?</p>
+</uh-confirm-deny-modal>
+<uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
+	<h2 class="cdm">Cancel Booking</h2>
+	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>
