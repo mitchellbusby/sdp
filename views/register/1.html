@@ -18,22 +18,34 @@
 
 
 <div>
-
+	</br>
+	<div class="row">
+		<div class="progress radius large-6 small-centered progress round" style="margin-left: auto; margin-right: auto;">
+			<span class="meter" style="width: 0%"></span>
+		</div>
+	</div>
+	<div class="row">
+		<h2 style="text-align: center;">Personal Details</h2>
+	</div>
 	<form name="studentDetails" class="register-fields">
-		<br>
-		<br>
-
-		<label for="studentId">Student ID:</label>
-		<input type="number" min="0" step="1" name="studentIdInput" id="studentId" ng-model="details.student.StudentId" required>
+		<label for="studentId">Student ID: 	*	
+			<span class="round alert label" ng-show="studentDetails.studentIdInput.$error.required && studentDetails.studentIdInput.$dirty || studentDetails.studentIdInput.$invalid">Student ID required, numeric</span>
+		</label>
+		<input type="text" name="studentIdInput" id="studentId" ng-model="details.student.StudentId" required pattern="[0-9]*">
 
 		<!--<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.integer && studentDetails.$dirty">Id must be a number</span>-->
-		<span class="small-alert" ng-show="studentDetails.studentIdInput.$error.required && studentDetails.$dirty">Student Id required</span>
 
 
-		<label for="password">Password:</label>
+		<label for="password">Password: * 
+			<span class="round alert label" ng-show="details.user.Password.$error.required
+		">Password required</span>
+		</label>
 		<input type="password" id="password" ng-model="details.user.Password" required>
 
-		<label for="name">Name:</label>
+		<label for="name">Name: *
+			<span class="round alert label" ng-show="details.user.PreferredName.$error.required
+		">Name required</span>
+		</label>
 		<input type="text" id="name" ng-model="details.student.PreferredName" required>
 
 		<!--
@@ -47,19 +59,23 @@
 		<input type="radio" name="gender" value="Other" id="other">
 		<label for="other" ng-model="details.student.gender">Other</label>
 
-		<label for="emailinput">Email:</label>
+		<label for="emailinput">
+			Email: *
+			<span class="round alert label" ng-show="studentDetails.email.$error.required && studentDetails.email.$dirty">Email required</span>
+			<span class="round alert label" ng-show="studentDetails.email.$error.email && studentDetails.email.$dirty">Invalid email address</span></label>
 		<input type="email" id="emailinput" name="email" ng-model="details.user.Email" required>
 
-		<span class="small-alert" ng-show="studentDetails.email.$error.email && studentDetails.$dirty">Invalid email address</span>
-		<span class="small-alert" ng-show="studentDetails.email.$error.required && studentDetails.$dirty">Email required</span>
+		
+		
 
 		<label for="mobile">Mobile:</label>
-		<input type="text" id="mobile" ng-model="details.student.mobile">
+		<input type="number" id="mobile" ng-model="details.student.mobile">
 
 		<label for="altcontact">Alternate Contact:</label>
 		<input type="text" id="altcontact" ng-model="details.student.AltContact">
 
-		<label for="dob">Date Of Birth:</label>
+		<label for="dob">Date Of Birth: *
+			<span class="round alert label" ng-show="studentDetails.dob.$error.required">Date Of Birth required</span></label>
 		<input type="text" id="dob" ng-model="details.student.DateOfBirth" required>
 
 		<button class="button column medium-12 success" ng-click="pageOneToTwo()" ng-disabled="studentDetails.$invalid">Next</button>
