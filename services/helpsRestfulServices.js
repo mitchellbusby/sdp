@@ -140,6 +140,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.refresh = function() {
 		scope.activities = null;
+		scope.params.page = 1;
 		scope.onCreate();
 	};
 	this.bookWorkshop = function(workshopId, studentId) {
@@ -504,6 +505,26 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					return false;
 				}
 			});
+	}
+	vm.onCreate();
+}])
+.service('SessionsModel', ['ApiMethods', 'helps_endpoint_constants', 'Session', function(ApiMethods, endpoint_constants, Session) {
+	var vm = this;
+	vm.Sessions = [];
+	vm.getSessions = function() {
+		var params = {pageSize:1000,StudentId:Session.userId};
+		ApiMethods.getResource(endpoint_constants.GET_SESSIONS_URI, params)
+		.then(function success(response) {
+			if (response.data.IsSuccess) {
+				vm.Sessions = response.data.Results;
+			}
+		})
+	}
+	vm.onCreate = function() {
+		vm.getSessions();
+	}
+	vm.refresh = function() {
+		vm.onCreate();
 	}
 	vm.onCreate();
 }]);

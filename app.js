@@ -19,6 +19,7 @@ angular.module('utsHelps', [
 	'angular-alert-banner',
 	'utsHelps.UserMessagingService',
 	'utsHelps.Help',
+	'utsHelps.Sessions'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/upcomingActivities'});

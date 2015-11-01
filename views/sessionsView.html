@@ -1,0 +1,11 @@
+<div class="booking session small-11 medium-8 large-6 column small-centered" ng-repeat="session in SessionsModel.Sessions">
+    <div class="row">
+        <div id="title">
+			{{session.SessionType}}
+            <ul>
+                <li>{{ session.StartDate | date : 'hh:mm a'}} until {{session.EndDate | date : 'hh:mm a on dd/MM/yyyy'}}</li>
+                <li>{{ session.Campus }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
