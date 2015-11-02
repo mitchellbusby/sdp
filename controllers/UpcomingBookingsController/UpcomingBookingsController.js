@@ -127,6 +127,16 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 		for (var i in filterlist) {
 			BookingsModel.bookingFromId(filterlist[i].BookingId).isFiltered = false;
 		}
+
+		// horrible horrible not bad un-good dependency
+		var otherFilterLength = BookingsModel.bookingsArray().filter(BookingsModel.isUpcomingBooking).length;
+		var filterlistlen = filterlist.length;
+		if (filterlist.length <= otherFilterLength) {
+			// No results, show a sad message
+			$scope.noSearchResults = true;
+		} else {
+			$scope.noSearchResults = false;
+		}
 		$scope.$apply();
 	}
 	$scope.cancelWaitlisting = function(waitlist) {

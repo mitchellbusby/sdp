@@ -11,7 +11,7 @@
 <search-bar callback="searchBookings(query)">
 </search-bar>
 
-<div ng-repeat="booking in BookingsModel.bookingsArray(true) | filter: BookingsModel.isUpcomingBooking | orderBy: 'starting'"  ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
+<div ng-repeat="booking in BookingsModel.bookingsArray(true) | filter: BookingsModel.isUpcomingBooking | orderBy: 'starting'" ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
 	<div ng-if="!booking.isWaitList">
 		<uh-booking-details booking-details="booking" class="row" filtered="isFiltered">
 
@@ -19,7 +19,7 @@
 	<br>
 	<div class="booking small-11 medium-8 large-6 column small-centered">
 		<span ng-if="NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification set</span>
-		<span ng-if="!NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification not set</span>  
+		<span ng-if="!NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification not set</span>
 
 
 		<div ng-if="NotificationsModel.notificationExists(booking.BookingId)">
@@ -102,10 +102,6 @@
 <p>Are you sure you want to cancel this notification?</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
-<<<<<<< HEAD
-	<h2 class="cdm">Cancel Booking</h2>
-	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
-=======
 <h2 class="cdm">Cancel Booking</h2>
 <p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>
@@ -113,5 +109,7 @@
 <uh-confirm-deny-modal callback="confirmCancelWaitlisting(isConfirmed)" cdm-id="CANCEL_WAIT">
 <h2 class="cdm">Cancel Waitlisting</h2>
 <p>Are you sure you want to cancel your waitlisting for {{waitlist.topic}}?</p>
->>>>>>> master
 </uh-confirm-deny-modal>
+<center>
+	<span class="column" ng-if="noSearchResults">No search results...</span>
+</center>
