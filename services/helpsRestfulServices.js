@@ -415,6 +415,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		});
 	};
 	vm.mergeNotifications = function(existingNotifications, newNotifications) {
+		existingNotifications = {};
 		for (var i=0; i<newNotifications.length; i++) {
 			existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
 		}
