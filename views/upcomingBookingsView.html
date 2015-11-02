@@ -1,60 +1,91 @@
-<style>
-
-	.bookingTitle
-	{
-		font-size: 1.25rem;
-		font-weight: bold;
-	}
-
-</style>
-
-<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isUpcomingBooking">
-	<uh-booking-details booking-details="booking" class="row">
+<div ng-repeat="booking in BookingsModel.bookingsArray(true) | filter: BookingsModel.isUpcomingBooking | orderBy: 'starting'">
+	<div ng-if="!booking.isWaitList">
+		<uh-booking-details booking-details="booking" class="row">
 
 	</uh-booking-details>
-	<br>
+	<div class="row" style="padding-top: 20px;">
+		<center><a class="button round small-centered small-8 medium-3 column" ng-click="cancelBooking(booking.workshopID)" stop-event>Cancel</a></center>
+	</div>
+	<div ng-if="NotificationsModel.notificationExists(booking.BookingId)" class="row">
+		<center>
+			<a class="button round small-centered small-8 medium-3 column" ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
+				Delete notification
+			</a>
+			<a class="button round small-centered small-8 medium-3 column" ng-click="testNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId).notificationID)">
+				Test notification
+			</a>
+		</center>
+	</div>
+	<div ng-if="!NotificationsModel.notificationExists(booking.BookingId)" class="row">
+		<center><a class="button round small-centered small-8 medium-3 column" ng-click="addNotification(booking)">
+			Add notification
+		</a></center>
+	</div>
+</div>
+<div ng-if="booking.isWaitList">
+	<!-- Wait Listed Booking -->
 	<div class="booking small-11 medium-8 large-6 column small-centered">
-		<span ng-if="NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification set</span>
-		<span ng-if="!NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification not set</span>  
-
-
-		<div ng-if="NotificationsModel.notificationExists(booking.BookingId)">
-			<a ng-click="cancelNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId))">
-				<i class="fa fa-minus-circle small"></i> Delete Notification</a>
-			</a>
+		<div class="row">
+			<div id="title" class="bookingTitle">
+				{{booking.topic}}
+			</div>
 			<br>
-			<a ng-click="testNotification(NotificationsModel.getNotificationByBookingId(booking.BookingId).notificationID)">
-				<i class="fa fa-reply small"></i> Test Notification
-			</a>
-			</a>
-		</div>
-		<div ng-if="!NotificationsModel.notificationExists(booking.BookingId)">
-			<a ng-click="addNotification(booking)">
-			<i class="fa fa-plus-circle small"></i> Add Notification
-			</a>
+			<div class="row">
+				<div class="column small-1">
+					<i class="fa fa-calendar small"></i>
+				</div>
+				<div class="column small-10 medium 11 ng-binding">
+					<strong>Date: </strong>
+					05/11/2015
+				</div>
+				<br>
+				<div class="column small-1">
+					<i class="fa fa-clock-o small"></i>
+				</div>
+				<div class="column small-10 medium 11 ng-binding">
+					<strong>Time: </strong>
+					{{booking.starting | date : 'hh:mm a'}} until {{booking.ending | date : 'hh:mm a on dd/MM/yyyy'}}
+				</div>
+				<br>
+				<div class="column small-1">
+					<i class="fa fa-info-circle small"></i>
+				</div>
+				<div class="column small-10 medium 11 ng-binding">
+					<strong>Status: </strong>
+					On waitlist; {{booking.positionInQueue - 1}} people in front
+				</div>
+				<br>
+				<div class="column small-10 medium 11">
+				</div>
+			</div>
 		</div>
 	</div>
-	<br>
-	<div class="row">
-		<center><a class="alert button round small-centered small-8 medium-3 column" ng-click="cancelBooking(booking.workshopID)" stop-event>Cancel</a></center>
+	<div class="row" style="padding-top: 20px;">
+		<center><a class="button round small-centered small-8 medium-3 warning column" ng-click="cancelWaitlisting(booking)">Drop out</a></center>
 	</div>
-	<hr ng-if="!$last" class="small-12 medium-8 large-6 column small-centered">
+</div>
+<hr ng-if="!$last" class="small-12 medium-8 large-6 column small-centered">
 </div>
 <uh-confirm-deny-modal callback="confirmNotificationAdd(isConfirmed)" cdm-id="CONFIRM_NOTIF">
-	<h2>Add notification</h2>
-	<p>Are you sure you want to add a notification?</p>
-	<p>Please select a time:</p>
-	<select ng-model="notification.notificationTime">
-		<option ng-repeat="option in availableNotificationTimes" value="{{option.value}}">
-			{{option.title}}
-		</option>
-	</select>
+<h2>Add notification</h2>
+<p>Are you sure you want to add a notification?</p>
+<p>Please select a time:</p>
+<select ng-model="notification.notificationTime">
+	<option ng-repeat="option in availableNotificationTimes" value="{{option.value}}">
+		{{option.title}}
+	</option>
+</select>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancelNotification(isConfirmed)" cdm-id="CANCEL_NOTIF">
-	<h2>Cancel notification</h2>
-	<p>Are you sure you want to cancel this notification?</p>
+<h2>Cancel notification</h2>
+<p>Are you sure you want to cancel this notification?</p>
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
-	<h2 class="cdm">Cancel Booking</h2>
-	<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+<h2 class="cdm">Cancel Booking</h2>
+<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+</uh-confirm-deny-modal>
+
+<uh-confirm-deny-modal callback="confirmCancelWaitlisting(isConfirmed)" cdm-id="CANCEL_WAIT">
+<h2 class="cdm">Cancel Waitlisting</h2>
+<p>Are you sure you want to cancel your waitlisting for {{waitlist.topic}}?</p>
 </uh-confirm-deny-modal>
