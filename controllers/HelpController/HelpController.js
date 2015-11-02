@@ -9,4 +9,10 @@ angular.module('utsHelps.Help', ['ngRoute'])
 }])
 .controller('HelpController', ['$scope',function($scope) {
 	$scope.globals.pageTitle = "Help";
+
+	$scope.toggleExpand = function (event) {
+		var target = $(event.target);
+		target.parent().toggleClass('expanded');
+	}
+
 }]);
