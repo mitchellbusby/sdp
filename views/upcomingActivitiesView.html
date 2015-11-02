@@ -15,7 +15,7 @@
     </a>
 </div>
 
-<center ng-if="noSearchResults">
+<center ng-show="noSearchResults" ng-hide="!noSearchResults">
 	<span class="column" >No search results...</span>
 	<br>
 </center>

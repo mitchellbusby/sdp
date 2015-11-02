@@ -111,5 +111,5 @@
 <p>Are you sure you want to cancel your waitlisting for {{waitlist.topic}}?</p>
 </uh-confirm-deny-modal>
 <center>
-	<span class="column" ng-if="noSearchResults">No search results...</span>
+	<span class="column" ng-show="noSearchResults" ng-hide="!noSearchResults">No search results...</span>
 </center>
