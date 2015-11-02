@@ -20,6 +20,7 @@ angular.module('utsHelps.directives', [])
 		restrict: 'E',
 		scope: {
 			bookingDetails: '=bookingDetails',
+			filtered: '=filtered',
 		}
 	}
 })

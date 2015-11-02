@@ -121,9 +121,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 
 		$scope.searchActivies = function(query) {
 			var acts = UpcomingActivitiesModel.activities;
-			if (query == "")
-			{
-				console.log("Cleared");
+			if (query == "") {
 				// clear the filter
 				for (var i in acts) {
 					acts[i].isFiltered = false;

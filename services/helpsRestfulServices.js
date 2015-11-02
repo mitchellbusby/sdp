@@ -304,6 +304,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 			return -1;
 		};
+		this.bookingFromId = function(bookingId) {
+			return scope.bookings[bookingId];
+		};
 		this.saveNote = function(booking) {
 			var updatedBooking = {
 				notes: booking.notes,
@@ -483,7 +486,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				else {
 					return false;
 				}
-			});	
+			});
 	};
 	vm.getNotificationByBookingId = function(bookingID) {
 		if (bookingID in vm.notifications) {

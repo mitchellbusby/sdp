@@ -7,7 +7,7 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 		controller: 'UpcomingBookingsCtrl'
 	})
 }])
-.controller('UpcomingBookingsCtrl', ['$scope', 'BookingsModel', 'NotificationsModel', 'notification_times', 'PostNotification', 'Session', 'AlertBanner', 'UpcomingActivitiesModel', function($scope, BookingsModel, NotificationsModel, notification_times, PostNotification, Session, AlertBanner, UpcomingActivitiesModel) {
+.controller('UpcomingBookingsCtrl', ['$scope', 'BookingsModel', 'NotificationsModel', 'notification_times', 'PostNotification', 'Session', 'AlertBanner', 'UpcomingActivitiesModel', 'Filter', function($scope, BookingsModel, NotificationsModel, notification_times, PostNotification, Session, AlertBanner, UpcomingActivitiesModel, Filter) {
 	$scope.globals.pageTitle = "Bookings";
 	$scope.BookingsModel = BookingsModel;
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
@@ -36,7 +36,7 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 				else {
 					$scope.$broadcast("API_ERROR", "Failed to create notification.");
 				}
-			});			
+			});
 		}
 	};
 
@@ -105,5 +105,28 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 				$scope.$broadcast("API_ERROR", "Failed to fire notification.");
 			}
 		});
+	}
+
+	$scope.searchBookings = function(query) {
+		var books = BookingsModel.bookingsArray();
+		if (query == "") {
+			for (var i in books) {
+				BookingsModel.bookingFromId(books[i].BookingId).isFiltered = false;
+			}
+			$scope.$apply();
+			return;
+		}
+
+		for (var i in books) {
+			BookingsModel.bookingFromId(books[i].BookingId).isFiltered = true;
+		}
+
+		var transposed = Filter.transposeIntoNamed(books, "topic");
+		var filterlist = Filter.filterList(transposed, query);
+
+		for (var i in filterlist) {
+			BookingsModel.bookingFromId(filterlist[i].BookingId).isFiltered = false;
+		}
+		$scope.$apply();
 	}
 }]);
