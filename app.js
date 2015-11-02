@@ -22,6 +22,7 @@ angular.module('utsHelps', [
 	'utsHelps.filter',
 	'utsHelps.Help',
 	'utsHelps.helpsSearchBar',
+	'utsHelps.Sessions'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
 	$routeProvider.otherwise({redirectTo:'/'});

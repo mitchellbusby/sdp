@@ -562,4 +562,31 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			});
 	}
 	vm.onCreate();
+}])
+.service('SessionsModel', ['ApiMethods', 'helps_endpoint_constants', 'Session', function(ApiMethods, endpoint_constants, Session) {
+	var vm = this;
+	vm.Sessions = [];
+	vm.getSessions = function() {
+		var params = {pageSize:1000,StudentId:Session.userId};
+		ApiMethods.getResource(endpoint_constants.GET_SESSIONS_URI, params)
+		.then(function success(response) {
+			if (response.data.IsSuccess) {
+				vm.Sessions = response.data.Results;
+			}
+		})
+	}
+	vm.cancelSession = function(session) {
+		var params = {SessionId: session.sessionId, Cancel:true};
+		ApiMethods.putResource(endpoint_constants.CANCEL_SESSION_URI, params).
+		then(function success(response) {
+			return response.data.IsSuccess;
+		});	
+	}
+	vm.onCreate = function() {
+		vm.getSessions();
+	}
+	vm.refresh = function() {
+		vm.onCreate();
+	}
+	vm.onCreate();
 }]);
