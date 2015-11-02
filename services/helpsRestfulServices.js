@@ -568,6 +568,13 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		})
 	}
+	vm.cancelSession = function(session) {
+		var params = {SessionId: session.sessionId, Cancel:true};
+		ApiMethods.putResource(endpoint_constants.CANCEL_SESSION_URI, params).
+		then(function success(response) {
+			return response.data.IsSuccess;
+		});	
+	}
 	vm.onCreate = function() {
 		vm.getSessions();
 	}

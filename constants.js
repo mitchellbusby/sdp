@@ -40,6 +40,7 @@ angular.module('utsHelps.constants', [])
 	"GET_SESSIONS_URI":"/session/booking/search",
 	"SEARCH_WAITLIST_URI":"/workshop/wait/search",
 	"CANCEL_WAITLIST_URI":"/workshop/wait/cancel",
+	"CANCEL_SESSION_URI":"/session/booking/update"
 })
 .constant("notification_times", [
 	{title:"10 minutes before", value:10, seconds: (10*60), msg: "10 minutes"},
