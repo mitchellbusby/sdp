@@ -9,4 +9,7 @@ angular.module('utsHelps.Help', ['ngRoute'])
 }])
 .controller('HelpController', ['$scope',function($scope) {
 	$scope.globals.pageTitle = "Help";
+
+
+
 }]);
