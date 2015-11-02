@@ -26,6 +26,14 @@
 			<strong>Location: </strong>
 			{{bookingDetails.campus}}
 		</div>
+    <br>
+    <div class="column small-1">
+      <i class="fa fa-users small"></i>
+    </div>
+    <div class="column small-10 medium 11">
+      <strong>Type: </strong>
+      {{bookingDetails.type.charAt(0).toUpperCase() + bookingDetails.type.slice(1)}}
+    </div>
 		<div class="column small-10 medium 11">
 		</div>
 	</div>
