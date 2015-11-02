@@ -35,6 +35,6 @@
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmAddToWaitlist(isConfirmed)" cdm-id="ADDTOWAITLIST">
     <h2 class="cdm">Waitlist Workshop</h2>
-    <p class="small-11 small-centered column">Unfortunately this workshop is fully booked, however you can add yourself to the waitlist which will automatically book the workshop for you if a position becomes available.</p>
+    <p class="small-11 small-centered column">Unfortunately this workshop is fully booked, however you can add yourself to the waitlist which will automatically book the workshop for you if a position becomes available. <span ng-if="selectedWorkshop.count > 0">There will be {{selectedWorkshop.count}} people in front of you.</span> <span ng-if="selectedWorkshop.count == 0"> <strong>You will be the first person to be added to the workshop if someone else cancels.</strong></span> </p>
 	<p class="small-11 small-centered column">Are you sure you want to be added to the waitlist for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
 </uh-confirm-deny-modal>

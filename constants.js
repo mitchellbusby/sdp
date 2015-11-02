@@ -40,6 +40,7 @@ angular.module('utsHelps.constants', [])
 	"GET_SESSIONS_URI":"/session/booking/search",
 	"SEARCH_WAITLIST_URI":"/workshop/wait/search",
 	"CANCEL_WAITLIST_URI":"/workshop/wait/cancel",
+	"GET_WAITLIST_COUNT_URI":"/workshop/waitcount",
 	"CANCEL_SESSION_URI":"/session/booking/update"
 })
 .constant("notification_times", [

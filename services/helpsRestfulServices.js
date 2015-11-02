@@ -223,9 +223,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.getBookings = function(params) {
 			// Gets data from the server
 			params.pageSize = scope.params.pageSize;
-			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
+			var result = ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
+			console.log(result);
+			return result;
 		};
 
 		this.hasUpcomingBookings = function() {
@@ -373,6 +375,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			return ApiMethods.putResource(endpoint_constants.UPDATE_BOOKING_URI, updatedBooking)
 			// Need to create a put method
 		}
+		this.getWaitListCount = function(workshopId) {
+			var params = { workshopId : workshopId };
+			return ApiMethods.getResource(endpoint_constants.GET_WAITLIST_COUNT_URI, params).then(function success(response) {
+				if (response.data.IsSuccess) {
+					return response.data.WaitListCount;
+				}
+				else {
+					return false;
+				}
+			});
+		}
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
@@ -495,7 +508,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		//shift the thing
 		var notificationTimeId = notificationToBeSent.notificationTime.toString();
 		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
-		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.notificationTime);
+		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.bookingTime);
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
