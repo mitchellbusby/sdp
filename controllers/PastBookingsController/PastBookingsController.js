@@ -7,7 +7,7 @@ angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulSer
 		controller: 'PastBookingsCtrl'
 	})
 }])
-.controller('PastBookingsCtrl', ['$scope', 'BookingsModel', 'UserMessagingService', 'ERR_BROADCASTS', function($scope, BookingsModel, UserMessagingService, ERR_BROADCASTS) {
+.controller('PastBookingsCtrl', ['$scope', 'BookingsModel', 'UserMessagingService', 'ERR_BROADCASTS', 'Filter', function($scope, BookingsModel, UserMessagingService, ERR_BROADCASTS, Filter) {
 	$scope.globals.pageTitle = "Past Bookings";
 	$scope.BookingsModel = BookingsModel;
 	$scope.saveNote = function(booking) {
@@ -23,4 +23,27 @@ angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulSer
 				}
 			});
 	};
+
+	$scope.searchBookings = function(query) {
+		var books = BookingsModel.bookingsArray();
+		if (query == "") {
+			for (var i in books) {
+				BookingsModel.bookingFromId(books[i].BookingId).isFiltered = false;
+			}
+			$scope.$apply();
+			return;
+		}
+
+		for (var i in books) {
+			BookingsModel.bookingFromId(books[i].BookingId).isFiltered = true;
+		}
+
+		var transposed = Filter.transposeIntoNamed(books, "topic");
+		var filterlist = Filter.filterList(transposed, query);
+
+		for (var i in filterlist) {
+			BookingsModel.bookingFromId(filterlist[i].BookingId).isFiltered = false;
+		}
+		$scope.$apply();
+	}
 }]);

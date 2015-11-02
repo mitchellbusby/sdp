@@ -75,8 +75,9 @@
 								</div>
 								<div class="row">
 									<a class="button column small-12 alert" ng-if="bookings.bookingExists(workshop)" ng-click="workshopCancelHandler(workshop)" stop-event>Cancel</a>
-									<a ng-if="workshop.BookingCount < workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
-									<a ng-if="workshop.BookingCount >= workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
+									<a ng-if="workshop.BookingCount < workshop.maximum && !bookings.bookingExists(workshop) && !bookings.waitListExists(workshop)" class="button column small-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
+									<a ng-if="workshop.BookingCount >= workshop.maximum && !bookings.bookingExists(workshop) && !bookings.waitListExists(workshop)" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
+									<a ng-if="bookings.waitListExists(workshop)" class="button column small-12 warning" disabled">Waitlisted</a>
 								</div>
 							</div>
 						</div>

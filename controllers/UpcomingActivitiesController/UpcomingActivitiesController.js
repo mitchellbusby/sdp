@@ -113,6 +113,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
                     else{
                         //Do nothing
                     }
+        			$scope.WorkshopBookingsModel.refresh();
                 });
         }
         //reset seleted workshop
