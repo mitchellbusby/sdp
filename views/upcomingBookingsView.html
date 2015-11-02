@@ -61,7 +61,7 @@
 		</div>
 	</div>
 	<div class="row" style="padding-top: 20px;">
-		<center><a class="button round small-centered small-8 medium-3 column" disabled ng-click="cancelBooking(booking.workshopID)" stop-event>Cancel</a></center>
+		<center><a class="button round small-centered small-8 medium-3 warning column" ng-click="cancelWaitlisting(booking)">Drop out</a></center>
 	</div>
 </div>
 <hr ng-if="!$last" class="small-12 medium-8 large-6 column small-centered">
@@ -83,4 +83,9 @@
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
 <h2 class="cdm">Cancel Booking</h2>
 <p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+</uh-confirm-deny-modal>
+
+<uh-confirm-deny-modal callback="confirmCancelWaitlisting(isConfirmed)" cdm-id="CANCEL_WAIT">
+<h2 class="cdm">Cancel Waitlisting</h2>
+<p>Are you sure you want to cancel your waitlisting for {{waitlist.topic}}?</p>
 </uh-confirm-deny-modal>

@@ -270,6 +270,19 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		}
 
+		this.cancelWaitlisting = function(waitListing) {
+			var params = {waitListId: waitListing.waitingId};
+			return ApiMethods.getResource(endpoint_constants.CANCEL_WAITLIST_URI, params).
+			then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+		}
+
 		this.bookingsArray = function (waitListsIncluded) {
 			if (typeof scope.bookings !== 'undefined') {
 				return $.map(scope.bookings, function(value) {
