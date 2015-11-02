@@ -223,9 +223,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.getBookings = function(params) {
 			// Gets data from the server
 			params.pageSize = scope.params.pageSize;
-			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
+			var result = ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
+			console.log(result);
+			return result;
 		};
 
 		this.hasUpcomingBookings = function() {
@@ -314,7 +316,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					scope.bookings = scope.mergeBookings(result.data);
 					scope.getWaitlists({"studentId":Session.userId}).then(function(response) {
 						if (response.data.IsSuccess) {
-							scope.mergeWaitlists(response.data.Results, scope.bookings);							
+							scope.mergeWaitlists(response.data.Results, scope.bookings);
 						}
 					})
 				});
@@ -328,7 +330,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return true;
@@ -349,7 +351,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return scope.bookings[bookingId];
@@ -536,7 +538,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				else {
 					return false;
 				}
-			});	
+			});
 	};
 	vm.getNotificationByBookingId = function(bookingID) {
 		if (bookingID in vm.notifications) {
