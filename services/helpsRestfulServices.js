@@ -467,13 +467,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		});
 	};
 	vm.mergeNotifications = function(existingNotifications, newNotifications) {
+		existingNotifications = {};
 		for (var i=0; i<newNotifications.length; i++) {
-			if (newNotifications[i].bookingID in existingNotifications) {
-				// Don't add
-			}
-			else {
-				existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
-			}
+			existingNotifications[newNotifications[i].bookingID] = newNotifications[i];
 		}
 	};
 	vm.notificationExists = function(bookingId) {
