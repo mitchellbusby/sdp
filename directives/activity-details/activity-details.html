@@ -34,19 +34,19 @@
 								<div class="workshop-details">
 									<div class="row">
 										<div class="column small-1">
-											<i class="fa fa-clock-o small"></i>
-										</div>
-										<div class="column small-10 medium 11">
-											<strong>Time: </strong>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm'}}
-										</div>
-									</div>
-									<div class="row">
-										<div class="column small-1">
 											<i class="fa fa-calendar small"></i>
 										</div>
 										<div class="column small-10 medium 11">
 											<strong>Date:</strong>
 											{{workshop.StartDate | date: 'dd/MM/yyyy'}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-clock-o small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Time: </strong>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm'}}
 										</div>
 									</div>
 									<div class="row">

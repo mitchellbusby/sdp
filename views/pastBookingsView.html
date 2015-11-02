@@ -8,10 +8,9 @@
 					<span class="fa fa-pencil-square-o"></span>&nbsp;Attendance notes&#58;</a> 
 				</div>
 				<p class="row notes-text" ng-show="!booking.editNote">
-					<span>{{booking.notes || 'Add some notes'}}</span>
+					<span>{{booking.notes || 'You have not added any notes yet!'}}</span>
 				</p>
 		</div>
-	</div>
 	<div class="row" >
 		<div class="booking small-12 medium-9 large-7 column small-centered">
 			<div class="row collapse notes-text" ng-if="booking.editNote">
