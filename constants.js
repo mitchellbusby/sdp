@@ -37,6 +37,8 @@ angular.module('utsHelps.constants', [])
 	"SEARCH_STUDENT": "/student/isregistered",
 	"TEST_NOTIFICATION_URI":"/notifications/fire",
 	"UPDATE_BOOKING_URI":"/workshop/booking/update",
+	"SEARCH_WAITLIST_URI":"/workshop/wait/search",
+	"CANCEL_WAITLIST_URI":"/workshop/wait/cancel",
 })
 .constant("notification_times", [
 	{title:"10 minutes before", value:10, seconds: (10*60), msg: "10 minutes"},

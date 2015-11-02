@@ -23,3 +23,28 @@ label {
 .notes-text {
 	margin-top: 0.1rem !important;
 }
+
+.help-page {
+  padding: 8px 16px;
+
+  .faq h1 {
+	font-size: 1.5rem;
+  }
+
+  .faq h1:hover {
+	cursor: pointer;
+  }
+
+  .faq:not(.expanded) .steps {
+	display: none;
+  }
+}
+
+.bookingTitle {
+		font-size: 1.25rem;
+		font-weight: bold;
+}
+
+.dashboard {
+  padding: 1.2rem;
+}

@@ -1,19 +1,16 @@
 <div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isPastBooking">
-	<a>
-		<uh-booking-details booking-details="booking" class="row">
+	<uh-booking-details booking-details="booking" class="row">
 
-		</uh-booking-details>
-	</a>
+	</uh-booking-details>
 	<div class="row">
 		<div class="booking small-11 medium-9 large-7 column small-centered">
 				<div class="row"><a ng-click="booking.editNote = !booking.editNote">
 					<span class="fa fa-pencil-square-o"></span>&nbsp;Attendance notes&#58;</a> 
 				</div>
 				<p class="row notes-text" ng-show="!booking.editNote">
-					<span>{{booking.notes || 'Add some notes'}}</span>
+					<span>{{booking.notes || 'You have not added any notes yet!'}}</span>
 				</p>
 		</div>
-	</div>
 	<div class="row" >
 		<div class="booking small-12 medium-9 large-7 column small-centered">
 			<div class="row collapse notes-text" ng-if="booking.editNote">

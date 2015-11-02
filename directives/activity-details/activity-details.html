@@ -34,19 +34,19 @@
 								<div class="workshop-details">
 									<div class="row">
 										<div class="column small-1">
-											<i class="fa fa-clock-o small"></i>
-										</div>
-										<div class="column small-10 medium 11">
-											<strong>Time: </strong>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm'}}
-										</div>
-									</div>
-									<div class="row">
-										<div class="column small-1">
 											<i class="fa fa-calendar small"></i>
 										</div>
 										<div class="column small-10 medium 11">
 											<strong>Date:</strong>
 											{{workshop.StartDate | date: 'dd/MM/yyyy'}}
+										</div>
+									</div>
+									<div class="row">
+										<div class="column small-1">
+											<i class="fa fa-clock-o small"></i>
+										</div>
+										<div class="column small-10 medium 11">
+											<strong>Time: </strong>{{workshop.StartDate | date: 'HH:mm'}}-{{workshop.EndDate | date: 'HH:mm'}}
 										</div>
 									</div>
 									<div class="row">
@@ -75,8 +75,9 @@
 								</div>
 								<div class="row">
 									<a class="button column small-12 alert" ng-if="bookings.bookingExists(workshop)" ng-click="workshopCancelHandler(workshop)" stop-event>Cancel</a>
-									<a ng-if="workshop.BookingCount < workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
-									<a ng-if="workshop.BookingCount >= workshop.maximum && !bookings.bookingExists(workshop)" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
+									<a ng-if="workshop.BookingCount < workshop.maximum && !bookings.bookingExists(workshop) && !bookings.waitListExists(workshop)" class="button column small-12" stop-event ng-click="workshopClickHandler(workshop)">Book</a>
+									<a ng-if="workshop.BookingCount >= workshop.maximum && !bookings.bookingExists(workshop) && !bookings.waitListExists(workshop)" class="button column small-12 medium-12 large-12 warning" stop-event ng-click="addToWaitlistClickHandler(workshop)">Waitlist</a>
+									<a ng-if="bookings.waitListExists(workshop)" class="button column small-12 warning" disabled">Waitlisted</a>
 								</div>
 							</div>
 						</div>
