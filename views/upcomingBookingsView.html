@@ -57,7 +57,7 @@
 				</div>
 				<div class="column small-10 medium 11 ng-binding">
 					<strong>Date: </strong>
-					05/11/2015
+					{{booking.starting | date : 'dd/MM/yyyy'}}
 				</div>
 				<br>
 				<div class="column small-1">
@@ -65,7 +65,7 @@
 				</div>
 				<div class="column small-10 medium 11 ng-binding">
 					<strong>Time: </strong>
-					{{booking.starting | date : 'hh:mm a'}} until {{booking.ending | date : 'hh:mm a on dd/MM/yyyy'}}
+					{{booking.starting | date : 'HH:mm'}}-{{booking.ending | date : 'HH:mm'}}
 				</div>
 				<br>
 				<div class="column small-1">
