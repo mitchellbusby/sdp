@@ -350,7 +350,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		}
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
-			return bookingFromWorkshopId(workshopId);
+			return scope.bookingFromWorkshopId(workshopId);
 		};
 		this.bookingFromId = function(bookingId) {
 			return scope.bookings[bookingId];
