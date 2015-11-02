@@ -314,7 +314,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					scope.bookings = scope.mergeBookings(result.data);
 					scope.getWaitlists({"studentId":Session.userId}).then(function(response) {
 						if (response.data.IsSuccess) {
-							scope.mergeWaitlists(response.data.Results, scope.bookings);							
+							scope.mergeWaitlists(response.data.Results, scope.bookings);
 						}
 					})
 				});
@@ -328,7 +328,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return true;
@@ -348,17 +348,20 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		}
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
+			return bookingFromWorkshopId(workshopId);
+		};
+		this.bookingFromId = function(bookingId) {
+			return scope.bookings[bookingId];
+		};
+		this.bookingFromWorkshopId = function(workshopId) {
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return scope.bookings[bookingId];
 				}
 			}
 			return -1;
-		};
-		this.bookingFromId = function(bookingId) {
-			return scope.bookings[bookingId];
 		};
 		this.saveNote = function(booking) {
 			var updatedBooking = {
@@ -580,7 +583,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		ApiMethods.putResource(endpoint_constants.CANCEL_SESSION_URI, params).
 		then(function success(response) {
 			return response.data.IsSuccess;
-		});	
+		});
 	}
 	vm.onCreate = function() {
 		vm.getSessions();

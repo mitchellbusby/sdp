@@ -14,6 +14,12 @@
         </uh-activity-details>
     </a>
 </div>
+
+<center ng-if="noSearchResults">
+	<span class="column" >No search results...</span>
+	<br>
+</center>
+
 <div class="small-centered" ng-if="UpcomingActivitiesModel.activities != null">
     <center><button class="round small" ng-click = "onViewMore()">View More</button></center>
 </div>

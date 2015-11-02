@@ -108,24 +108,38 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 	}
 
 	$scope.searchBookings = function(query) {
-		var books = BookingsModel.bookingsArray();
+		var books = BookingsModel.bookingsArray(true);
+		console.log("books");
+		console.log(books);
 		if (query == "") {
 			for (var i in books) {
-				BookingsModel.bookingFromId(books[i].BookingId).isFiltered = false;
+				if (books[i].isWaitList) {
+					BookingsModel.bookingFromWorkshopId(books[i].WorkshopId).isFiltered = false;
+				} else {
+					BookingsModel.bookingFromId(books[i].BookingId).isFiltered = false;
+				}
 			}
 			$scope.$apply();
 			return;
 		}
 
 		for (var i in books) {
-			BookingsModel.bookingFromId(books[i].BookingId).isFiltered = true;
+			if (books[i].isWaitList) {
+				BookingsModel.bookingFromWorkshopId(books[i].WorkshopId).isFiltered = true;
+			} else {
+				BookingsModel.bookingFromId(books[i].BookingId).isFiltered = true;
+			}
 		}
 
 		var transposed = Filter.transposeIntoNamed(books, "topic");
 		var filterlist = Filter.filterList(transposed, query);
 
 		for (var i in filterlist) {
-			BookingsModel.bookingFromId(filterlist[i].BookingId).isFiltered = false;
+			if (books[i].isWaitList) {
+				BookingsModel.bookingFromWorkshopId(books[i].WorkshopId).isFiltered = false;
+			} else {
+				BookingsModel.bookingFromId(books[i].BookingId).isFiltered = false;
+			}
 		}
 
 		// horrible horrible not bad un-good dependency
