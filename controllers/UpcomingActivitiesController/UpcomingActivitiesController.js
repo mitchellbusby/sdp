@@ -144,6 +144,11 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 			for (var i in filterlist) {
 				filterlist[i].isFiltered = false;
 			}
+			if (filterlist.length === 0) {
+				$scope.noSearchResults = true;
+			} else {
+				$scope.noSearchResults = false;
+			}
 			$scope.$apply();
 		}
 }]);

@@ -44,6 +44,11 @@ angular.module('utsHelps.PastBookings', ['utsHelps.directives', 'helpsRestfulSer
 		for (var i in filterlist) {
 			BookingsModel.bookingFromId(filterlist[i].BookingId).isFiltered = false;
 		}
+		if (filterlist.length === 0) {
+			$scope.noSearchResults = true;
+		} else {
+			$scope.noSearchResults = false;
+		}
 		$scope.$apply();
 	}
 }]);

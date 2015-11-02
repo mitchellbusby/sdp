@@ -350,6 +350,12 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		}
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
+			return scope.bookingFromWorkshopId(workshopId);
+		};
+		this.bookingFromId = function(bookingId) {
+			return scope.bookings[bookingId];
+		};
+		this.bookingFromWorkshopId = function(workshopId) {
 			for (var bookingId in scope.bookings) {
 				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
@@ -358,9 +364,6 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				}
 			}
 			return -1;
-		};
-		this.bookingFromId = function(bookingId) {
-			return scope.bookings[bookingId];
 		};
 		this.saveNote = function(booking) {
 			var updatedBooking = {
@@ -593,7 +596,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		ApiMethods.putResource(endpoint_constants.CANCEL_SESSION_URI, params).
 		then(function success(response) {
 			return response.data.IsSuccess;
-		});	
+		});
 	}
 	vm.onCreate = function() {
 		vm.getSessions();

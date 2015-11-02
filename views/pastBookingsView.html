@@ -1,7 +1,7 @@
 <search-bar callback="searchBookings(query)">
 </search-bar>
 
-<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isPastBooking" ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
+<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isPastBooking | orderBy: '-starting'" ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
 	<uh-booking-details booking-details="booking" class="row" >
 
 	</uh-booking-details>
@@ -28,3 +28,8 @@
 	</div>
 	<hr ng-if="!$last" class="small-12 medium-8 large-6 column small-centered">
 </div>
+
+<center ng-show="noSearchResults" ng-hide="!noSearchResults">
+	<span class="column" >No search results...</span>
+	<br>
+</center>
