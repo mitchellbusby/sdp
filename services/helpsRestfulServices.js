@@ -489,7 +489,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		//shift the thing
 		var notificationTimeId = notificationToBeSent.notificationTime.toString();
 		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
-		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.notificationTime);
+		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.bookingTime);
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
