@@ -232,6 +232,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			return scope.bookingsArray().filter(scope.isUpcomingBooking) != [];
 		};
 
+		this.getWaitlists = function(params) {
+			params.pageSize = scope.params.pageSize;
+			return ApiMethods.getResource(endpoint_constants.SEARCH_WAITLIST_URI, params);
+		};
+
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
 
@@ -257,10 +262,35 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 		};
 
-		this.bookingsArray = function () {
+		this.mergeWaitlists = function(waitListings, existingData) {
+			for (var i=0; i<waitListings.length; i++) {
+				if (!(waitListings[i].waitingId in existingData)) {
+					var waitingId = waitListings[i].waitingId;
+					existingData[waitingId] = waitListings[i];
+					existingData[waitingId].isWaitList = true;
+					existingData[waitingId].starting = existingData[waitingId].startingDate;
+					existingData[waitingId].ending = existingData[waitingId].endingDate;
+				}
+			}
+		}
+
+		this.cancelWaitlisting = function(waitListing) {
+			var params = {waitListId: waitListing.waitingId};
+			return ApiMethods.getResource(endpoint_constants.CANCEL_WAITLIST_URI, params).
+			then(function success(response) {
+				if (response.data.IsSuccess) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			});
+		}
+
+		this.bookingsArray = function (waitListsIncluded) {
 			if (typeof scope.bookings !== 'undefined') {
 				return $.map(scope.bookings, function(value) {
-					return [value];
+					if (waitListsIncluded || !value.isWaitList) {return [value];}
 				});
 			}
 			else {
@@ -282,6 +312,11 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			setTimeout(function() {
 				scope.getBookings({"studentID":Session.userId}).then(function(result) {
 					scope.bookings = scope.mergeBookings(result.data);
+					scope.getWaitlists({"studentId":Session.userId}).then(function(response) {
+						if (response.data.IsSuccess) {
+							scope.mergeWaitlists(response.data.Results, scope.bookings);							
+						}
+					})
 				});
 			}, 2000);
 		};
@@ -293,16 +328,30 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+				if (scope.bookings[bookingId].workshopID === workshopId 
+					&& scope.bookings[bookingId].BookingArchived === null
+					&& !scope.bookings[bookingId].isWaitList) {
 					return true;
 				}
 			}
 			return false;
 		};
+		this.waitListExists = function(workshop) {
+			var workshopId = workshop.WorkshopId;
+			for (var bookingId in scope.bookings) {
+				if (scope.bookings[bookingId].workshopId === workshopId
+					&& scope.bookings[bookingId].isWaitList) {
+					return true;
+				}
+			}
+			return false;
+		}
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId && scope.bookings[bookingId].BookingArchived === null) {
+				if (scope.bookings[bookingId].workshopID === workshopId 
+					&& scope.bookings[bookingId].BookingArchived === null
+					&& !scope.bookings[bookingId].isWaitList) {
 					return scope.bookings[bookingId];
 				}
 			}

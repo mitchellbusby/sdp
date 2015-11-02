@@ -106,4 +106,30 @@ angular.module('utsHelps.UpcomingBookings', ['utsHelps.directives', 'helpsRestfu
 			}
 		});
 	}
+
+	$scope.cancelWaitlisting = function(waitlist) {
+		$scope.waitlist = waitlist;
+		$scope.$broadcast("SHOW_CONFIRM_DENY_CANCEL_WAIT");
+	}
+	$scope.confirmCancelWaitlisting = function(isConfirmed) {
+		if (isConfirmed) {
+			$scope.BookingsModel.cancelWaitlisting($scope.waitlist).then(function success(isSuccess) {
+				if (isSuccess) {
+					AlertBanner.publish({
+						type:"success",
+						message: "Cancelled wait listing."
+					});
+					$scope.BookingsModel.refresh();
+				}
+				else {
+					$scope.$broadcast("API_ERROR", "Failed to cancel waitlisting.");
+				}
+				$scope.waitlist = null;
+			});
+		}
+		else {
+			$scope.waitlist = null;
+		}
+		
+	}
 }]);
