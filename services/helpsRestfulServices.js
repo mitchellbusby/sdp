@@ -228,10 +228,14 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			);
 		};
 
+		this.hasUpcomingBookings = function() {
+			return scope.bookingsArray().filter(scope.isUpcomingBooking) != [];
+		};
+
 		this.getWaitlists = function(params) {
 			params.pageSize = scope.params.pageSize;
 			return ApiMethods.getResource(endpoint_constants.SEARCH_WAITLIST_URI, params);
-		}
+		};
 
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
