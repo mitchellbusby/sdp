@@ -90,7 +90,7 @@
 </uh-confirm-deny-modal>
 <uh-confirm-deny-modal callback="confirmCancel(isConfirmed)" cdm-id="CANCEL">
 <h2 class="cdm">Cancel Booking</h2>
-<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{selectedWorkshop.StartDate | date: 'HH:mm'}}-{{selectedWorkshop.EndDate | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{selectedWorkshop.campus}}</strong>?</p>
+<p class="small-11 small-centered column">Are you sure you want to cancel your booking for <strong>{{BookingsModel.getBooking({'WorkshopID': selectedWorkshop}).starting | date: 'HH:mm'}}-{{BookingsModel.getBooking({'WorkshopID': selectedWorkshop}).ending | date: 'HH:mm on dd/MM/yyyy'}}</strong> in room <strong>{{BookingsModel.getBooking({'WorkshopID': selectedWorkshop}).campus}}</strong>?</p>
 </uh-confirm-deny-modal>
 
 <uh-confirm-deny-modal callback="confirmCancelWaitlisting(isConfirmed)" cdm-id="CANCEL_WAIT">
