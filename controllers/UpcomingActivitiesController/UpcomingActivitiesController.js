@@ -96,7 +96,11 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	}
     $scope.addToWaitlist = function(workshop){
         $scope.selectedWorkshop = workshop;
-        $scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");
+        WorkshopBookingsModel.getWaitListCount(workshop.WorkshopId)
+        .then(function success(count) {
+        	$scope.selectedWorkshop.count = count;
+        	$scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");        
+        });
     };
 
     $scope.confirmAddToWaitlist = function(confirmation){

@@ -369,6 +369,17 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			return ApiMethods.putResource(endpoint_constants.UPDATE_BOOKING_URI, updatedBooking)
 			// Need to create a put method
 		}
+		this.getWaitListCount = function(workshopId) {
+			var params = { workshopId : workshopId };
+			return ApiMethods.getResource(endpoint_constants.GET_WAITLIST_COUNT_URI, params).then(function success(response) {
+				if (response.data.IsSuccess) {
+					return response.data.WaitListCount;
+				}
+				else {
+					return false;
+				}
+			});
+		}
 		this.onCreate();
 }])
 .service('CampusesModel', ['$http', 'helps_endpoint_constants', 'ERR_BROADCASTS', '$rootScope', 'ApiMethods', function($http, endpoint_constants, ERR_BROADCASTS, $rootScope, ApiMethods) {
