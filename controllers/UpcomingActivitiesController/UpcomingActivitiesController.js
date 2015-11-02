@@ -96,7 +96,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 	}
     $scope.addToWaitlist = function(workshop){
         $scope.selectedWorkshop = workshop;
-        WorkshopBookingsModel.getWaitListCount(workshop)
+        WorkshopBookingsModel.getWaitListCount(workshop.WorkshopId)
         .then(function success(count) {
         	$scope.selectedWorkshop.count = count;
         	$scope.$broadcast("SHOW_CONFIRM_DENY_ADDTOWAITLIST");        
