@@ -1,7 +1,8 @@
-<div class="booking small-11 medium-8 large-6 column small-centered">
-    <div class="bookingTitle">
-        {{bookingDetails['topic']}}
-    </div>
+<div class="booking small-11 medium-8 large-6 column small-centered" ng-show="!filtered" ng-hide="filtered">
+  <div class="bookingTitle">
+      {{bookingDetails['topic']}}
+  </div>
+  <br>
     <div class="row">
     	<div class="column small-1">
     		<i class="fa fa-calendar small"></i>

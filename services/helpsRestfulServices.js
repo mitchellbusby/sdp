@@ -359,6 +359,9 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			}
 			return -1;
 		};
+		this.bookingFromId = function(bookingId) {
+			return scope.bookings[bookingId];
+		};
 		this.saveNote = function(booking) {
 			var updatedBooking = {
 				notes: booking.notes,

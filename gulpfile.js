@@ -63,7 +63,7 @@ gulp.task('external-server', ['sass:watch', 'concat:watch', 'webserver-public'],
 gulp.task('concat-js', function() {
 	return gulp.src(jsFiles, {base: './'})
 		.pipe(sourcemaps.init())
-			.pipe(uglify().on('error', gutil.log))
+			//.pipe(uglify().on('error', gutil.log))
 				.pipe((concat('main.js')))
 					.pipe(sourcemaps.write())
 						.pipe(gulp.dest('.'));
@@ -77,6 +77,7 @@ var jsFiles = ['./app.js',
 	 './services/registerService.js',
 	 './services/helpsRestfulServices.js',
 	 './services/helpsModelServices.js',
+	 './services/filterService.js',
 	 './factories/authenticationFactories.js',
 	 './factories/helpsRestfulFactories.js',
 	 './controllers/ExampleController/ExampleController.js',
@@ -87,6 +88,7 @@ var jsFiles = ['./app.js',
 	 './services/messagingService.js',
 	 './constants.js',
 	 './directives/directives.js',
+	 './directives/search-bar/search-bar.js',
 	 './controllers/UpcomingBookingsController/UpcomingBookingsController.js',
 	 './controllers/PastBookingsController/PastBookingsController.js',
 	 './controllers/HelpController/HelpController.js',

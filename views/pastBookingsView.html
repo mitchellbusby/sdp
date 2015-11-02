@@ -1,11 +1,14 @@
-<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isPastBooking">
-	<uh-booking-details booking-details="booking" class="row">
+<search-bar callback="searchBookings(query)">
+</search-bar>
+
+<div ng-repeat="booking in BookingsModel.bookingsArray() | filter: BookingsModel.isPastBooking" ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
+	<uh-booking-details booking-details="booking" class="row" >
 
 	</uh-booking-details>
 	<br>
 		<div class="booking small-11 medium-9 large-7 column small-centered">
 				<div class="row"><a ng-click="booking.editNote = !booking.editNote">
-					<span class="fa fa-pencil-square-o"></span>&nbsp;Attendance notes&#58;</a> 
+					<span class="fa fa-pencil-square-o"></span>&nbsp;Attendance notes&#58;</a>
 				</div>
 				<p class="row notes-text" ng-show="!booking.editNote">
 					<span>{{booking.notes || 'You have not added any notes yet!'}}</span>

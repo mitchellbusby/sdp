@@ -5,9 +5,12 @@
 	}
 </style>
 
+<search-bar callback="searchActivies(query)">
+</search-bar>
+
 <div ng-repeat="activity in UpcomingActivitiesModel.activities" class="activity-row">
     <a ng-click="clickedOnAnActivity(activity)">
-        <uh-activity-details activity-details="activity" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" workshop-cancel-handler="cancelBooking" bookings="WorkshopBookingsModel" class="row">
+        <uh-activity-details activity-details="activity" filtered="activity.isFiltered" expand="activity.isExpanded" workshop-click-handler="bookWorkshop" add-to-waitlist-click-handler="addToWaitlist" workshop-cancel-handler="cancelBooking" bookings="WorkshopBookingsModel" class="row">
         </uh-activity-details>
     </a>
 </div>

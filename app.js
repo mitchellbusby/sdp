@@ -19,7 +19,9 @@ angular.module('utsHelps', [
 	'utsHelps.constants',
 	'angular-alert-banner',
 	'utsHelps.UserMessagingService',
+	'utsHelps.filter',
 	'utsHelps.Help',
+	'utsHelps.helpsSearchBar',
 	'utsHelps.Sessions'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
@@ -71,7 +73,7 @@ angular.module('utsHelps', [
 				}
 				else {
 					if ($location.path()=="/login" || $location.path().match(/register[0-9]*/) != null) {
-						// 
+						//
 					}
 					else {
 						console.log($location.path().match('/register[0-9]*\''));

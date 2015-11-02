@@ -1,12 +1,25 @@
-<div ng-repeat="booking in BookingsModel.bookingsArray(true) | filter: BookingsModel.isUpcomingBooking | orderBy: 'starting'">
+<style>
+
+	.bookingTitle
+	{
+		font-size: 1.25rem;
+		font-weight: bold;
+	}
+
+</style>
+
+<search-bar callback="searchBookings(query)">
+</search-bar>
+
+<div ng-repeat="booking in BookingsModel.bookingsArray(true) | filter: BookingsModel.isUpcomingBooking | orderBy: 'starting'" ng-show="!booking.isFiltered" ng-hide="booking.isFiltered">
 	<div ng-if="!booking.isWaitList">
-		<uh-booking-details booking-details="booking" class="row">
+		<uh-booking-details booking-details="booking" class="row" filtered="isFiltered">
 
 	</uh-booking-details>
 	<br>
 	<div class="booking small-11 medium-8 large-6 column small-centered">
 		<span ng-if="NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification set</span>
-		<span ng-if="!NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification not set</span>  
+		<span ng-if="!NotificationsModel.notificationExists(booking.BookingId)"><strong>Notification:</strong> Notification not set</span>
 
 
 		<div ng-if="NotificationsModel.notificationExists(booking.BookingId)">
@@ -97,3 +110,6 @@
 <h2 class="cdm">Cancel Waitlisting</h2>
 <p>Are you sure you want to cancel your waitlisting for {{waitlist.topic}}?</p>
 </uh-confirm-deny-modal>
+<center>
+	<span class="column" ng-if="noSearchResults">No search results...</span>
+</center>
