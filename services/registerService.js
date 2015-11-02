@@ -3,8 +3,9 @@
 angular.module('utsHelps.registerService', ['ngRoute'])
 
 .service('RegisterService', ['$location', 'User', 'Student',
-	'StudentRegisterService',
-function($location, User, Student, StudentRegisterService) {
+	'StudentRegisterService', 'ApiMethods', 'helps_endpoint_constants', 'UserMessagingService',
+function($location, User, Student, StudentRegisterService, ApiMethods, endpoint_constants,
+	UserMessagingService) {
 	var registerDetails = {};
 
 	registerDetails.user = User.create("", "", "", "");
@@ -22,9 +23,15 @@ function($location, User, Student, StudentRegisterService) {
 
 	var getStudent = function() { return registerDetails.student; };
 
-	var goRegisterPageOne = function() { $location.path('/register1') };
+	var goRegisterPageOne = function () { $location.path('/register1')	};
 	var goRegisterPageTwo = function () { $location.path('/register2') };
 	var goRegisterPageThree = function() { $location.path('/register3') };
+
+	var isStudentIdAvailable = function(studentId)
+	{
+		 var json = { "studentId": studentId };
+		 return ApiMethods.getResourceWithParamsInURI(endpoint_constants.SEARCH_STUDENT, json);
+	};
 
 	var setUserFromLogin = function (username, password) {
 		registerDetails.user.name = username;
@@ -32,13 +39,14 @@ function($location, User, Student, StudentRegisterService) {
 	};
 
 	var registerUserDetails = function () {
-		if (StudentRegisterService.registerStudent(registerDetails.student))
+		if (StudentRegisterService.registerStudent(registerDetails.student,
+			function () {
+				$location.path('/login');
+				registerDetails.student = null;
+				registerDetails.user = null;
+			}))
 		{
-			console.log("Successfully registered!")
-			console.log(registerDetails.student);
-			$location.path('/login');
-			registerDetails.student = null;
-			registerDetails.user = null;
+			UserMessagingService.successAlertBanner("Successfully registered.");
 		} else {
 			// something went wrong. Error is broadcast elsewhere, so just leave it
 		}
@@ -54,5 +62,6 @@ function($location, User, Student, StudentRegisterService) {
 		goRegisterPageThree: goRegisterPageThree,
 		setUserFromLogin: setUserFromLogin,
 		registerUserDetails: registerUserDetails,
+		isStudentIdAvailable: isStudentIdAvailable,
 	};
 }]);

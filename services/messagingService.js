@@ -1,9 +1,16 @@
-angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-alert-banner'])
+angular.module('utsHelps.UserMessagingService', ['utsHelps.constants'])
 .service('UserMessagingService', ['AlertBanner', '$rootScope', 'ERR_BROADCASTS', "ErrorRegistry", "AUTH_EVENTS", function(AlertBanner, $rootScope, ERR_BROADCASTS, ErrorRegistry, AUTH_EVENTS){
 	var scope = this;
 	this.errorAlertBanner = function(message) {
 		AlertBanner.publish({
 			type: "error",
+			message: message,
+			timeCollapse: 3000
+		});
+	}
+	this.successAlertBanner = function(message) {
+		AlertBanner.publish({
+			type: "success",
 			message: message,
 			timeCollapse: 3000
 		});
@@ -22,7 +29,8 @@ angular.module('utsHelps.UserMessagingService', ['utsHelps.constants', 'angular-
 		"Error encountered whilst trying to create your booking. Please try again and if issues persist contact UTS HELPS.":"Couldn't create booking.",
 		"Error encountered whilst trying to register your details. Please try again and if issues persist contact UTS HELPS.":"Couldn't register details.",
 		"Error creating workshop booking: Booking already exists.":"Booking already exists.",
-		"Error creating workshop booking: Workshop has reached cut-off for bookings.":"Workshop has reached cut-off for bookings"
+		"Error creating workshop booking: Workshop has reached cut-off for bookings.":"Workshop has reached cut-off for bookings",
+		"StudentIdExists":"A student with this ID already exists."
 	}
 	this.retrieveFriendlyError = function(message) {
 		if (message in this.errorDictionary) {

@@ -17,11 +17,36 @@ angular.module('utsHelps.register', ['ngRoute'])
 	});
 }])
 
-.controller('registerCtrl', ['$scope', '$rootScope', 'User', 'Student', 'RegisterService', function ($scope, $rootScope, User, Student, RegisterService) {
+.controller('registerCtrl', ['$scope', '$rootScope', 'User', 'Student',
+	'RegisterService', 'ERR_BROADCASTS',
+	function ($scope, $rootScope, User, Student, RegisterService, ERR_BROADCASTS) {
 	$scope.details = {
 		user: RegisterService.getUser(),
 		student: RegisterService.getStudent()
 	};
+
+	$scope.pageOneToTwo = function() {
+		if (parseInt($scope.details.student.StudentId) !== parseFloat($scope.details.student.StudentId)) {
+			// Who's bad? I'm bad!
+			// plz no judge.
+			return;
+		}
+		RegisterService.isStudentIdAvailable($scope.details.student.StudentId).then(function (result) {
+			console.log(result.data);
+			if (result.data.IsSuccess) {
+				if (result.data.IsRegistered) { // this ought to be IsAvailable
+					$scope.goRegisterTwo();
+				}
+				else {
+					$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, "StudentIdExists");
+				}
+			} else {
+
+				$rootScope.$broadcast(ERR_BROADCASTS.API_ERROR, response.data.DisplayMessage);
+				return false;
+			}
+		});
+	}
 
 	$scope.goRegisterOne = function() {
 		RegisterService.goRegisterPageOne();

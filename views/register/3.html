@@ -1,58 +1,64 @@
 <style>
-	.register-fields
-	{
-		padding: 1rem;
-		padding-left: 2rem;
-		padding-right: 2rem;
-		width: 20rem;
-		margin-left: auto;
-		margin-right: auto;
-	}
+.register-fields
+{
+	padding: 1rem;
+	padding-left: 2rem;
+	padding-right: 2rem;
+	width: 20rem;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 </style>
 
 
 <div>
-
+	</br>
+	<div class="row">
+		<div class="progress radius small-10 large-6 small-centered progress round" style="margin-left: auto; margin-right: auto;">
+			<span class="meter" style="width: 66%"></span>
+		</div>
+	</div>
+	<div class="row">
+		<h2 style="text-align: center;">Prior Qualifications</h2>
+	</div>
 	<form name="studentDetails" class="register-fields">
-		<br>
-		<br>
-
-
+		
 		<input type="checkbox" id="hscMarkCheck" ng-model="details.student.HSC">
 		<label for="hscMark">HSC</label>
-		<input type="text" id="hscMark" ng-model="details.student.HSCMarks">
+		<input type="text" id="hscMark" ng-disabled="!details.student.HSC" ng-model="details.student.HSCMarks">
 
 		<input type="checkbox" id="ieltsMarkCheck" ng-model="details.student.IELTS">
 		<label for="ieltsMark">IELTS</label>
-		<input type="text" id="ieltsMark" ng-model="details.student.IELTSMarks">
+		<input type="text" id="ieltsMark" ng-disabled="!details.student.IELTS" ng-model="details.student.IELTSMarks">
 
 		<input type="checkbox" id="toeflMarkCheck" ng-model="details.student.TOEFL">
 		<label for="toeflMark">TOEFL</label>
-		<input type="text" id="toeflMark" ng-model="details.student.TOEFLMarks">
+		<input type="text" id="toeflMark" ng-disabled="!details.student.TOEFLMarks" ng-model="details.student.TOEFLMarks">
 
 		<input type="checkbox" id="tafeMarkCheck" ng-model="details.student.TAFE">
 		<label for="tafeMark">TAFE</label>
-		<input type="text" id="tafeMark" ng-model="details.student.TAFEMarks">
+		<input type="text" id="tafeMark" ng-disabled="!details.student.TAFE" ng-model="details.student.TAFEMarks">
 
 		<input type="checkbox" id="cultMarkCheck" ng-model="details.student.CULT">
 		<label for="cultMark">CULT</label>
-		<input type="text" id="cultMark" ng-model="details.student.CULTMarks">
+		<input type="text" id="cultMark" ng-disabled="!details.student.CULT" ng-model="details.student.CULTMarks">
 
-		<input type="checkbox" id="insearchDeepMarkCheck" ng-model="details.student.insearchDEEP">
-		<label for="insearchDeepMark">insearchDEEP</label>
-		<input type="text" id="insearchDeepMark" ng-model="details.student.insearchDEEPMarks">
+		<input type="checkbox" id="insearchDeepMarkCheck" ng-model="details.student.InsearchDEEP">
+		<label for="insearchDeepMark">InSearch DEEP</label>
+		<input type="text" id="insearchDeepMark" ng-disabled="!details.student.InsearchDEEP" ng-model="details.student.InsearchDEEPMarks">
 
-		<input type="checkbox" id="insearchDiplomaMarkCheck" ng-model="details.student.insearchDiploma">
-		<label for="insearchDiplomaMark">insearchDiploma</label>
-		<input type="text" id="insearchDiplomaMark" ng-model="details.student.insearchDiplomaMarks">
+		<input type="checkbox" id="insearchDiplomaMarkCheck" ng-model="details.student.InsearchDiploma">
+		<label for="insearchDiplomaMark">InSearch Diploma</label>
+		<input type="text" id="insearchDiplomaMark" ng-disabled="!details.student.InsearchDiploma" ng-model="details.student.InsearchDiplomaMarks">
 
-		<input type="checkbox" id="foundationCourseMarkCheck" ng-model="details.student.foundationCourse">
-		<label for="foundationCourseMark">foundationCourse</label>
-		<input type="text" id="foundationCourseMark" ng-model="details.student.foundationCourseMarks">
-		<button class="button column medium-12" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Previous</button>
+		<input type="checkbox" id="foundationCourseMarkCheck" ng-model="details.student.FoundationCourse">
+		<label for="foundationCourseMark">Foundation Course</label>
+		<input type="text" id="foundationCourseMark" ng-disabled="!details.student.FoundationCourse" ng-model="details.student.FoundationCourseMarks">
 
 		<button class="button column medium-12 success" ng-click="registerStudent()" ng-disabled="studentDetails.$invalid">Register</button>
 
-		</form>
+		<button class="button column medium-12" ng-click="goRegisterTwo()" ng-disabled="studentDetails.$invalid">Previous</button>
+
+	</form>
 </div>

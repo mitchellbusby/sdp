@@ -18,27 +18,29 @@ angular.module('helpsModelsServices', [])
 	var student = {};
 
 	student.empty = function() {
-		return student.create("", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "","", "", "", "", "","", "", "","");
+		return student.create("", "", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "","", "", "", "", "","", "", "","");
 	};
 
 	student.create = function (studentId, creatorId, dob, gender, degree, status,
-		firstLanguage, countryOfOrigin, background, degreeDetails, altContact,
+		firstLanguage, countryOfOrigin, background, degreeDetails, altContact, mobile, preferredName,
 		HSC, HSCMarks, IELTS, IELTSMarks, TOELF, TOELFMarks, TAFE,
 		TAFEMarks, CULT, CULTMarks, insearchDEEP, insearchDEEPMarks,
 		insearchDiploma, insearchDiplomaMarks, foundationCourse,
 		foundationCourseMarks) {
 			return {
-				"studentId":studentId,
-				"creatorId": creatorId,
-				"dob": dob,
-				"gender": gender,
-				"degree": degree,
-				"status": status,
-				"firstLanguage": firstLanguage,
-				"countryOfOrigin": countryOfOrigin,
-				"background": background,
-				"degreeDetails": degreeDetails,
-				"altContact": altContact,
+				"StudentId":studentId,
+				"CreatorId": creatorId,
+				"DateOfBirth": dob,
+				"Gender": gender,
+				"Degree": degree,
+				"Status": status,
+				"FirstLanguage": firstLanguage,
+				"CountryOfOrigin": countryOfOrigin,
+				"Background": background,
+				"DegreeDetails": degreeDetails,
+				"AltContact": altContact,
+				"mobile": mobile,
+				"PreferredName": preferredName,
 				"HSC": HSC,
 				"HSCMarks": HSCMarks,
 				"IELTS": IELTS,
@@ -49,12 +51,12 @@ angular.module('helpsModelsServices', [])
 				"TAFEMarks": TAFEMarks,
 				"CULT": CULT,
 				"CULTMarks": CULTMarks,
-				"insearchDEEP": insearchDEEP,
-				"insearchDEEPMarks": insearchDEEPMarks,
-				"insearchDiploma": insearchDiploma,
-				"insearchDiplomaMarks": insearchDiplomaMarks,
-				"foundationCourse": foundationCourse,
-				"foundationCourseMarks": foundationCourseMarks
+				"InsearchDEEP": insearchDEEP,
+				"InsearchDEEPMarks": insearchDEEPMarks,
+				"InsearchDiploma": insearchDiploma,
+				"InsearchDiplomaMarks": insearchDiplomaMarks,
+				"FoundationCourse": foundationCourse,
+				"FoundationCourseMarks": foundationCourseMarks
 			};
 		};
 	return student;
