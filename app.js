@@ -12,6 +12,7 @@ angular.module('utsHelps', [
 	'utsHelps.registerService',
 	'utsHelps.UpcomingBookings',
 	'utsHelps.PastBookings',
+	'utsHelps.Dashboard',
 	'angular.filter',
 	'ngAnimate',
 	'angular-loading-bar',
@@ -19,9 +20,10 @@ angular.module('utsHelps', [
 	'angular-alert-banner',
 	'utsHelps.UserMessagingService',
 	'utsHelps.Help',
+	'utsHelps.Sessions'
 	])
 .config(['$routeProvider', 'cfpLoadingBarProvider', '$httpProvider', function($routeProvider, cfpLoadingBarProvider, $httpProvider){
-	$routeProvider.otherwise({redirectTo:'/upcomingActivities'});
+	$routeProvider.otherwise({redirectTo:'/'});
 	cfpLoadingBarProvider.includeSpinner = false;
 	$httpProvider.interceptors.push([
 		'$injector',
@@ -83,7 +85,7 @@ angular.module('utsHelps', [
 	// Redirect if user if they have been logged in and/or logged out
 	$rootScope.$on(AUTH_EVENTS.loginSuccess, function(event){
 		console.log("login success");
-		$location.path("/example"); // dashboard
+		$location.path("/"); // dashboard
 	});
 	$rootScope.$on(AUTH_EVENTS.logoutSuccess, function(event) {
 		$location.path("/login");

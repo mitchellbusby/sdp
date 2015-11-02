@@ -2,7 +2,6 @@
     <div class="bookingTitle">
         {{bookingDetails['topic']}}
     </div>
-    <br>
     <div class="row">
     	<div class="column small-1">
     		<i class="fa fa-calendar small"></i>
@@ -27,6 +26,18 @@
 			<strong>Location: </strong>
 			{{bookingDetails.campus}}
 		</div>
+    <br>
+    <div class="column small-1">
+      <i class="fa fa-users small"></i>
+    </div>
+    <div class="column small-10 medium 11" ng-show="{{bookingDetails.type === 'single'}}">
+      <strong>Type: </strong>
+      Workshop
+    </div>
+    <div class="column small-10 medium 11" ng-show="{{bookingDetails.type === 'multiple'}}">
+      <strong>Type: </strong>
+      Programme
+    </div>
 		<div class="column small-10 medium 11">
 		</div>
 	</div>

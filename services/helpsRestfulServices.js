@@ -223,15 +223,21 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.getBookings = function(params) {
 			// Gets data from the server
 			params.pageSize = scope.params.pageSize;
-			return ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
+			var result = ApiMethods.getResource(endpoint_constants.BOOKINGS_URI+endpoint_constants.SEARCH_URI,
 				params
 			);
+			console.log(result);
+			return result;
+		};
+
+		this.hasUpcomingBookings = function() {
+			return scope.bookingsArray().filter(scope.isUpcomingBooking) != [];
 		};
 
 		this.getWaitlists = function(params) {
 			params.pageSize = scope.params.pageSize;
 			return ApiMethods.getResource(endpoint_constants.SEARCH_WAITLIST_URI, params);
-		}
+		};
 
 		this.mergeBookings = function(newDataToMerge, existingData) {
 			if (newDataToMerge.IsSuccess) {
@@ -310,7 +316,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					scope.bookings = scope.mergeBookings(result.data);
 					scope.getWaitlists({"studentId":Session.userId}).then(function(response) {
 						if (response.data.IsSuccess) {
-							scope.mergeWaitlists(response.data.Results, scope.bookings);							
+							scope.mergeWaitlists(response.data.Results, scope.bookings);
 						}
 					})
 				});
@@ -324,7 +330,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 			//Checks if booking exists for a workshop
 			var workshopId = workshop.WorkshopId;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return true;
@@ -345,7 +351,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		this.getBooking = function(workshop) {
 			var workshopId = workshop.WorkshopID;
 			for (var bookingId in scope.bookings) {
-				if (scope.bookings[bookingId].workshopID === workshopId 
+				if (scope.bookings[bookingId].workshopID === workshopId
 					&& scope.bookings[bookingId].BookingArchived === null
 					&& !scope.bookings[bookingId].isWaitList) {
 					return scope.bookings[bookingId];
@@ -496,7 +502,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 		//shift the thing
 		var notificationTimeId = notificationToBeSent.notificationTime.toString();
 		notificationToBeSent.notificationTime = vm.applyTimeShiftToNotification(notificationToBeSent.notificationTime, notificationToBeSent.bookingTime);
-		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.notificationTime);
+		notificationToBeSent.notificationMessage = vm.generateMessage(notificationToBeSent, notificationTimeId, notificationToBeSent.bookingTime);
 		return ApiMethods.postResource(endpoint_constants.POST_NOTIFICATION_URI, notificationToBeSent).
 			then(function success(response){
 				if (response.data.IsSuccess) {
@@ -543,7 +549,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 				else {
 					return false;
 				}
-			});	
+			});
 	};
 	vm.getNotificationByBookingId = function(bookingID) {
 		if (bookingID in vm.notifications) {
@@ -564,6 +570,33 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 					return false;
 				}
 			});
+	}
+	vm.onCreate();
+}])
+.service('SessionsModel', ['ApiMethods', 'helps_endpoint_constants', 'Session', function(ApiMethods, endpoint_constants, Session) {
+	var vm = this;
+	vm.Sessions = [];
+	vm.getSessions = function() {
+		var params = {pageSize:1000,StudentId:Session.userId};
+		ApiMethods.getResource(endpoint_constants.GET_SESSIONS_URI, params)
+		.then(function success(response) {
+			if (response.data.IsSuccess) {
+				vm.Sessions = response.data.Results;
+			}
+		})
+	}
+	vm.cancelSession = function(session) {
+		var params = {SessionId: session.sessionId, Cancel:true};
+		ApiMethods.putResource(endpoint_constants.CANCEL_SESSION_URI, params).
+		then(function success(response) {
+			return response.data.IsSuccess;
+		});	
+	}
+	vm.onCreate = function() {
+		vm.getSessions();
+	}
+	vm.refresh = function() {
+		vm.onCreate();
 	}
 	vm.onCreate();
 }]);
