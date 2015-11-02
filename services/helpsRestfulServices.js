@@ -140,6 +140,7 @@ angular.module('helpsRestfulServices', ['utsHelps.constants', 'helpsModelsServic
 	};
 	this.refresh = function() {
 		scope.activities = null;
+		scope.params.page = 1;
 		scope.onCreate();
 	};
 	this.bookWorkshop = function(workshopId, studentId) {
