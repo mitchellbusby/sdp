@@ -7,7 +7,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		controller: 'UpcomingActivitiesCtrl'
 	})
 }])
-.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', 'BookingsModel', function($scope, UpcomingActivitiesModel, Session, AlertBanner, WorkshopBookingsModel){
+.controller('UpcomingActivitiesCtrl', ['$scope', 'UpcomingActivitiesModel', 'Session', 'AlertBanner', 'BookingsModel', 'Filter', function($scope, UpcomingActivitiesModel, Session, AlertBanner, WorkshopBookingsModel, Filter){
 	$scope.globals.pageTitle = "Upcoming Activities";
 	$scope.WorkshopBookingsModel = WorkshopBookingsModel;
 	$scope.UpcomingActivitiesModel = UpcomingActivitiesModel;
@@ -42,7 +42,7 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
 		// Make it appear
 		$scope.$broadcast("SHOW_CONFIRM_DENY_BOOK");
 	};
-	
+
 	$scope.confirmWorkshop = function(confirmation) {
 		if (confirmation) {
 			UpcomingActivitiesModel.bookWorkshop($scope.selectedWorkshop.WorkshopId, Session.userId)
@@ -118,4 +118,29 @@ angular.module('utsHelps.UpcomingActivities', ['utsHelps.directives', 'helpsRest
         //reset seleted workshop
         $scope.selectedWorkshop = null;
     }
+
+		$scope.searchActivies = function(query) {
+			var acts = UpcomingActivitiesModel.activities;
+			if (query == "")
+			{
+				console.log("Cleared");
+				// clear the filter
+				for (var i in acts) {
+					acts[i].isFiltered = false;
+				}
+				$scope.$apply();
+				return;
+			}
+
+			for (var i in acts) {
+				acts[i].isFiltered = true;
+			}
+
+		  var transposedValues = Filter.transposeIntoNamed(acts, "topic");
+			var filterlist = Filter.filterList(transposedValues, query);
+			for (var i in filterlist) {
+				filterlist[i].isFiltered = false;
+			}
+			$scope.$apply();
+		}
 }]);

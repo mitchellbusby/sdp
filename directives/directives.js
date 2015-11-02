@@ -6,6 +6,7 @@ angular.module('utsHelps.directives', [])
 		scope: {
 			activityDetails: '=activityDetails',
 			expand: '=expand',
+			filtered: '=filtered',
 			workshopClickHandler: '=workshopClickHandler',
 			workshopCancelHandler: '=workshopCancelHandler',
 			bookings: '=bookings',
